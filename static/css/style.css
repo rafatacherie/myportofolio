@@ -605,3 +605,113 @@ span {
     pointer-events: auto;
     transform: scale(1);
 }
+
+/* Mengatur latar belakang hitam untuk skills section */
+.skills {
+    background: var(--second-bg-color);
+}
+
+/* Membagi area skill menjadi 2 kolom grid sejajar */
+.skills-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10rem; 
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative; 
+}
+
+/* Mengatur judul kolom (Technical Skills / Soft Skills) */
+.skills-column .title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: var(--text-color);
+    text-align: left;
+}
+
+/* Menyusun baris-baris bilah persen secara vertikal ke bawah */
+.skills-box .skills-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem; 
+}
+
+/* Mengatur nama skill di kiri dan angka persen di ujung kanan */
+.skills-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+/* Menyelaraskan teks skill dan ikon skills agar sejajar horizontal */
+.skills-info p {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 1rem; 
+}
+
+/* Mengatur ukuran dan warna ikon skills */
+.skills-info p i {
+    font-size: 2.4rem;
+    color: var(--main-color);
+}
+
+/* Mengatur format teks angka persen */
+.skills-info span {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+/* Dasar belakang lintasan progress bar */
+.skills-content .bar {
+    height: 8px;
+    width: 100%;
+    background-color: black;
+    border-radius: 10px;
+    position: relative;
+}
+
+/* Elemen penggeser yang otomatis meluncur maju */
+.skills-content .bar span {
+    height: 100%;
+    background-color: #6499E9;
+    box-shadow: 0 0 15px #6499E9;
+    position: absolute;
+    border-radius: 10px;
+    transform-origin: left;
+    transform: scaleX(0);
+    animation: animateBar 1.2s cubic-bezier(1, 0, 0, 1) forwards;
+}
+
+/* Daftar target persentase pada bar skill */
+.tech-bar-1 { width: 70%; }
+.tech-bar-2 { width: 60%; }
+.tech-bar-3 { width: 90%; }
+.tech-bar-4 { width: 75%; }
+.tech-bar-5 { width: 90%; }
+
+.soft-bar-1 { width: 80%; }
+.soft-bar-2 { width: 85%; }
+.soft-bar-3 { width: 80%; }
+.soft-bar-4 { width: 95%; }
+.soft-bar-5 { width: 90%; }
+
+/* Menggerakkan bar memanjang penuh ke ujung target persennya */
+@keyframes animateBar {
+    100% {
+        transform: scaleX(1);
+    }
+}
+
+/* Saat tampilan mobile, buat dua kolom Technical/Soft Skills 
+ditumpuk jadi satu kolom vertikal agar tidak menumpuk */
+@media (max-width: 991px) {
+    .skills-row {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+}
