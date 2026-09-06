@@ -426,3 +426,182 @@ span {
     background-color: var(--bg-color);
     width: 50px;
 }
+
+/* Mengatur warna latar belakang hitam untuk area riwayat pengalaman */
+.experience {
+    background: var(--bg-color);
+    color: black;
+}
+
+/* Jarak bawah judul utama section experience */
+.experience h2 {
+    margin-bottom: 5rem;
+    color: white;
+}
+
+/* Membagi wadah luar experience menjadi 2 kolom grid sejajar */
+.experience-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    gap: 2.5rem;
+}
+
+/* Mengatur gaya kotak dengan warna latar biru dengan posisi relative
+   agar sisi depan & belakang (yang absolute) bisa ditumpuk di dalamnya */
+.experience-box {
+    background-color: var(--main-color);
+    height: 240px; 
+    border-radius: 3rem;
+    border: 5px solid transparent;
+    overflow: hidden;              /* Memastikan konten cerita di dalamnya tidak bocor keluar box */
+    position: relative; 
+    transition: 0.4s ease-in-out;
+}
+
+/* Kotak otomatis berubah warna latar menjadi putih saat didekati kursor */
+.experience-box:hover {
+    background: white;
+    color: black;
+    border: 5px solid var(--main-color);
+    transform: scale(1.03);
+}
+
+/* Menyembunyikan sakelar input checkbox agar tidak merusak tampilan visual */
+.exp-checkbox {
+    display: none;
+}
+
+/* Mengatur ukuran halaman depan agar memenuhi ruang internal box */
+.box-front {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    transition: 0.3s ease;
+}
+
+/* Mengatur spasi tulisan judul pengalaman dan posisi tombol */
+.box-front .experience-info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    height: 100%;
+    justify-content: flex-start; 
+    align-items: baseline;
+    padding: 3rem 3.5rem; 
+}
+
+/* Mengatur ukuran font judul pengalaman */
+.experience-info h4 {
+    font-size: 3rem; 
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+/* Mengatur ukuran font tulisan untuk jabatan/posisi */
+.experience-info h3 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #3e4756;
+    line-height: 1.2;
+    margin-top: 0.5rem;
+}
+
+/* Tombol See Detail yang posisinya mengunci otomatis di dasar layar depan */
+.see-detail-btn {
+    display: inline-block;
+    padding: 0.8rem 2.4rem;
+    background: var(--bg-color);
+    color: var(--main-color);
+    border-radius: 4rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-top: auto; 
+    letter-spacing: 0.1rem;
+    border: 2px solid var(--main-color);
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+/* Tampilan BELAKANG kartu (See Detail), ditumpuk di posisi yang sama
+   dengan box-front tapi disembunyikan sampai checkbox dicentang */
+.box-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 3rem 3.5rem 2.5rem; 
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 0; 
+    pointer-events: none; 
+    transition: 0.3s ease;
+}
+
+/* Area teks detail yang bisa di-scroll jika isinya panjang */
+.scroll-content {
+    overflow-y: auto;
+    max-height: 130px; 
+    padding-right: 1rem;
+}
+
+/* Mengatur format paragraf deskripsi pengalaman */
+.scroll-content p {
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    color: inherit;
+}
+
+/* Tombol Back penutup halaman detail */
+.close-detail-btn {
+    align-self: flex-start;
+    padding: 0.5rem 1.8rem;
+    background: var(--bg-color);
+    color: var(--text-color);
+    border-radius: 2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: 0.3s;
+}
+
+/* Mengubah warna tombol back saat disorot */
+.close-detail-btn:hover {
+    background: transparent;
+    color: var(--bg-color);
+    border-color: var(--bg-color);
+}
+
+/* Mengatur ketebalan minimalis batang scrollbar di dalam kotak box */
+.scroll-content::-webkit-scrollbar { 
+    width: 6px; 
+}
+
+/* Mewarnai batangan penggeser kecil di dalam kotak box */
+.scroll-content::-webkit-scrollbar-thumb { 
+    background-color: rgba(0, 0, 0, 0.2); 
+    border-radius: 10px; 
+}
+
+/* Menyembunyikan halaman depan saat kotak dicentang */
+.exp-checkbox:checked ~ .box-front {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.95);
+}
+
+/* Memunculkan halaman belakang dari paling atas saat kotak dicentang */
+.exp-checkbox:checked ~ .box-back {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+}
