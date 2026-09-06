@@ -94,7 +94,7 @@ section {
     padding: 10rem 12% 10rem;
 }
 
-/* ==================== HOME SECTION ==================== */
+/* ================== HOME SECTION ================== */
 /* Mengatur tata letak flexbox untuk halaman utama */
 .home {
     display: flex;
@@ -298,4 +298,131 @@ span {
     font-size: 8rem;
     text-align: center;
     margin: 5rem 0;
+}
+
+/* ================== EDUCATION SECTION ================== */
+/* Menampilkan riwayat pendidikan dalam bentuk garis waktu vertikal
+   dengan entri berselang-seling kiri-kanan. */
+.education {
+    padding: 100px 15px;
+    background: var(--second-bg-color); /* warna latar dibedakan dari section lain */
+}
+
+/* Jarak bawah judul utama edukasi */
+.education h2 {
+    margin-bottom: 5rem;
+}
+
+/* Wadah utama seluruh item timeline, posisinya relative agar garis
+   vertikal bisa diposisikan absolut tepat di tengahnya */
+.timeline-items {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+/* Menggambar tiang garis vertikal biru tepat di tengah halaman */
+.timeline-items::before {
+    content: "";
+    position: absolute;
+    width: 5px;
+    height: 100%;
+    background-color: var(--main-color);
+    left: calc(50% - 1px);
+}
+
+/* Mengatur ruang pembungkus untuk satu baris item data pendidikan */
+.timeline-item {
+    margin-bottom: 40px;
+    width: 100%;
+    position: relative;
+}
+
+/* Menghilangkan margin bawah khusus pada item pendidikan paling terakhir */
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Mengatur letak teks kotak ganjil (1, 3, dst) agar bergeser ke kiri */
+.timeline-item:nth-child(odd) {
+    padding-right: calc(50% + 30px);
+    text-align: right;
+}
+
+/* Mengatur letak teks kotak genap (2, 4, dst) agar bergeser ke kanan */
+.timeline-item:nth-child(even) {
+    padding-left: calc(50% + 30px);
+}
+
+/* Menggambar dan memberikan efek glow pada bulatan timeline di tengah garis */
+.timeline-dot {
+    height: 21px;
+    width: 21px;
+    background-color: var(--main-color);
+    box-shadow: 0 0 25px var(--main-color),
+                0 0 50px var(--main-color);
+    position: absolute;
+    left: calc(50% - 8px);
+    border-radius: 50%;
+    top: 10px;
+}
+
+/* Mengatur format tanggal riwayat pendidikan */
+.timeline-date {
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    margin: 6px 0 15px;
+}
+
+/* Mengatur desain kotak box riwayat pendidikan */
+.timeline-content {
+    background-color: var(--bg-color);
+    border: 3px solid var(--main-color);
+    padding: 30px 50px;
+    border-radius: 4rem;
+    box-shadow: 0 0 10px var(--main-color);
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+/* Memberikan efek glow dan sedikit membesar saat kotak di-hover */
+.timeline-content:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px var(--main-color);
+}
+
+/* Mengatur ketebalan nama tingkat pendidikan */
+.timeline-content h3 {
+    font-size:  20px;
+    color: white;
+    margin: 0 0 10px;
+    font-weight: 700;
+}
+
+/* Mengatur format tulisan deskripsi */
+.timeline-content p {
+    color: white;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 22px;
+}
+
+/* ================== SCROLLBAR SYSTEM ================== */
+/* Mengatur lebar ukuran batangan scrollbar utama browser */
+::-webkit-scrollbar {
+    width: 15px;
+}
+
+/* Mewarnai batangan penggeser scrollbar utama dengan warna biru */
+::-webkit-scrollbar-thumb {
+    background-color: var(--main-color);
+}
+
+/* Mewarnai lintasan scrollbar utama dengan warna hitam dasar */
+::-webkit-scrollbar-track {
+    background-color: var(--bg-color);
+    width: 50px;
 }
