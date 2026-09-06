@@ -1,195 +1,301 @@
+/* Menghapus margin, padding bawaan browser, dan mengatur font universal */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;
+    font-family: 'Poppins', sans-serif;
 }
 
+/* Semua warna utama didefinisikan di sini agar mudah diganti dari satu tempat. */
 :root {
-    --ink: #00204f;
-    --paper: #f1faff;
-    --accent: #003162;
-    --accent-dark: #9b4c65;
-    --line: #2c639b;
-    --text-muted: #3e4756;
-    --radius: 4px;
+    --bg-color: #080808;         /* warna latar utama */
+    --second-bg-color: #131313;  /* warna latar section selang-seling */
+    --text-color: white;         /* warna teks default */
+    --main-color: #6499E9;       /* warna aksen biru */
 }
 
+/* Mengatur ukuran font dasar untuk perhitungan rem dan mencegah halaman web bisa digeser ke samping */
+html {
+    font-size: 60%;
+    overflow-x: hidden;
+}
+
+/* Mengatur warna latar belakang dan warna teks default untuk seluruh halaman */
 body {
-    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    color: var(--ink);
-    background-color: var(--paper);
-    line-height: 1.6;
+    background: var(--bg-color);
+    color: var(--text-color);
 }
 
-h1, .brand {
-    font-family: "Space Grotesk", -apple-system, sans-serif;
-}
-
-.container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-}
-
-.site-header {
-    border-bottom: 1px solid var(--line);
-}
-
-.site-header .container {
+/* Mengunci posisi header di paling atas layar dengan efek latar belakang blur */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 4rem 12% 4rem;           /* Jarak atas-bawah dan kanan-kiri header */
+    background: rgba(0, 0, 0, 0.3); /* Hitam transparan */
+    backdrop-filter: blur(10px);      /* Efek blur kaca buram yang modern */
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between;   /* Logo di kiri, menu navigasi di kanan */
+    align-items: center;              /* Memastikan logo dan navbar sejajar lurus secara vertikal */
+    z-index: 5;                       /* Lapisan teratas agar tidak tertutup konten saat di-scroll */
+}
+
+/* Mengatur ukuran dan ketebalan teks logo */
+.logo {
+    font-size: 3rem;
+    color: var(--text-color);
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+/* Memberikan efek membesar sedikit saat logo didekati kursor */
+.logo:hover {
+    transform: scale(1.1);
+}
+
+/* Memberikan efek pendaran cahaya biru khusus pada teks di dalam tag span logo */
+.logo span {
+    text-shadow: 0 0 25px var(--main-color);
+}
+
+/* Mengatur jarak dan ukuran teks pada menu navigasi atas */
+.navbar a {
+    font-size: 1.8rem;
+    color: var(--text-color);
+    margin-left: 4rem;                    /* Jarak antar menu navigasi */
+    font-weight: 500;
+    transition: 0.3s ease;
+    border-bottom: 3px solid transparent; /* Garis bawah bawaan dibuat tidak terlihat */
+}
+
+/* Mengubah warna teks dan memunculkan garis bawah biru saat menu aktif atau di-hover */
+.navbar a:hover,
+.navbar a.active {
+    color: var(--main-color);
+    border-bottom: 3px solid var(--main-color);
+}
+
+/* Menyembunyikan ikon menu tiga garis di layar laptop/desktop */
+#menu-icon {
+    font-size: 3.6rem;
+    color: var(--main-color);
+    display: none;
+}
+
+/* Mengatur tinggi minimal dan jarak padding untuk setiap section utama */
+section {
+    min-height: 100vh;
+    padding: 10rem 12% 10rem;
+}
+
+/* ==================== HOME SECTION ==================== */
+/* Mengatur tata letak flexbox untuk halaman utama */
+.home {
+    display: flex;
     align-items: center;
-    padding: 1.25rem 1.5rem;
+    justify-content: center;
+    gap: 15rem;              /* Jarak antara kolom teks dengan foto */
 }
 
-.brand {
-    font-size: 1.3rem;
+/* Menyusun teks perkenalan secara vertikal lurus ke bawah */
+.home-content {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    text-align: left;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+/* Mewarnai tag span universal dengan aksen biru */
+span {
+    color: var(--main-color);
+}
+
+/* Mengatur ukuran dan jarak teks h3 di area home */
+.home-content h3 {
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    font-size: 2.5rem;
+}
+
+/* Mengatur ukuran, jarak, dan ketebalan teks h1 di area home */
+.home-content h1 {
+    font-size: 4.5rem;
     font-weight: 700;
-    color: var(--ink);
-    text-decoration: none;
+    margin-top: 1rem;
+    line-height: 1;
 }
 
-.site-header nav {
-    display: flex;
-    gap: 2rem;
+/* Mengatur posisi, ukuran, dan efek pada foto profil */
+.home-img img {
+    position: relative;
+    top: 3rem;
+    width: 25vw;
+    aspect-ratio: 1 / 1;                   /* Memastikan foto berbentuk kotak */
+    object-fit: cover;                     /* Memastikan foto tidak gepeng saat diregangkan */
+    border-radius: 15px;
+    box-shadow: 0 0 25px var(--main-color);
+    cursor: pointer;
+    transition: 0.4s ease-in-out;
 }
 
-.site-header nav a {
-    color: var(--ink);
-    text-decoration: none;
-    font-size: 0.95rem;
+/* Memberikan efek cahaya bertingkat saat foto profil disentuh kursor */
+.home-img img:hover {
+    box-shadow: 0 0 25px var(--main-color),
+                0 0 50px var(--main-color),
+                0 0 100px var(--main-color);
 }
 
-.hero {
-    padding: 4.5rem 0 5rem;
+/* Mengatur ukuran huruf pada paragraf deskripsi diri */
+.home-content p {
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.8;
+    max-width: 1000px;
 }
 
-.hero-grid {
-    display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    grid-template-areas:
-        "identity photo"
-        "details  photo";
-    gap: 1.5rem 3rem;
+/* Mengatur bentuk tombol lingkaran untuk media sosial */
+.social-icons a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    background: transparent;
+    border: 2px solid var(--main-color);
+    font-size: 2.5rem;
+    border-radius: 50%;
+    color: var(--main-color);
+    margin: 3rem 1.5rem 3rem 0;
+    transition: 0.3s ease-in-out;
 }
 
-.hero-identity {
-    grid-area: identity;
+/* Memberikan animasi membesar, bergeser naik, dan efek glow pada ikon sosmed */
+.social-icons a:hover {
+    color: var(--text-color);
+    transform: scale(1.3)translateY(-5px);
+    box-shadow: 0 0 25px var(--main-color);
+    background-color: var(--main-color);
 }
 
-.hero-details {
-    grid-area: details;
-}
-
-.hero-kicker {
-    font-size: 0.85rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent-dark);
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-}
-
-.hero-identity h1 {
-    font-size: clamp(3rem, 7vw, 5rem);
-    line-height: 0.95;
-}
-
-.bio {
-    color: var(--text-muted);
-    max-width: 480px;
-    margin-bottom: 1.5rem;
-}
-
-.meta-list {
-    display: flex;
-    gap: 2rem;
-    margin-bottom: 1.5rem;
-}
-
-.meta-row dt {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--text-muted);
-    margin-bottom: 0.15rem;
-}
-
-.meta-row dd {
-    font-weight: 600;
-}
-
-.social-links {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-}
-
-.social-link {
+/* Gaya dasar pada tombol utama portofolio */
+.btn {
     display: inline-block;
-    font-size: 0.85rem;
+    padding: 1rem 2.8rem;
+    background: var(--main-color);
+    box-shadow: 0 0 25px var(--main-color);
+    border-radius: 4rem;
+    font-size: 1.6rem;
+    color: black;
+    border: 2px solid transparent;
+    letter-spacing: 0.1rem;
     font-weight: 600;
-    text-decoration: none;
-    color: var(--paper);
-    background-color: var(--ink);
-    border-radius: var(--radius);
-    padding: 0.5rem 1.1rem;
-    transition: background-color 0.2s ease;
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
 }
 
-.social-link:hover {
-    background-color: var(--accent);
+/* Memberikan efek glow dan sedikit membesar pada tombol saat di-hover */
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 50px var(--main-color);
 }
 
-.hero-photo {
-    grid-area: photo;
-    align-self: center;
+/* Menjejarkan dua tombol secara berdampingan */
+.btn-group {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Mengatur tampilan tombol kedua (gaya outline transparan) */
+.btn-group a:nth-of-type(2) {
+    background-color: black;
+    color: var(--main-color);
+    border: 2px solid var(--main-color);
+    box-shadow: 0 0 25px transparent;
+}
+
+/* Mengubah tombol kedua menjadi biru penuh saat disentuh kursor */
+.btn-group a:nth-of-type(2):hover {
+    box-shadow: 0 0 25px var(--main-color);
+    background-color: var(--main-color);
+    color: black;
+}
+
+/* Mengatur ukuran font dan batas minimal lebar untuk animasi teks mengetik */
+.text-animation {
+    font-size: 34px;
+    font-weight: 600;
+    min-width: 280px;
+}
+
+.text-animation span {
     position: relative;
 }
 
-.photo-block {
+/* Menyisipkan teks cetakan utama menggunakan pseudo-element CSS */
+.text-animation span::before {
+    content: "2506621592";
+    color: var(--main-color);
+    animation: words 20s infinite;
+}
+
+/* Membuat kotak penutup berwarna sama dengan background yang bergerak maju mundur sebagai tiruan ketikan */
+.text-animation span::after {
+    content: "";
+    background-color: var(--bg-color);
     position: absolute;
-    top: 1.25rem;
-    left: 1.25rem;
-    width: 100%;
+    width: calc(100% + 8px);
     height: 100%;
-    background-color: var(--accent);
-    border-radius: var(--radius);
-    z-index: 0;
+    border-left: 3px solid var(--bg-color);
+    right: -8px;
+    animation: cursor 0.6s infinite, typing 20s steps(14) infinite;
 }
 
-.avatar {
-    position: relative;
-    z-index: 1;
-    display: block;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: var(--radius);
-    border: 3px solid var(--ink);
+/* Animasi kursor berkedip di ujung teks */
+@keyframes cursor {
+    to {
+        border-left: 2px solid var(--main-color);
+    }
 }
 
-.site-footer {
-    padding: 1.5rem;
-    color: var(--text-muted);
-    font-size: 0.85rem;
-    border-top: 1px solid var(--line);
+/* Animasi untuk menggerakkan lebar kotak penutup teks agar terlihat sedang diketik */
+@keyframes typing {
+    10%,
+    15%,
+    30%,
+    35%,
+    50%,
+    55%,
+    70%,
+    75%,
+    90%,
+    95% {
+        width: 0;
+    }
+    5%,
+    20%,
+    25%,
+    40%,
+    45%,
+    60%,
+    65%,
+    80%,
+    85% {
+        width: calc(100% + 8px)
+    }
 }
 
-@media (max-width: 600px) {
-    .hero-grid {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "identity"
-            "photo"
-            "details";
-    }
-
-    .hero-photo {
-        max-width: 220px;
-    }
-
-    .social-links {
-        justify-content: flex-start;
-    }
+/* Gaya universal pada teks judul yang dipakai di setiap awal section */
+.heading {
+    font-size: 8rem;
+    text-align: center;
+    margin: 5rem 0;
 }

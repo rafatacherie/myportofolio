@@ -6,56 +6,49 @@
     <title>Rafata Zahi Cherie - Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="/static/css/style.css">
+    
 </head>
 <body>
-    <header class="site-header">
-        <div class="container">
-            <a href="#profile" class="brand">Rafata Zahi Cherie</a>
-            <nav>
-                <a href="#profile">Profile</a>
-            </nav>
-        </div>
+    <header class="header">
+        <a href="#home" class="logo"><span>Rafata Zahi Cherie</span></a>
+
+        <i class='bx bx-menu' id="menu-icon"></i>
+            
+        <nav class="navbar">
+            <a href="#home" class="active">Home</a>
+            <a href="#education">Education</a>
+            <a href="#experience">Experience</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact">Contact</a>
+        </nav>
     </header>
 
-    <main>
-        <section class="hero" id="profile">
-            <div class="container hero-grid">
-                <div class="hero-identity">
-                    <p class="hero-kicker">Information System &middot; Universitas Indonesia</p>
-                    <h1>Rafata Zahi Cherie</h1>
-                </div>
-                <div class="hero-photo">
-                    <div class="photo-block"></div>
-                    <img class="avatar" src="/static/img/rafata.png" alt="Photo of Rafata">
-                </div>
-                <div class="hero-details">
-                    <p class="bio">A student with a strong interest in digital transformation and business. Skilled in problem-solving, teamwork, and analytical thinking, with a constantly evolving knowledge of data, systems, and business processes. With a growth-oriented mindset, I am always eager to learn, take on challenges, and develop my skills.</p>
-                    <dl class="meta-list">
-                        <div class="meta-row">
-                            <dt>NPM</dt>
-                            <dd>2506621592</dd>
-                        </div>
-                        <div class="meta-row">
-                            <dt>Program</dt>
-                            <dd>S1 Sistem Informasi</dd>
-                        </div>
-                    </dl>
-                    <div class="social-links">
-                        <a href="https://github.com/rafatacherie" class="social-link">GitHub</a>
-                        <a href="https://www.linkedin.com/in/rafata-zahi-cherie" class="social-link">LinkedIn</a>
-                        <a href="mailto:rafatazzacc@gmail.com" class="social-link">Email</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+    <section class="home" id="home">
+        <div class="home-content">
+            <h1>Hi, I'm <span>Rafata</span></h1>
+            <h3 class="text-animation">NPM <span></span></h3>
+            <p>A student with a strong interest in digital transformation and business. Skilled in problem-solving, teamwork, and analytical thinking, 
+                with a constantly evolving knowledge of data, systems, and business processes. With a growth-oriented mindset, I am always eager to learn, take on challenges, and develop my skills.</p>
 
-    <footer class="site-footer">
-        <div class="container">
-            <p>&copy; 2026 Rafata Zahi Cherie. Fakultas Ilmu Komputer, Universitas Indonesia.</p>
+            <div class="social-icons">
+                <a href="https://www.linkedin.com/in/rafata-zahi-cherie-894103375"><i class='bx bxl-linkedin'></i></a>
+                <a href="https://github.com/rafatacherie"><i class='bx bxl-github'></i></a>
+                <a href="https://www.instagram.com/rftazc/"><i class='bx bxl-instagram-alt'></i></a>
+            </div>
+
+            <div class="btn-group">
+                <a href="#" class="btn">Hire</a>
+                <a href="#contact" class="btn">Contact</a>
+            </div>
         </div>
-    </footer>
+            <div class="home-img">
+                <img src="/static/img/rafata.png" alt="">
+            </div>
+    </section>
+
+    <script src="/static/js/script.js"></script>
 </body>
 </html>
