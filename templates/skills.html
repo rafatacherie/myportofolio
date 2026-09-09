@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ name }} - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/static/css/style.css">
+    
+</head>
+<body>
+    <header class="header">
+        <a href="{% url 'main:show_main' %}" class="logo">{{ name }}</a>
+
+        <i class='bx bx-menu' id="menu-icon"></i>
+            
+        <nav class="navbar">
+            <a href="{% url 'main:show_main' %}" class="active">Profile</a>
+            <a href="{% url 'main:show_main' %}#education">Education</a>
+            <a href="{% url 'main:show_experience' %}">Experience</a>
+            <a href="{% url 'main:show_main' %}#skills">Skills</a>
+            <a href="{% url 'main:show_main' %}#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="skills" id="skills">
+        <h2 class="heading">Skills</h2>
+
+        <div class="skills-row">
+            <div class="skills-column">
+                <h3 class="title">Technical Skills</h3>
+
+                <div class="skills-box">
+                    <div class="skills-content">
+
+                        <div class="progress">
+                            <div class="skills-info">
+                                <p><i class='bx bxl-python'></i> Python</p>
+                                <span>70%</span>
+                            </div>
+                            <div class="bar"><span class="tech-bar-1"></span></div>
+                        </div>
+
+                        <div class="progress">
+                            <div class="skills-info">
+                                <p><i class='bx bxl-java'></i> Java</p>
+                                <span>60%</span>
+                            </div>
+                            <div class="bar"><span class="tech-bar-2"></span></div>
+                        </div>
+
+                        <div class="progress">
+                            <div class="skills-info">
+                                <p><i class='bx bx-edit'></i> Canva</p>
+                                <span>90%</span>
+                            </div>
+                            <div class="bar"><span class="tech-bar-3"></span></div>
+                        </div>
+
+                        <div class="progress">
+                            <div class="skills-info">
+                                <p><i class='bx bx-video-recording'></i> Video Editing</p>
+                                <span>75%</span>
+                            </div>
+                            <div class="bar"><span class="tech-bar-4"></span></div>
+                        </div>
+
+                        <div class="progress">
+                            <div class="skills-info">
+                                <p><i class='bx bx-laptop'></i> Microsoft Word</p>
+                                <span>90%</span>
+                            </div>
+                            <div class="bar"><span class="tech-bar-5"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-column">
+                <h3 class="title">Soft Skills</h3>
+
+                <div class="skills-box">
+                    <div class="skills-content">
+
+                        <div class="progress">
+                            <div class="skills-info">
+                                <p><i class='bx bx-group'></i> Public Speaking</p>
+                                <span>80%</span>
+                            </div>
+                            <div class="bar"><span class="soft-bar-1"></span></div>
+                        </div>
+
+                        <div class="progress">
+                            <div class="skills-info">
+                                <p><i class='bx bx-conversation'></i> Communication</p>
+                                <span>85%</span>
+                            </div>
+                            <div class="bar"><span class="soft-bar-2"></span></div>
+                        </div>
+
+                        <div class="progress">
+                            <div class="skills-info">
+                                <p><i class='bx bx-brain'></i> Problem Solving</p>
+                                <span>80%</span>
+                            </div>
+                            <div class="bar"><span class="soft-bar-3"></span></div>
+                        </div>
+
+                        <div class="progress">
+                            <div class="skills-info">
+                                <p><i class='bx bx-time-five'></i> Time Management</p>
+                                <span>95%</span>
+                            </div>
+                            <div class="bar"><span class="soft-bar-4"></span></div>
+                        </div>
+
+                        <div class="progress">
+                            <div class="skills-info">
+                                <p><i class='bx bx-briefcase'></i> Teamwork</p>
+                                <span>90%</span>
+                            </div>
+                            <div class="bar"><span class="soft-bar-5"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rafata Zahi Cherie - Portfolio</title>
+    <title>{{ name }} - Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
@@ -13,25 +13,25 @@
 </head>
 <body>
     <header class="header">
-        <a href="#home" class="logo"><span>Rafata Zahi Cherie</span></a>
+        <a href="{% url 'main:show_main' %}" class="logo">{{ name }}</a>
 
         <i class='bx bx-menu' id="menu-icon"></i>
             
         <nav class="navbar">
-            <a href="#home" class="active">Home</a>
-            <a href="#education">Education</a>
-            <a href="#experience">Experience</a>
-            <a href="#skills">Skills</a>
-            <a href="#contact">Contact</a>
+            <a href="{% url 'main:show_main' %}" class="active">Profile</a>
+            <a href="{% url 'main:show_main' %}#education">Education</a>
+            <a href="{% url 'main:show_experience' %}">Experience</a>
+            <a href="{% url 'main:show_main' %}#skills">Skills</a>
+            <a href="{% url 'main:show_main' %}#contact">Contact</a>
         </nav>
+
     </header>
 
     <section class="home" id="home">
         <div class="home-content">
-            <h1>Hi, I'm <span>Rafata</span></h1>
+            <h1>Hi, I'm <span>{{ short_name }}</span></h1>
             <h3 class="text-animation">NPM <span></span></h3>
-            <p>A student with a strong interest in digital transformation and business. Skilled in problem-solving, teamwork, and analytical thinking, 
-                with a constantly evolving knowledge of data, systems, and business processes. With a growth-oriented mindset, I am always eager to learn, take on challenges, and develop my skills.</p>
+            <p>{{ bio }}</p>
 
             <div class="social-icons">
                 <a href="https://www.linkedin.com/in/rafata-zahi-cherie-894103375"><i class='bx bxl-linkedin'></i></a>
@@ -45,7 +45,7 @@
             </div>
         </div>
             <div class="home-img">
-                <img src="/static/img/rafata.png" alt="">
+                <img src="/static/img/rafata.png" alt="Photo of {{ name }}">
             </div>
     </section>
 
@@ -59,7 +59,7 @@
                     <div class="timeline-date">2025 - Present</div>
                     <div class="timeline-content">
                         <h3>Universitas Indonesia</h3>
-                        <p>Information System, Faculty of Computer Science</p>
+                        <p>{{ study_program }}, Faculty of Computer Science</p>
                     </div>
                 
             </div>
@@ -76,188 +76,11 @@
         </div>
     </section>
 
-    <section class="experience" id="experience">
-        <h2 class="heading">Experience</h2>
+    {% include 'experience.html' %}
 
-        <div class="experience-container">
-            <div class="experience-box">
-                <input type="checkbox" id="toggle-exp1" class="exp-checkbox">
+    {% include 'skills.html' %}
 
-                <div class="box-front">
-                    <div class="experience-info">
-                        <h4>Product Management Class by RISTEK</h4>
-                        <h3>Participant</h3>
-                        <label for="toggle-exp1" class="see-detail-btn">See Detail</label>
-                    </div>
-                </div>
-
-                <div class="box-back">
-                    <div class="scroll-content">
-                        <p>- Completed a series of studies on product and project management.</p>
-                        <p>- Analyzed product management case studies to identify problems, prioritize features, identify solutions, and plan product development.</p>
-                        <p>- Created a project timeline with clear start and end dates, assigned responsibilities, and ensured team alignment for smooth execution.</p>
-                    </div>
-                    <label for="toggle-exp1" class="close-detail-btn">Back</label>
-                </div>
-            </div> 
-
-            <div class="experience-box">
-                <input type="checkbox" id="toggle-exp2" class="exp-checkbox">
-
-                <div class="box-front">
-                    <div class="experience-info">
-                        <h4>Dream Campus 2026</h4>
-                        <h3>Event Staff</h3>
-                        <label for="toggle-exp2" class="see-detail-btn">See Detail</label>
-                    </div>
-                </div>
-
-                <div class="box-back">
-                    <div class="scroll-content">
-                        <p>- Responsible for planning, coordinating, and executing a series of events, ensuring each program runs smoothly and achieves its objectives.</p>
-                        <p>- Developed detailed event schedules and prepared comprehensive budgets for events, including allocation of resources and logistics to support successful execution.</p>
-                        <p>- Monitored event progress, addressed issues in real-time, and ensured that all activities adhered to planned timelines, contributing to the overall success of the Dream Campus event.</p>
-                    </div>
-                    <label for="toggle-exp2" class="close-detail-btn">Back</label>
-                </div>
-            </div> 
-
-            <div class="experience-box">
-                <input type="checkbox" id="toggle-exp3" class="exp-checkbox">
-
-                <div class="box-front">
-                    <div class="experience-info">
-                        <h4>Compfest 18</h4>
-                        <h3>Direct Marketing Staff</h3>
-                        <label for="toggle-exp3" class="see-detail-btn">See Detail</label>
-                    </div>
-                </div>
-
-                <div class="box-back">
-                    <div class="scroll-content">
-                        <p>- Experienced as an MC for seminars.</p>
-                        <p>- Developed and executed creative content strategies to attract audiences, boost engagement, and foster active interaction.</p>
-                        <p>- Engaged directly with prospective participants, persuasively conveying information to generate interest and drive registrations.</p>
-                        <p>- Collaborated with team members to develop compelling promotional ideas and expand audience reach through effective communication strategies.</p>
-                    </div>
-                    <label for="toggle-exp3" class="close-detail-btn">Back</label>
-                </div>
-            </div> 
-
-        </div>
-    </section>
-
-    <section class="skills" id="skills">
-        <h2 class="heading">Skills</h2>
-
-        <div class="skills-row">
-            <div class="skills-column">
-                <h3 class="title">Technical Skills</h3>
-
-                <div class="skills-box">
-                    <div class="skills-content">
-
-                        <div class="progress">
-                            <div class="skills-info">
-                                <p><i class='bx bxl-python'></i> Python</p>
-                                <span>70%</span>
-                            </div>
-                            <div class="bar"><span class="tech-bar-1"></span></div>
-                        </div>
-
-                        <div class="progress">
-                            <div class="skills-info">
-                                <p><i class='bx bxl-java'></i> Java</p>
-                                <span>60%</span>
-                            </div>
-                            <div class="bar"><span class="tech-bar-2"></span></div>
-                        </div>
-
-                        <div class="progress">
-                            <div class="skills-info">
-                                <p><i class='bx bx-edit'></i> Canva</p>
-                                <span>90%</span>
-                            </div>
-                            <div class="bar"><span class="tech-bar-3"></span></div>
-                        </div>
-
-                        <div class="progress">
-                            <div class="skills-info">
-                                <p><i class='bx bx-video-recording'></i> Video Editing</p>
-                                <span>75%</span>
-                            </div>
-                            <div class="bar"><span class="tech-bar-4"></span></div>
-                        </div>
-
-                        <div class="progress">
-                            <div class="skills-info">
-                                <p><i class='bx bx-laptop'></i> Microsoft Word</p>
-                                <span>90%</span>
-                            </div>
-                            <div class="bar"><span class="tech-bar-5"></span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="skills-column">
-                <h3 class="title">Soft Skills</h3>
-
-                <div class="skills-box">
-                    <div class="skills-content">
-
-                        <div class="progress">
-                            <div class="skills-info">
-                                <p><i class='bx bx-group'></i> Public Speaking</p>
-                                <span>80%</span>
-                            </div>
-                            <div class="bar"><span class="soft-bar-1"></span></div>
-                        </div>
-
-                        <div class="progress">
-                            <div class="skills-info">
-                                <p><i class='bx bx-conversation'></i> Communication</p>
-                                <span>85%</span>
-                            </div>
-                            <div class="bar"><span class="soft-bar-2"></span></div>
-                        </div>
-
-                        <div class="progress">
-                            <div class="skills-info">
-                                <p><i class='bx bx-brain'></i> Problem Solving</p>
-                                <span>80%</span>
-                            </div>
-                            <div class="bar"><span class="soft-bar-3"></span></div>
-                        </div>
-
-                        <div class="progress">
-                            <div class="skills-info">
-                                <p><i class='bx bx-time-five'></i> Time Management</p>
-                                <span>95%</span>
-                            </div>
-                            <div class="bar"><span class="soft-bar-4"></span></div>
-                        </div>
-
-                        <div class="progress">
-                            <div class="skills-info">
-                                <p><i class='bx bx-briefcase'></i> Teamwork</p>
-                                <span>90%</span>
-                            </div>
-                            <div class="bar"><span class="soft-bar-5"></span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="contact" id="contact">
-        <h2 class="heading">Contact</h2>
-        
-        <div class="contact-buttons">
-            <a href="mailto:rafatazzacc@gmail.com" class="btn"><i class='bx bx-envelope'></i> Send me a message</a>
-        </div>
-    </section>
+    {% include 'contact.html' %}
 
     <footer class="footer">
         <div class="social">
@@ -289,7 +112,7 @@
         </ul>
 
         <p class="copyright">
-            &copy; 2026 by Rafata Zahi Cherie | Faculty of Computer Science, Universitas Indonesia.
+            &copy; 2026 by {{ name }} | Faculty of Computer Science, Universitas Indonesia.
         </p>
     </footer>
 

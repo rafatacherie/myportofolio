@@ -949,6 +949,17 @@ ditumpuk jadi satu kolom vertikal agar tidak menumpuk */
         width: 56vw;
     }
 
+    /* Mengubah grid experience menjadi 1 kolom vertikal ke bawah */
+    .experience-container {
+        grid-template-columns: 1fr;
+    }
+
+    /* Opsional: Menyesuaikan tinggi kotak agar isi teks tidak terpotong di layar HP */
+    .experience-box {
+        height: auto;
+        min-height: 240px;
+    }
+
     .skills h2 {
         margin-bottom: 3rem;
     }

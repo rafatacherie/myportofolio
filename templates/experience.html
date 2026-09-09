@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ name }} - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/static/css/style.css">
+    
+</head>
+<body>
+    <header class="header">
+        <a href="{% url 'main:show_main' %}" class="logo">{{ name }}</a>
+
+        <i class='bx bx-menu' id="menu-icon"></i>
+            
+        <nav class="navbar">
+            <a href="{% url 'main:show_main' %}" class="active">Profile</a>
+            <a href="{% url 'main:show_main' %}#education">Education</a>
+            <a href="{% url 'main:show_experience' %}">Experience</a>
+            <a href="{% url 'main:show_main' %}#skills">Skills</a>
+            <a href="{% url 'main:show_main' %}#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="experience" id="experience">
+        <h2 class="heading">Experience</h2>
+
+        <div class="experience-container">
+            <div class="experience-box">
+                <input type="checkbox" id="toggle-exp1" class="exp-checkbox">
+
+                <div class="box-front">
+                    <div class="experience-info">
+                        <h4>Product Management Class by RISTEK</h4>
+                        <h3>Participant</h3>
+                        <label for="toggle-exp1" class="see-detail-btn">See Detail</label>
+                    </div>
+                </div>
+
+                <div class="box-back">
+                    <div class="scroll-content">
+                        <p>- Completed a series of studies on product and project management.</p>
+                        <p>- Analyzed product management case studies to identify problems, prioritize features, identify solutions, and plan product development.</p>
+                        <p>- Created a project timeline with clear start and end dates, assigned responsibilities, and ensured team alignment for smooth execution.</p>
+                    </div>
+                    <label for="toggle-exp1" class="close-detail-btn">Back</label>
+                </div>
+            </div> 
+
+            <div class="experience-box">
+                <input type="checkbox" id="toggle-exp2" class="exp-checkbox">
+
+                <div class="box-front">
+                    <div class="experience-info">
+                        <h4>Dream Campus 2026</h4>
+                        <h3>Event Staff</h3>
+                        <label for="toggle-exp2" class="see-detail-btn">See Detail</label>
+                    </div>
+                </div>
+
+                <div class="box-back">
+                    <div class="scroll-content">
+                        <p>- Responsible for planning, coordinating, and executing a series of events, ensuring each program runs smoothly and achieves its objectives.</p>
+                        <p>- Developed detailed event schedules and prepared comprehensive budgets for events, including allocation of resources and logistics to support successful execution.</p>
+                        <p>- Monitored event progress, addressed issues in real-time, and ensured that all activities adhered to planned timelines, contributing to the overall success of the Dream Campus event.</p>
+                    </div>
+                    <label for="toggle-exp2" class="close-detail-btn">Back</label>
+                </div>
+            </div> 
+
+            <div class="experience-box">
+                <input type="checkbox" id="toggle-exp3" class="exp-checkbox">
+
+                <div class="box-front">
+                    <div class="experience-info">
+                        <h4>Compfest 18</h4>
+                        <h3>Direct Marketing Staff</h3>
+                        <label for="toggle-exp3" class="see-detail-btn">See Detail</label>
+                    </div>
+                </div>
+
+                <div class="box-back">
+                    <div class="scroll-content">
+                        <p>- Experienced as an MC for seminars.</p>
+                        <p>- Developed and executed creative content strategies to attract audiences, boost engagement, and foster active interaction.</p>
+                        <p>- Engaged directly with prospective participants, persuasively conveying information to generate interest and drive registrations.</p>
+                        <p>- Collaborated with team members to develop compelling promotional ideas and expand audience reach through effective communication strategies.</p>
+                    </div>
+                    <label for="toggle-exp3" class="close-detail-btn">Back</label>
+                </div>
+            </div> 
+
+        </div>
+    </section>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
