@@ -18,18 +18,37 @@
             
         <nav class="navbar">
             <a href="{% url 'main:show_main' %}">Profile</a>
-            <a href="{% url 'main:show_education' %}">Education</a>
+            <a href="{% url 'main:show_education' %}" class="active">Education</a>
             <a href="{% url 'main:show_experience' %}">Experience</a>
             <a href="{% url 'main:show_skills' %}">Skills</a>
-            <a href="{% url 'main:show_contact' %}" class="active">Contact</a>
+            <a href="{% url 'main:show_contact' %}">Contact</a>
         </nav>
     </header>
 
-    <section class="contact" id="contact">
-        <h2 class="heading">Contact</h2>
-        
-        <div class="contact-buttons">
-            <a href="mailto:rafatazzacc@gmail.com" class="btn"><i class='bx bx-envelope'></i> Send me a message</a>
+    <section class="education" id="education">
+        <h2 class="heading">Education</h2>
+
+        <div class="timeline-items">
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                    <div class="timeline-date">2025 - Present</div>
+                    <div class="timeline-content">
+                        <h3>Universitas Indonesia</h3>
+                        <p>{{ study_program }}, Faculty of Computer Science</p>
+                    </div>
+                
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                    <div class="timeline-date">2022 - 2025</div>
+                    <div class="timeline-content">
+                        <h3>MAN 2 Kota Bogor</h3>
+                        <p>Science</p>
+                    </div>
+                
+            </div>
         </div>
     </section>
 

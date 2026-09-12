@@ -8,7 +8,6 @@ def show_main(request):
         "name": "Rafata Zahi Cherie",
         "short_name": "Rafata",
         "npm": "2506621592",
-        "study_program": "Information System",
         "bio": (
             "A student with a strong interest in digital transformation and business. "
             "Skilled in problem-solving, teamwork, and analytical thinking, with a constantly "
@@ -18,6 +17,12 @@ def show_main(request):
     }
     return render(request, "index.html", context)
 
+def show_education(request):
+    context = {
+        "name": "Rafata Zahi Cherie",
+        "study_program": "Information System",
+    }
+    return render(request, "education.html", context)
 
 def show_experience(request):
     context = {
@@ -25,3 +30,15 @@ def show_experience(request):
         "experience_list": Experience.objects.all(),
     }
     return render(request, "experience.html", context)
+
+def show_skills(request):
+    context = {
+        "name": "Rafata Zahi Cherie",
+    }
+    return render(request, "skills.html", context)
+
+def show_contact(request):
+    context = {
+        "name": "Rafata Zahi Cherie",
+    }
+    return render(request, "contact.html", context)
