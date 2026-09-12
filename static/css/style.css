@@ -539,9 +539,10 @@ span {
     text-shadow: 0 0 8px rgba(139, 30, 45, 0.6);
 }
 
-/* Pesan ketika belum ada data experience di database */
+/* Pesan ketika belum ada data di database */
 .empty-state {
     grid-column: 1 / -1;
+    width: 100%;
     font-size: 1.4rem;
     font-weight: 500;
     color: #3e4756;

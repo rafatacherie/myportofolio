@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from main.models import Education, Experience
+from main.models import Education, Experience, Skill
 
 
 def show_main(request):
@@ -35,6 +35,8 @@ def show_experience(request):
 def show_skills(request):
     context = {
         "name": "Rafata Zahi Cherie",
+        "technical_skills": Skill.objects.filter(skill_type='technical'),
+        "soft_skills": Skill.objects.filter(skill_type='soft'),
     }
     return render(request, "skills.html", context)
 

@@ -51,3 +51,18 @@ class Education(models.Model):
         if self.is_ongoing:
             return f"{self.start_year} - Present"
         return f"{self.start_year} - {self.end_year}"
+
+class Skill(models.Model):
+    SKILL_TYPE_CHOICES = [
+        ('technical', 'Technical Skills'),
+        ('soft', 'Soft Skills'),
+    ]
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=100)        
+    percentage = models.IntegerField()             
+    icon_class = models.CharField(max_length=50)
+    skill_type = models.CharField(max_length=15, choices=SKILL_TYPE_CHOICES) 
+
+    def __str__(self):
+        return f"{self.name} ({self.get_skill_type_display()})"
