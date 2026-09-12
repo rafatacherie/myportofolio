@@ -541,6 +541,7 @@ span {
 
 /* Pesan ketika belum ada data experience di database */
 .empty-state {
+    grid-column: 1 / -1;
     font-size: 1.4rem;
     font-weight: 500;
     color: #3e4756;
