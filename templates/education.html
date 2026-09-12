@@ -30,25 +30,19 @@
 
         <div class="timeline-items">
 
+            {% for education in education_list %}
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
-                    <div class="timeline-date">2025 - Present</div>
+                    <div class="timeline-date">{{ education.period_label }}</div>
                     <div class="timeline-content">
-                        <h3>Universitas Indonesia</h3>
-                        <p>{{ study_program }}, Faculty of Computer Science</p>
+                        <h3>{{ education.institution }}</h3>
+                        <p>{{ education.program }}</p>
                     </div>
-                
-            </div>
 
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                    <div class="timeline-date">2022 - 2025</div>
-                    <div class="timeline-content">
-                        <h3>MAN 2 Kota Bogor</h3>
-                        <p>Science</p>
-                    </div>
-                
             </div>
+            {% empty %}
+            <p class="empty-state">Belum ada riwayat pendidikan yang ditambahkan.</p>
+            {% endfor %}
         </div>
     </section>
 

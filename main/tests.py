@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from main.models import Experience
+from main.models import Education, Experience
 
 
 class MainTest(TestCase):
@@ -70,3 +70,34 @@ class ExperienceTest(TestCase):
             "Completed a series of studies on product and project management.",
         )
         self.assertContains(response, "Experienced as an MC for seminars.")
+
+
+class EducationTest(TestCase):
+    """Test untuk halaman Education"""
+
+    def setUp(self):
+        Education.objects.create(
+            institution="Universitas Indonesia",
+            program="Information System, Faculty of Computer Science",
+            start_year=2025,
+        )
+        Education.objects.create(
+            institution="MAN 2 Kota Bogor",
+            program="Science",
+            start_year=2022,
+            end_year=2025,
+        )
+
+    def test_education_url_is_accessible(self):
+        response = self.client.get(reverse("main:show_education"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "education.html")
+
+    def test_education_content(self):
+        response = self.client.get(reverse("main:show_education"))
+
+        self.assertContains(response, "Universitas Indonesia")
+        self.assertContains(response, "MAN 2 Kota Bogor")
+        self.assertContains(response, "2025 - Present")
+        self.assertContains(response, "2022 - 2025")

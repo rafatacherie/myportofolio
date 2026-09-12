@@ -25,3 +25,29 @@ class Experience(models.Model):
     @property
     def is_ongoing(self):
         return self.ended_at is None
+
+class Education(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    institution = models.CharField(max_length=255)
+    program = models.CharField(max_length=255)
+    start_year = models.PositiveIntegerField()
+    end_year = models.PositiveIntegerField(
+        blank=True,
+        null=True,
+    )
+
+    class Meta:
+        ordering = ["-start_year"]
+
+    def __str__(self):
+        return self.institution
+
+    @property
+    def is_ongoing(self):
+        return self.end_year is None
+
+    @property
+    def period_label(self):
+        if self.is_ongoing:
+            return f"{self.start_year} - Present"
+        return f"{self.start_year} - {self.end_year}"
