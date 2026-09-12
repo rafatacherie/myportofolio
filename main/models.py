@@ -66,3 +66,10 @@ class Skill(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.get_skill_type_display()})"
+
+class Contact(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    email = models.EmailField(max_length=255) 
+
+    def __str__(self):
+        return self.email

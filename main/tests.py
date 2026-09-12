@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from main.models import Education, Experience, Skill
+from main.models import Education, Experience, Skill, Contact
 
 
 class MainTest(TestCase):
@@ -154,3 +154,29 @@ class SkillsTest(TestCase):
 
         self.assertContains(response, "Belum ada technical skills yang ditambahkan.")
         self.assertContains(response, "Belum ada soft skills yang ditambahkan.")
+
+class SkillsTest(TestCase):
+    """Test untuk halaman Contact"""
+
+    def setUp(self):
+        Contact.objects.create(
+            email="rafatazzacc@gmail.com"
+        )
+
+    def test_skills_url_is_accessible(self):
+        response = self.client.get(reverse("main:show_contact"))
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "contact.html")
+
+    def test_skills_content(self):
+        response = self.client.get(reverse("main:show_contact"))
+        
+        self.assertContains(response, "mailto:rafatazzacc@gmail.com")
+
+    def test_skills_empty_state(self):
+        Contact.objects.all().delete()
+        self.assertEqual(Contact.objects.count(), 0)
+        response = self.client.get(reverse("main:show_contact"))
+
+        self.assertContains(response, "Belum ada informasi kontak yang ditambahkan.")
