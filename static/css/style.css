@@ -1117,11 +1117,11 @@ ditumpuk jadi satu kolom vertikal agar tidak menumpuk */
 
     /* Ukuran teks menu footer */
     .footer ul li a {
-        font-size: 1.15rem;
+        font-size: 1.3rem;
     }
     
     /* Ukuran teks copyright */
     .footer .copyright {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
     }
 }
