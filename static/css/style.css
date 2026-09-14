@@ -730,19 +730,6 @@ span {
     animation: animateBar 1.2s cubic-bezier(1, 0, 0, 1) forwards;
 }
 
-/* Daftar target persentase pada bar skill */
-.tech-bar-1 { width: 70%; }
-.tech-bar-2 { width: 60%; }
-.tech-bar-3 { width: 90%; }
-.tech-bar-4 { width: 75%; }
-.tech-bar-5 { width: 90%; }
-
-.soft-bar-1 { width: 80%; }
-.soft-bar-2 { width: 85%; }
-.soft-bar-3 { width: 80%; }
-.soft-bar-4 { width: 95%; }
-.soft-bar-5 { width: 90%; }
-
 /* Menggerakkan bar memanjang penuh ke ujung target persennya */
 @keyframes animateBar {
     100% {

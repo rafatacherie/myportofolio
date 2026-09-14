@@ -204,13 +204,13 @@ education, skills, dan contact. Selain itu, AI digunakan untuk membantu menganal
 terjadi serta memberikan solusi untuk memperbaikinya.
 
 **Lampiran Prompting:**
-- **Section Education**: Bisakah buat agar struktur kode ini [kode lama statis] agar sesuai 
+- **Section Education**: Bisakah buat struktur kode ini [kode lama statis] agar sesuai 
     seperti yang ada pada kode di tutorial ini [kode baru dinamis].
-- **Section Experience**: Bisakah buat agar struktur kode ini [kode lama statis] agar sesuai 
+- **Section Experience**: Bisakah buat struktur kode ini [kode lama statis] agar sesuai 
     seperti yang ada pada kode di tutorial ini [kode baru dinamis].
-- **Section Skills**: Bisakah buat agar struktur kode ini [kode lama statis] agar sesuai 
+- **Section Skills**: Bisakah buat struktur kode ini [kode lama statis] agar sesuai 
     seperti yang ada pada kode di tutorial ini [kode baru dinamis].
-- **Section Contact**: Bisakah buat agar struktur kode ini [kode lama statis] agar sesuai 
+- **Section Contact**: Bisakah buat struktur kode ini [kode lama statis] agar sesuai 
     seperti yang ada pada kode di tutorial ini [kode baru dinamis].
 
 **AI Disclosure & Analisis**

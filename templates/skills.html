@@ -42,7 +42,9 @@
                                     <span>{{ skill.percentage }}%</span>
                                 </div>
 
-                                <div class="bar"><span class="tech-bar-{{ forloop.counter }}"></span></div>
+                                <div class="bar">
+                                    <span class="skill-bar" data-percentage="{{ skill.percentage }}"></span>
+                                </div>
                             </div>
                         {% empty %}
                             <p class="empty-state">Belum ada technical skills yang ditambahkan.</p>
@@ -63,7 +65,9 @@
                                     <span>{{ skill.percentage }}%</span>
                                 </div>
 
-                                <div class="bar"><span class="soft-bar-{{ forloop.counter }}"></span></div>
+                                <div class="bar">
+                                    <span class="skill-bar" data-percentage="{{ skill.percentage }}"></span>
+                                </div>
                             </div>
                         {% empty %}
                             <p class="empty-state">Belum ada soft skills yang ditambahkan.</p>
