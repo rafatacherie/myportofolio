@@ -21,9 +21,7 @@ ALLOWED_HOSTS = ["localhost", "127.0.0.1", "rafata-zahi-myportofolio.pws.cs.ui.a
 
 PRODUCTION = os.getenv('PRODUCTION', 'False').lower() == 'true'
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://rafata-zahi-myportofolio.pws.cs.ui.ac.id",
-]
+CSRF_TRUSTED_ORIGINS = ["https://rafata-zahi-myportofolio.pws.cs.ui.ac.id"]
 
 CSRF_COOKIE_SECURE    = True
 SESSION_COOKIE_SECURE = True
