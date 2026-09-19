@@ -443,6 +443,267 @@ span {
     color: white;
 }
 
+/* Bungkus form pencarian experience dengan pill bar */
+.experience-search {
+    max-width: 600px;
+    margin: 0 auto 4rem;
+    position: relative;
+}
+
+/* Input pencarian experience */
+.experience-search__input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1.4rem 6rem 1.4rem 2.2rem;
+    border-radius: 5rem;
+    border: 2px solid var(--main-color);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-color);
+    font-size: 1.5rem;
+}
+
+/* Placeholder input pencarian */
+.experience-search__input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Glow saat input pencarian difokuskan */
+.experience-search__input:focus {
+    outline: none;
+    box-shadow: 0 0 15px var(--main-color);
+}
+
+/* Tombol ikon search */
+.experience-search__submit {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: none;
+    background: var(--main-color);
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.8rem;
+    transition: 0.3s ease-in-out;
+}
+
+/* Glow button search saat hover */
+.experience-search__submit:hover {
+    box-shadow: 0 0 15px var(--main-color);
+}
+
+/* Header section Experience (judul + button Add Experience) */
+.experience-header {
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Button tambah experience */
+.experience-add-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+/* Button tambah experience main color */
+.experience-add-button span {
+    font-size: 1.6rem;
+    line-height: 1;
+}
+
+/* Form tambah experience */
+.experience-form {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Baris button submit/cancel form experience */
+.experience-form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 3rem;
+}
+
+/* Jarak antar grup input form experience */
+.experience-form-group {
+    margin-bottom: 1.5rem;
+}
+
+/* Label tiap input form experience */
+.experience-form-group label {
+    font-size: 1.8rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+/* Gaya input/textarea/select form experience */
+.experience-form-group input,
+.experience-form-group textarea,
+.experience-form-group select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1rem;
+    border: 2px solid var(--main-color);
+    border-radius: 1rem;
+    background: transparent;
+    color: var(--text-color);
+    font-family: inherit;
+    font-size: 1.3rem;
+}
+
+/* Warna opsi dropdown category (select) */
+.experience-form-group select option {
+    color: black;
+    background: white;
+}
+
+/* Ukuran placeholder input/textarea form experience */
+.experience-form-group input::placeholder,
+.experience-form-group textarea::placeholder {
+    font-size: 1.3rem;
+}
+
+/* Glow saat input/textarea/select form experience difokuskan */
+.experience-form-group input:focus,
+.experience-form-group textarea:focus,
+.experience-form-group select:focus {
+    outline: none;
+    box-shadow: 0 0 12px var(--main-color);
+}
+
+/* Pesan error validasi form experience */
+.experience-form-error {
+    color: #ff4d4d;
+    font-size: 1.2rem;
+    margin-top: 0.4rem;
+}
+
+/* Baris tombol See Detail + Delete */
+.experience-front-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: auto;
+}
+
+/* Button Detele */
+.experience-delete-btn {
+    display: inline-block;
+    padding: 0.8rem 2.4rem;
+    background: #ff4d4d;
+    color: white;
+    border-radius: 4rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: 0.1rem;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+/* Glow tombol hapus saat hover */
+.experience-delete-btn:hover {
+    box-shadow: 0 0 15px rgba(255, 77, 77, 0.5);
+}
+
+/* Modal konfirmasi hapus experience, full-screen overlay */
+.experience-delete-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 1rem;
+    border: 0;
+    background: transparent;
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Lapisan gelap belakang modal, sekaligus area klik untuk tutup */
+.experience-delete-modal:popover-open {
+    display: flex;
+}
+
+.experience-delete-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    padding: 0;
+    background: rgba(0, 0, 0, 0.7);
+    cursor: default;
+}
+
+/* Lapisan gelap belakang modal dan area klik untuk tutup */
+.experience-delete-modal__content {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 440px);
+    padding: 2rem;
+    background: var(--second-bg-color);
+    border: 2px solid var(--main-color);
+    border-radius: 1.5rem;
+    color: var(--text-color);
+    font-size: 1.3rem;
+}
+
+/* Kotak konten modal konfirmasi hapus experience */
+.experience-delete-modal .experience-delete-modal__content h3 {
+    margin: 0 0 1rem;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+/* Judul modal konfirmasi hapus experience */
+.experience-delete-modal__close {
+    position: absolute;
+    top: 1rem;
+    right: 1.2rem;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--text-color);
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+/* Tombol silang (X) untuk menutup modal */
+.experience-delete-modal__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* Baris tombol Cancel & Yes, Delete */
+.experience-delete-modal__actions .btn {
+    padding: 0.6rem 1.6rem;  
+    font-size: 1.3rem;       
+    border-radius: 3rem; 
+}
+
 /* Membagi wadah luar experience menjadi 2 kolom grid sejajar */
 .experience-container {
     display: grid;
