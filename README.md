@@ -232,3 +232,98 @@ terjadi serta memberikan solusi untuk memperbaikinya.
     section. Saya kemudian mengidentifikasi kode yang menyebabkan perubahan pada gaya tulisan, 
     ukuran, atau layout, lalu memperbaikinya secara manual agar tetap sesuai dengan desain 
     sebelumnya.
+
+---
+
+### Tugas 3
+
+1. Mengapa menggunakan `ModelForm` dan `{% csrf_token %}`?
+
+    `ModelForm` digunakan karena dapat membuat form berdasarkan model Django secara otomatis. 
+    Field pada form akan menyesuaikan dengan field yang terdapat pada model, sehingga tidak 
+    perlu membuat setiap input HTML dan validasinya secara manual. `ModelForm` juga memudahkan 
+    proses pengolahan dan penyimpanan data form ke database.
+
+    Sementara itu, `{% csrf_token %}` digunakan untuk melindungi form dari serangan 
+    **Cross-Site Request Forgery (CSRF)**. Token tersebut memastikan bahwa request POST berasal 
+    dari form yang dibuat oleh aplikasi, sehingga dapat mencegah pengiriman request palsu oleh pihak lain.
+
+2. Mengapa JSON lebih disukai dibandingkan XML?
+
+    **JSON (JavaScript Object Notation)** lebih sering digunakan dalam pengembangan aplikasi web 
+    modern karena memiliki struktur yang lebih sederhana dan ringan dibandingkan XML. JSON menggunakan 
+    format key-value yang mudah dibaca oleh manusia maupun diproses oleh program.
+
+    Contoh JSON:
+    ```json
+    {
+        "title": "Portfolio Website",
+        "tech_stack": "Django, Python"
+    }
+    ```
+
+    Sedangkan XML menggunakan tag pembuka dan penutup:
+    ```xml
+    <project>
+        <title>Portfolio Website</title>
+        <tech_stack>Django, Python</tech_stack>
+    </project>
+    ```
+
+    JSON juga lebih mudah digunakan dalam komunikasi antara frontend dan backend, terutama pada API. 
+    Selain itu, JSON didukung oleh berbagai bahasa pemrograman dan umumnya memiliki ukuran data yang 
+    lebih kecil dibandingkan XML.
+
+3. Alur view mengembalikan data portofolio dalam bentuk JSON
+
+    Alurnya adalah:
+    **Request → View → Mengambil data dari Model → Serialization → JSON Response → Client**
+
+    Contohnya:
+    ```python
+    def show_json(request):
+        data = Project.objects.all()
+        return HttpResponse(
+            serializers.serialize("json", data),
+            content_type="application/json"
+        )
+    ```
+
+    Ketika URL diakses, Django menjalankan fungsi `show_json()`. View kemudian mengambil data project 
+    dari database menggunakan `Project.objects.all()`.
+
+    Data tersebut masih berupa **QuerySet/object Django**, sehingga perlu diubah terlebih dahulu ke 
+    format yang dapat dikirim dan dibaca oleh client. Proses tersebut disebut **serialization**:
+
+    ```python
+    serializers.serialize("json", data)
+    ```
+
+    Serialization mengubah object atau data dari model Django menjadi format JSON. Setelah itu, JSON 
+    dikembalikan melalui `HttpResponse` dengan `content_type="application/json"`, sehingga client 
+    menerima data portofolio dalam format JSON.
+
+---
+
+### Penggunaan AI Tugas 3
+
+Dalam tugas ini, saya menggunakan Claude untuk membantu menyesuaikan kode pada section Experience 
+agar dapat menerima input secara langsung melalui website, dengan struktur yang serupa dengan section 
+Projects dari tutorial. AI juga digunakan untuk membantu merapikan layout dan gaya tulisan pada fitur 
+tambahan tersebut agar tetap sesuai dengan desain website yang sudah dibuat.
+
+**Lampiran Prompting:**
+- **Section Experience**: Berdasarkan kode pada section Projects, bisakah sesuaikan kode yang ada di 
+    section Experience agar memiliki struktur yang sama dan dapat menerima input melalui website.   
+
+**AI Disclosure & Analisis**
+- **Tools yang Digunakan**: Claude
+- **Analisis Keterbatasan AI**: Ketika kode diubah agar section Experience dapat menerima input langsung 
+    melalui website, terdapat beberapa perubahan pada layout dan gaya tulisan di bagian tertentu yang 
+    membuat tampilannya tidak lagi sepenuhnya sesuai dengan desain awal.
+- **Perbaikan Manual (oleh saya)**: Untuk mengatasi perubahan tersebut, saya menganalisis kembali kode yang 
+    telah dibuat, terutama bagian CSS yang mengatur tampilan setiap section. Saya mengidentifikasi bagian 
+    kode yang memengaruhi ukuran, jarak, dan layout, kemudian melakukan penyesuaian secara manual agar tampilan 
+    pada fitur tetap konsisten dengan desain keseluruhan website.
+
+---
