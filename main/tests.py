@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from main.models import Education, Experience, Skill, Contact
+from main.models import Education, Experience, Skill, Project, Contact
 
 
 class MainTest(TestCase):
@@ -155,7 +155,7 @@ class SkillsTest(TestCase):
         self.assertContains(response, "Belum ada technical skills yang ditambahkan.")
         self.assertContains(response, "Belum ada soft skills yang ditambahkan.")
 
-class SkillsTest(TestCase):
+class ContactTest(TestCase):
     """Test untuk halaman Contact"""
 
     def setUp(self):
@@ -180,3 +180,70 @@ class SkillsTest(TestCase):
         response = self.client.get(reverse("main:show_contact"))
 
         self.assertContains(response, "Belum ada informasi kontak yang ditambahkan.")
+
+class ProjectTest(TestCase):
+    """Test untuk halaman Projects"""
+ 
+    def setUp(self):
+        self.project = Project.objects.create(
+            title="Portfolio Website",
+            description="Website portofolio pribadi dibangun pakai Django.",
+            tech_stack="Django, Python, HTML, CSS",
+            project_url="https://github.com/example/repo",
+        )
+ 
+    def test_projects_url_is_accessible(self):
+        response = self.client.get(reverse("main:show_projects"))
+ 
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "project.html")
+        self.assertContains(response, "Portfolio Website")
+ 
+    def test_add_project_form_is_accessible(self):
+        response = self.client.get(reverse("main:create_project"))
+ 
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "projects_form.html")
+ 
+    def test_create_project_via_post(self):
+        response = self.client.post(
+            reverse("main:create_project"),
+            {
+                "title": "Second Project",
+                "description": "Deskripsi proyek kedua.",
+                "tech_stack": "React, Node.js",
+                "project_url": "",
+                "project_image_url": "",
+            },
+        )
+ 
+        self.assertRedirects(response, reverse("main:show_projects"))
+        self.assertEqual(Project.objects.count(), 2)
+        self.assertTrue(Project.objects.filter(title="Second Project").exists())
+ 
+    def test_search_project_by_title(self):
+        Project.objects.create(
+            title="Another App",
+            description="Proyek lain.",
+            tech_stack="Flutter",
+        )
+ 
+        response = self.client.get(reverse("main:show_projects"), {"title": "Portfolio"})
+ 
+        self.assertContains(response, "Portfolio Website")
+        self.assertNotContains(response, "Another App")
+ 
+    def test_delete_project(self):
+        response = self.client.post(
+            reverse("main:delete_project", args=[self.project.id])
+        )
+ 
+        self.assertRedirects(response, reverse("main:show_projects"))
+        self.assertFalse(Project.objects.filter(id=self.project.id).exists())
+ 
+    def test_projects_json_endpoint(self):
+        response = self.client.get(reverse("main:get_projects_json"))
+ 
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response["Content-Type"], "application/json")
+        self.assertContains(response, "Portfolio Website")

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block meta %}
+    <title>Add Experience - {{ name }}</title>
+{% endblock meta %}
+{% block content %}
+    <section class="experience" id="add-experience">
+        <h2 class="heading">Add New Experience</h2>
+
+        <form method="post" action="{% url 'main:create_experience' %}" class="experience-form">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="experience-form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% for error in field.errors %}
+                        <p class="experience-form-error">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <div class="experience-form-actions">
+                <button type="submit" class="btn">Add Experience</button>
+                <a href="{% url 'main:show_experience' %}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </section>
+{% endblock content %}

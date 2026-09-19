@@ -24,10 +24,19 @@
             <a href="{% url 'main:show_education' %}" class="{% if request.resolver_match.url_name == 'show_education' %}active{% endif %}">Education</a>
             <a href="{% url 'main:show_experience' %}" class="{% if request.resolver_match.url_name == 'show_experience' %}active{% endif %}">Experience</a>
             <a href="{% url 'main:show_skills' %}" class="{% if request.resolver_match.url_name == 'show_skills' %}active{% endif %}">Skills</a>
-            <!-- <a href="{% url 'main:show_projects' %}" class="{% if request.resolver_match.url_name == 'show_projects' %}active{% endif %}">Projects</a> -->
+            <a href="{% url 'main:show_projects' %}" class="{% if request.resolver_match.url_name == 'show_projects' %}active{% endif %}">Projects</a>
             <a href="{% url 'main:show_contact' %}" class="{% if request.resolver_match.url_name == 'show_contact' %}active{% endif %}">Contact</a>
         </nav>
     </header>
+    {% if messages %}
+        <div class="site-messages">
+            {% for message in messages %}
+                <div class="site-message site-message--{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
     {% block content %} {% endblock content %}
 
     <footer class="footer">

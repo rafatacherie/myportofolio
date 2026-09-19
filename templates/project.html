@@ -10,7 +10,7 @@
             <input type="search"
                    name="title"
                    value="{{ title_query }}"
-                   placeholder="Cari proyek..."
+                   placeholder="Search the project..."
                    class="project-search__input"
                    aria-label="Cari berdasarkan nama proyek">
             <button type="submit" class="project-search__submit" aria-label="Cari">
@@ -21,7 +21,7 @@
         <div class="project-header">
             <a href="{% url 'main:create_project' %}" class="btn project-add-button">
                 <span aria-hidden="true"></span>
-                Add Project
+                + Add Project
             </a>
         </div>
 
@@ -34,7 +34,7 @@
                              class="project-image">
                     {% endif %}
                     <div class="project-card-body">
-                        <span class="experience-category">{{ project.tech_stack }}</span>
+                        <span class="project-tag">{{ project.tech_stack }}</span>
                         <h3>{{ project.title }}</h3>
                         <p class="project-description">{{ project.description }}</p>
                     </div>
@@ -49,11 +49,9 @@
                 </article>
             {% empty %}
                 {% if title_query %}
-                    <p class="empty-state">Tidak ada proyek dengan nama tersebut.</p>
+                    <p class="empty-state">There is no project with that name.</p>
                 {% else %}
-                    <p class="empty-state">Belum ada proyek yang ditambahkan.</p>
-
-                    
+                    <p class="empty-state">No projects have been added yet.</p>
                 {% endif %}
             {% endfor %}
         </div>

@@ -140,7 +140,7 @@ span {
 /* Mengatur posisi, ukuran, dan efek pada foto profil */
 .home-img img {
     position: relative;
-    top: 3rem;
+    top: 2rem;
     width: 25vw;
     aspect-ratio: 1 / 1;                   /* Memastikan foto berbentuk kotak */
     object-fit: cover;                     /* Memastikan foto tidak gepeng saat diregangkan */
@@ -440,7 +440,6 @@ span {
 
 /* Jarak bawah judul utama section experience */
 .experience h2 {
-    margin-bottom: 5rem;
     color: white;
 }
 
@@ -456,7 +455,7 @@ span {
    agar sisi depan & belakang (yang absolute) bisa ditumpuk di dalamnya */
 .experience-box {
     background-color: var(--main-color);
-    height: 240px; 
+    height: 220px; 
     border-radius: 3rem;
     border: 5px solid transparent;
     overflow: hidden;              /* Memastikan konten cerita di dalamnya tidak bocor keluar box */
@@ -563,7 +562,7 @@ span {
     font-weight: 500;
     margin-top: auto; 
     letter-spacing: 0.1rem;
-    border: 2px solid var(--main-color);
+    border: 2px solid #395EA6;
     cursor: pointer;
     transition: 0.3s ease;
 }
@@ -749,7 +748,7 @@ ditumpuk jadi satu kolom vertikal agar tidak menumpuk */
 /* ================== CONTACT SECTION ================== */
 /* Setting dasar latar belakang untuk area kontak */
 .contact {
-    background-color: var(--bg-color);
+    background-color: var(--second-bg-color);
     width: 100%;
 }
 
@@ -830,7 +829,7 @@ ditumpuk jadi satu kolom vertikal agar tidak menumpuk */
 /* Memastikan menu link navigasi bawah berbaris horizontal ke samping */
 .footer ul li {
     display: inline-block;
-    padding: 0 1.5rem; 
+    padding: 0 1rem; 
 }
 
 /* Mengatur gaya teks dan transisi animasi menu navigasi */
@@ -925,10 +924,12 @@ ditumpuk jadi satu kolom vertikal agar tidak menumpuk */
     #menu-icon {
         display: block;
         font-size: 2.8rem;
+        margin-right: -2rem;
     }
  
     .logo {
         font-size: 2.2rem;
+        margin-left: -2rem;
     }
  
     /* Memberi jarak kanan-kiri di semua section */
@@ -996,6 +997,7 @@ ditumpuk jadi satu kolom vertikal agar tidak menumpuk */
     
     /* Foto profil */
     .home-img img {
+        top: 1rem;
         width: 56vw;
     }
  
@@ -1007,7 +1009,12 @@ ditumpuk jadi satu kolom vertikal agar tidak menumpuk */
     /* Tinggi box experience */
     .experience-box {
         height: auto;
-        min-height: 240px;
+        min-height: 180px;
+    }
+
+    .experience-delete-btn {
+        font-size: 1.1rem;
+        padding: 0.6rem 1.8rem;
     }
     
     /* padding dalam box experiene */
@@ -1018,7 +1025,7 @@ ditumpuk jadi satu kolom vertikal agar tidak menumpuk */
     /* Judul pengalaman */
     .experience-info h4 {
         font-size: 2.2rem;
-        margin-top: 1rem;
+        margin-top: 1.2rem;
     }
 
     /* Jabatan dalam pengalaman */
@@ -1028,7 +1035,7 @@ ditumpuk jadi satu kolom vertikal agar tidak menumpuk */
 
     /* Label kategori (volunteer, full-time, dst) */
     .experience-category {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         padding-right: 2rem;
     }
 
@@ -1036,7 +1043,7 @@ ditumpuk jadi satu kolom vertikal agar tidak menumpuk */
     .experience-status {
         top: 2rem;
         right: 2rem;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
     }
 
     /* Tombol see detail */
@@ -1099,12 +1106,12 @@ ditumpuk jadi satu kolom vertikal agar tidak menumpuk */
  
     /* Jarak antar item menu footer */
     .footer ul li {
-        padding: 0 0.7rem;
+        padding: 0 0.6rem;
     }
 
     /* Ukuran teks menu footer */
     .footer ul li a {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
     }
     
     /* Ukuran teks copyright */
@@ -1116,330 +1123,386 @@ ditumpuk jadi satu kolom vertikal agar tidak menumpuk */
 /* ================== PROJECTS SECTION ================== */
 /* Latar belakang section Projects, selang-seling sama section lain */
 .projects {
-    background: var(--second-bg-color);
+    background: var(--bg-color);
 }
 
-    /* Header di atas grid: teks kicker + tombol tambah proyek sejajar */
-    .project-header {
-        max-width: 1200px;
-        margin: 0 auto 4rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-        flex-wrap: wrap;
-    }
+/* Header section Project (judul + button Add Project) */
+.project-header {
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
 
-    .section-kicker {
-        color: var(--main-color);
-        font-size: 1.3rem;
-        font-weight: 700;
-        letter-spacing: 0.08rem;
-        text-transform: uppercase;
-    }
+/* Button add project */
+.project-add-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+}
 
-    .project-add-button {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.6rem;
-    }
+/* Button Add Project main color */
+.project-add-button span {
+    font-size: 1.6rem;
+    line-height: 1;
+}
 
-    .project-add-button span {
-        font-size: 1.6rem;
-        line-height: 1;
-    }
+/* Form pencarian proyek */
+.project-search {
+    max-width: 600px;
+    margin: 0 auto 4rem;
+    position: relative;
+}
 
-    /* Form pencarian proyek: pill bar dengan ikon kaca pembesar nempel di kanan */
-    .project-search {
-        max-width: 600px;
-        margin: 0 auto 4rem;
-        position: relative;
-    }
+/* Input pencarian project */
+.project-search__input {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1.4rem 6rem 1.4rem 2.2rem;
+    border-radius: 5rem;
+    border: 2px solid var(--main-color);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-color);
+    font-size: 1.5rem;
+}
 
-    .project-search__input {
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
-        padding: 1.4rem 6rem 1.4rem 2.2rem;
-        border-radius: 5rem;
-        border: 2px solid var(--main-color);
-        background: rgba(255, 255, 255, 0.05);
-        color: var(--text-color);
-        font-size: 1.5rem;
-    }
+/* Warna placeholder input pencarian */
+.project-search__input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
 
-    .project-search__input::placeholder {
-        color: rgba(255, 255, 255, 0.5);
-    }
+/* Efek glow saat input pencarian difokuskan */
+.project-search__input:focus {
+    outline: none;
+    box-shadow: 0 0 15px var(--main-color);
+}
 
-    .project-search__input:focus {
-        outline: none;
-        box-shadow: 0 0 15px var(--main-color);
-    }
+/* Tombol ikon search untuk pencarian */
+.project-search__submit {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: none;
+    background: var(--main-color);
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.8rem;
+    transition: 0.3s ease-in-out;
+}
 
-    .project-search__submit {
-        position: absolute;
-        top: 50%;
-        right: 10px;
-        transform: translateY(-50%);
-        width: 34px;
-        height: 34px;
-        border-radius: 50%;
-        border: none;
-        background: var(--main-color);
-        color: black;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        font-size: 1.8rem;
-        transition: 0.3s ease-in-out;
-    }
+/* Efek glow button cari saat hover */
+.project-search__submit:hover {
+    box-shadow: 0 0 15px var(--main-color);
+}
 
-    .project-search__submit:hover {
-        box-shadow: 0 0 15px var(--main-color);
-    }
+/* Grid 2 kolom untuk menampilkan kartu-kartu project */
+.project-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+}
 
+/* project card tunggal (gambar, judul, deskripsi, tombol aksi) */
+.project-card {
+    background-color: var(--second-bg-color);
+    border: 2px solid var(--main-color);
+    border-radius: 2rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s ease-in-out;
+}
+
+/* Efek terangkat + glow saat kartu project di-hover */
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px var(--main-color);
+}
+
+/* Thumbnail/gambar project */
+.project-image {
+    display: block;
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Label kategori project */
+.project-tag {
+    display: inline-block;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.05rem;
+    text-transform: uppercase;
+    color: var(--main-color);
+    margin-bottom: 0.8rem;
+}
+
+/* Judul project */
+.project-card-body h3 {
+    font-size: 1.8rem;
+    margin: 0.8rem 0;
+    color: var(--text-color);
+}
+
+/* Deskripsi project */
+.project-description {
+    color: var(--text-color);
+    opacity: 0.85;
+    font-size: 1.4rem;
+    line-height: 1.6;
+}
+
+/* button See Detail */
+.project-card-actions {
+    margin-top: auto;
+    padding-top: 1.5rem;
+}
+
+/* Baris button (See Detail, Delete) */
+.project-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+}
+
+/* Buttin outline transparan (button Cancel) */
+.btn-secondary {
+    background: transparent;
+    color: var(--text-color);
+    border: 2px solid var(--text-color);
+    box-shadow: none;
+}
+
+/* Button merah untuk Delete */
+.btn-danger {
+    background: #ff4d4d;
+    color: white;
+    box-shadow: 0 0 15px rgba(255, 77, 77, 0.5);
+}
+
+/* Modal konfirmasi hapus project */
+.project-delete-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 1rem;
+    border: 0;
+    background: transparent;
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Tampilkan modal (flex) saat popover aktif */
+.project-delete-modal:popover-open {
+    display: flex;
+}
+
+/* Lapisan gelap di belakang modal dan area klik untuk menutup */
+.project-delete-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    padding: 0;
+    background: rgba(0, 0, 0, 0.7);
+    cursor: default;
+}
+
+/* Kotak konten modal konfirmasi hapus */
+.project-delete-modal__content {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 440px);
+    padding: 2rem;
+    background: var(--second-bg-color);
+    border: 2px solid var(--main-color);
+    border-radius: 1.5rem;
+    color: var(--text-color);
+    font-size: 1.3rem;
+}
+
+/* Judul di dalam modal konfirmasi hapus */
+.project-delete-modal__content h3 {
+    margin: 0 0 1rem;
+    font-size: 1.5rem;
+}
+
+/* Tombol silang (X) untuk menutup modal */
+.project-delete-modal__close {
+    position: absolute;
+    top: 1rem;
+    right: 1.2rem;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: var(--text-color);
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+/* Baris tombol Cancel & Yes, Delete */
+.project-delete-modal__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* Form add project */
+.project-form {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Jarak antar box input pada form */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+/* Label tiap input pada form */
+.form-group label {
+    font-size: 1.8rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+/* Gaya input & textarea pada form project */
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1rem;
+    border: 2px solid var(--main-color);
+    border-radius: 1rem;
+    background: transparent;
+    color: var(--text-color);
+    font-family: inherit;
+    font-size: 1.3rem;
+}
+
+/* Ukuran teks placeholder input/textarea form */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    font-size: 1.3rem;
+}
+
+/* Efek glow saat input/textarea form */
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    box-shadow: 0 0 12px var(--main-color);
+}
+
+/* Pesan error validasi form */
+.form-error {
+    color: #ff4d4d;
+    font-size: 1.2rem;
+    margin-top: 0.4rem;
+}
+
+/* Baris button add project pada halaman add new project */
+.project-form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 4rem;
+}
+
+/* Mengatur ukuran tombol See Detail/Delete */
+.project-actions .btn,
+.project-actions .btn-danger {
+    padding: 0.6rem 1.6rem;   /* Mengecilkan tinggi & lebar tombol */
+    font-size: 1.3rem;        /* Mengecilkan ukuran teks tombol */
+    border-radius: 3rem;      
+}
+
+/* Pesan sukses/error dari Django messages framework */
+.site-messages {
+    position: fixed;
+    top: 12rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: min(90%, 500px);
+    padding: 0 3%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Kotak pesan tunggal (sukses/error) */
+.site-message {
+    padding: 1rem 1.5rem;
+    border-radius: 1rem;
+    font-size: 1.4rem;
+    border: none;
+    color: var(--text-color);
+}
+
+/* Varian hijau untuk pesan sukses */
+.site-message--success {
+    background: #4caf50;
+    box-shadow: 0 0 15px #4caf50;
+}
+
+/* Varian merah untuk pesan error */
+.site-message--error {
+    background: #ff4d4d;
+    box-shadow: 0 0 15px #ff4d4d;
+}
+
+@media (max-width: 895px) {   
+    /* Grid project jadi 1 kolom */
     .project-grid {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 3rem;
+        grid-template-columns: 1fr;
+        margin-bottom: 3rem;
     }
 
-    .project-card {
-        background-color: var(--second-bg-color);
-        border: 2px solid var(--main-color);
-        border-radius: 2rem;
-        padding: 2rem;
-        display: flex;
+    /* Header project ditumpuk vertikal */
+    .project-header {
         flex-direction: column;
-        transition: 0.3s ease-in-out;
-    }
-
-    .project-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 0 20px var(--main-color);
-    }
-
-    .project-image {
-        display: block;
-        width: 100%;
-        height: 180px;
-        object-fit: cover;
-        border-radius: 1.2rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .experience-category {
-        display: inline-block;
-        color: var(--main-color);          
-        font-size: 1.3rem;                 
-        font-weight: 800;                
-        text-transform: uppercase;        
-        letter-spacing: 0.08rem;          
-        margin-bottom: 0.5rem;            
-        text-shadow: 0 0 8px var(--main-color), 0 0 20px rgba(79, 172, 254, 0.4);
-    }
-
-
-    .project-card-body h3 {
-        font-size: 1.8rem;
-        margin: 0.8rem 0;
-        color: var(--text-color);
-    }
-
-    .project-description {
-        color: var(--text-color);
-        opacity: 0.85;
-        font-size: 1.4rem;
-        line-height: 1.6;
-    }
-
-    .project-card-actions {
-        margin-top: auto;
-        padding-top: 1.5rem;
-    }
-
-    .project-actions {
-        display: flex;
         align-items: center;
-        flex-wrap: wrap;
-        gap: 1.2rem;
     }
 
-    .btn-secondary {
-        background: transparent;
-        color: var(--text-color);
-        border: 2px solid var(--text-color);
-        box-shadow: none;
+    /* Search bar project */
+    .project-search {
+        max-width: 100%;
     }
 
-    .btn-danger {
-        background: #ff4d4d;
-        color: white;
-        box-shadow: 0 0 15px rgba(255, 77, 77, 0.5);
-    }
-
-    .project-delete-modal {
-        display: none;
-        position: fixed;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        max-width: none;
-        max-height: none;
-        margin: 0;
-        padding: 1rem;
-        border: 0;
-        background: transparent;
-        z-index: 999;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .project-delete-modal:popover-open {
-        display: flex;
-    }
-
-    .project-delete-modal__backdrop {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        border: 0;
-        padding: 0;
-        background: rgba(0, 0, 0, 0.7);
-        cursor: default;
-    }
-
-    .project-delete-modal__content {
-        position: relative;
-        z-index: 1;
-        width: min(100%, 440px);
-        padding: 2rem;
-        background: var(--second-bg-color);
-        border: 2px solid var(--main-color);
-        border-radius: 1.5rem;
-        color: var(--text-color);
-    }
-
-    .project-delete-modal__content h3 {
-        margin: 0 0 1rem;
-        font-size: 1.8rem;
-    }
-
-    .project-delete-modal__close {
-        position: absolute;
-        top: 1rem;
-        right: 1.2rem;
-        border: 0;
-        padding: 0;
-        background: transparent;
-        color: var(--text-color);
-        font-size: 2rem;
-        line-height: 1;
-        cursor: pointer;
-    }
-
-    .project-delete-modal__actions {
-        display: flex;
-        justify-content: flex-end;
-        gap: 1rem;
-        margin-top: 2rem;
-    }
-
-    /* Form tambah proyek */
-    .project-form {
-        max-width: 700px;
-        margin: 0 auto;
-    }
-
-    .form-group {
-        margin-bottom: 1.5rem;
-    }
-
-    .form-group label {
-        font-size: 1.8rem;
-        display: block;
-        margin-bottom: 0.5rem;
-        font-weight: 700;
-        color: var(--text-color);
-    }
-
-    .form-group input,
-    .form-group textarea {
-        width: 100%;
-        box-sizing: border-box;
-        padding: 1rem;
-        border: 2px solid var(--main-color);
-        border-radius: 1rem;
-        background: transparent;
-        color: var(--text-color);
-        font-family: inherit;
-        font-size: 1.3rem;
-    }
-
-    .form-group input::placeholder,
-    .form-group textarea::placeholder {
-        font-size: 1.3rem;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-        outline: none;
-        box-shadow: 0 0 12px var(--main-color);
-    }
-
-    .form-error {
-        color: #ff4d4d;
-        font-size: 1.2rem;
-        margin-top: 0.4rem;
-    }
-
+    /* Jarak bawah button form */
     .project-form-actions {
-        display: flex;
-        gap: 1rem;
-        margin-top: 5rem;
+        margin-bottom: 3rem;
     }
 
-    /* Pesan sukses/error dari Django messages framework */
-    .site-messages {
-        max-width: 1200px;
-        margin: 2rem auto 0;
-        padding: 0 3%;
+    /* Mengatur button See Project */
+    .project-actions {
+        font-size: 1rem;
     }
-
-    .site-message {
-        padding: 1rem 1.5rem;
-        border-radius: 1rem;
-        font-size: 1.4rem;
-        margin-bottom: 1rem;
-        background: var(--second-bg-color);
-        border: 2px solid var(--main-color);
-        color: var(--text-color);
-    }
-
-    .site-message--success {
-        border-color: #4caf50;
-    }
-
-    .site-message--error {
-        border-color: #ff4d4d;
-    }
-
-    @media (max-width: 895px) {
-        .project-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .project-header {
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .project-search {
-            max-width: 100%;
-        }
-    }
+}

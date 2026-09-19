@@ -55,7 +55,7 @@ Kelas : PBP C
 
 ---
 
-### Penggunaan AI
+### Penggunaan AI Tugas 1
 
 Dalam tugas ini, saya menggunakan tutorial yang tersedia melalui youtube dan google gemini untuk
 beberapa section. Untuk section home, education, dan experience saya menggunakan source code dari
@@ -95,6 +95,8 @@ disesuaikan agar sesuai dengan keinginan menggunakan google gemini.
     spesifik untuk memodifikasi, menambah fitur baru (seperti tombol back dan scroll pada flip box), serta 
     menyelaraskan layout agar sesuai dengan desain yang saya inginkan.
 
+---
+
 ### Tugas 2
 
 1. Alur ketika pengguna membuka halaman portofolio
@@ -104,21 +106,21 @@ disesuaikan agar sesuai dengan keinginan menggunakan google gemini.
 
     - **`urls.py` proyek** menerima request dari browser dan menentukan aplikasi mana 
         yang menangani URL tersebut. Misalnya, pada `portofolio/urls.py` terdapat:
+
         ```python
         path("", include("main.urls"))
         ```
         sehingga request diteruskan ke `main/urls.py`.
 
-
     - **`urls.py` aplikasi** menentukan view yang sesuai dengan URL. Contohnya:
+
         ```python
         path("experience/", show_experience, name="show_experience")
         ```
         sehingga URL `/experience/` akan menjalankan `show_experience`.
 
-
-    - **View** memproses request dan mengambil data yang diperlukan dari model. 
-        Contohnya:
+    - **View** memproses request dan mengambil data yang diperlukan dari model. Contohnya:
+        
         ```python
         def show_experience(request):
             context = {
@@ -133,6 +135,7 @@ disesuaikan agar sesuai dengan keinginan menggunakan google gemini.
 
     - **Template** (`experience.html`) menerima data dari view dan 
         menampilkannya menggunakan Django Template Language, misalnya:
+
         ```html
         {% for experience in experience_list %}
             <h4>{{ experience.title }}</h4>
@@ -165,6 +168,7 @@ disesuaikan agar sesuai dengan keinginan menggunakan google gemini.
     mudah dipelihara, dan mudah dikembangkan, terutama ketika jumlah data semakin banyak.
 
 3. Perbedaan `makemigrations` dan `migrate`
+
 - **`makemigrations`** digunakan untuk **membuat file migration** berdasarkan perubahan 
     pada model. Migration tersebut **berisi instruksi perubahan struktur database**.
 - **`migrate`** digunakan untuk **menerapkan migration tersebut ke database**, sehingga 
@@ -195,7 +199,8 @@ disesuaikan agar sesuai dengan keinginan menggunakan google gemini.
 
 ---
 
-### Penggunaan AI
+### Penggunaan AI Tugas 2
+
 Dalam tugas ini, saya menggunakan Claude untuk membantu memperbaiki kode yang masih memiliki 
 kesalahan agar sesuai dengan instruksi pada tutorial, seperti pada bagian experience yang 
 sebelumnya belum mengimplementasikan DTL (Django Template Language). AI juga membantu menyesuaikan 
@@ -204,13 +209,13 @@ education, skills, dan contact. Selain itu, AI digunakan untuk membantu menganal
 terjadi serta memberikan solusi untuk memperbaikinya.
 
 **Lampiran Prompting:**
-- **Section Education**: Bisakah buat struktur kode ini [kode lama statis] agar sesuai 
+- **Section Education**: Bisakah buat agar struktur kode ini [kode lama statis] sesuai 
     seperti yang ada pada kode di tutorial ini [kode baru dinamis].
-- **Section Experience**: Bisakah buat struktur kode ini [kode lama statis] agar sesuai 
+- **Section Experience**: Bisakah buat agar struktur kode ini [kode lama statis] sesuai 
     seperti yang ada pada kode di tutorial ini [kode baru dinamis].
-- **Section Skills**: Bisakah buat struktur kode ini [kode lama statis] agar sesuai 
+- **Section Skills**: Bisakah buat agar struktur kode ini [kode lama statis] sesuai 
     seperti yang ada pada kode di tutorial ini [kode baru dinamis].
-- **Section Contact**: Bisakah buat struktur kode ini [kode lama statis] agar sesuai 
+- **Section Contact**: Bisakah buat agar struktur kode ini [kode lama statis] sesuai 
     seperti yang ada pada kode di tutorial ini [kode baru dinamis].
 
 **AI Disclosure & Analisis**

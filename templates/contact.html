@@ -7,7 +7,13 @@
         <h2 class="heading">Contact</h2>
 
         <div class="contact-buttons">
-            <a href="mailto:rafatazzacc@gmail.com" class="btn"><i class='bx bx-envelope'></i> Send me a message</a>
+            {% for contact in contact_list %}
+                <a href="mailto:{{ contact.email }}" class="btn">
+                    <i class='bx bx-envelope'></i> Send me a message
+                </a>
+            {% empty %}
+                <p class="empty-state">No contact information has been added yet.</p>
+            {% endfor %}
         </div>
     </section>
 {% endblock content %}

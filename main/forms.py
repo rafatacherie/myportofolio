@@ -1,6 +1,6 @@
-from django.forms import ModelForm, TextInput, Textarea, URLInput
+from django.forms import ModelForm, Select, TextInput, Textarea, URLInput, DateInput
 
-from main.models import Project
+from main.models import Experience, Project
 
 class ProjectForm(ModelForm):
     class Meta:
@@ -14,11 +14,11 @@ class ProjectForm(ModelForm):
         ]
 
         labels = {
-            "title": "Nama Proyek",
-            "description": "Deskripsi Proyek",
-            "tech_stack": "Teknologi yang Digunakan",
-            "project_url": "URL Proyek",
-            "project_image_url": "URL Gambar Proyek",
+            "title": "Project Name",
+            "description": "Project Description",
+            "tech_stack": "The Technology Used",
+            "project_url": "Project URL",
+            "project_image_url": "Project Image URL",
         }
 
         widgets = {
@@ -30,7 +30,7 @@ class ProjectForm(ModelForm):
             ),
             "description": Textarea(
                 attrs={
-                    "placeholder": "Ceritakan Proyekmu",
+                    "placeholder": "Describe your project",
                     "rows": 3,
                 }
             ),
@@ -45,6 +45,60 @@ class ProjectForm(ModelForm):
                 }
             ),
             "project_image_url": URLInput(
+                attrs={
+                    "placeholder": "https://drive.google.com/thumbnail?id=...&sz=w1000",
+                }
+            ),
+        }
+
+class ExperienceForm(ModelForm):
+    class Meta:
+        model = Experience
+        fields = [
+            "title",
+            "role",
+            "description",
+            "category",
+            "ended_at",
+            "thumbnail",
+        ]
+ 
+        labels = {
+            "title": "Name of Experience",
+            "role": "Position/Role",
+            "description": "Experience Description",
+            "category": "Experience Category",
+            "ended_at": "Experience Status",
+            "thumbnail": "Image URL",
+        }
+ 
+        widgets = {
+            "title": TextInput(
+                attrs={
+                    "placeholder": "Seminar",
+                    "maxlength": 255,
+                }
+            ),
+            "role": TextInput(
+                attrs={
+                    "placeholder": "Participant",
+                    "maxlength": 255,
+                }
+            ),
+            "description": Textarea(
+                attrs={
+                    "placeholder": "Describe your experience",
+                    "rows": 3,
+                }
+            ),
+            "category": Select(),
+            "ended_at": DateInput(
+                attrs={
+                    "placeholder" : "Ongoing/Finished",
+                    "type": "date",
+                }
+            ),
+            "thumbnail": URLInput(
                 attrs={
                     "placeholder": "https://drive.google.com/thumbnail?id=...&sz=w1000",
                 }
