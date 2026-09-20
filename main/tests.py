@@ -76,7 +76,7 @@ class ExperienceTest(TestCase):
         self.assertEqual(Education.objects.count(), 0)
         response = self.client.get(reverse("main:show_experience"))
 
-        self.assertContains(response, "Belum ada pengalaman yang ditambahkan.")
+        self.assertContains(response, "No experience has been added yet.")
 
 
 class EducationTest(TestCase):
@@ -114,7 +114,7 @@ class EducationTest(TestCase):
             self.assertEqual(Education.objects.count(), 0)
             response = self.client.get(reverse("main:show_education"))
     
-            self.assertContains(response, "Belum ada riwayat pendidikan yang ditambahkan.")
+            self.assertContains(response, "No educational history has been added yet.")
 
 class SkillsTest(TestCase):
     """Test untuk halaman Skills"""
@@ -152,8 +152,8 @@ class SkillsTest(TestCase):
         self.assertEqual(Skill.objects.count(), 0)
         response = self.client.get(reverse("main:show_skills"))
 
-        self.assertContains(response, "Belum ada technical skills yang ditambahkan.")
-        self.assertContains(response, "Belum ada soft skills yang ditambahkan.")
+        self.assertContains(response, "No hard skills have been added yet.")
+        self.assertContains(response, "No soft skills have been added yet.")
 
 class ContactTest(TestCase):
     """Test untuk halaman Contact"""
@@ -179,7 +179,7 @@ class ContactTest(TestCase):
         self.assertEqual(Contact.objects.count(), 0)
         response = self.client.get(reverse("main:show_contact"))
 
-        self.assertContains(response, "Belum ada informasi kontak yang ditambahkan.")
+        self.assertContains(response, "No contact information has been added yet.")
 
 class ProjectTest(TestCase):
     """Test untuk halaman Projects"""
@@ -247,3 +247,10 @@ class ProjectTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response["Content-Type"], "application/json")
         self.assertContains(response, "Portfolio Website")
+
+    def test_project_empty_state(self):
+            Project.objects.all().delete()
+            self.assertEqual(Education.objects.count(), 0)
+            response = self.client.get(reverse("main:show_projects"))
+    
+            self.assertContains(response, "No projects have been added yet.")

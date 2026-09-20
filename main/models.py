@@ -54,7 +54,7 @@ class Education(models.Model):
 
 class Skill(models.Model):
     SKILL_TYPE_CHOICES = [
-        ('technical', 'Technical Skills'),
+        ('hard', 'Hard Skills'),
         ('soft', 'Soft Skills'),
     ]
 

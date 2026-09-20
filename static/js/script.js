@@ -6,6 +6,17 @@ menuIcon.onclick = () => {
     navbar.classList.toggle('active');
 }
 
+document.addEventListener('click', (event) => {
+    const isNavbarOpen = navbar.classList.contains('active');
+    const clickedInsideNavbar = navbar.contains(event.target);
+    const clickedMenuIcon = menuIcon.contains(event.target);
+
+    if (isNavbarOpen && !clickedInsideNavbar && !clickedMenuIcon) {
+        navbar.classList.remove('active');
+        menuIcon.classList.remove('bx-x');
+    }
+});
+
 document.querySelectorAll('.skill-bar').forEach(bar => {
     const percentage = bar.dataset.percentage;
     bar.style.width = percentage + '%';

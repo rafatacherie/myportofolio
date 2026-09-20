@@ -1273,6 +1273,10 @@ ditumpuk jadi satu kolom vertikal agar tidak menumpuk */
         min-height: 180px;
     }
 
+    .experience-delete-modal__content {
+        width: min(85%, 380px);
+    }
+
     .experience-delete-btn {
         font-size: 1.1rem;
         padding: 0.6rem 1.8rem;
@@ -1765,5 +1769,9 @@ ditumpuk jadi satu kolom vertikal agar tidak menumpuk */
     /* Mengatur button See Project */
     .project-actions {
         font-size: 1rem;
+    }
+
+    .project-delete-modal__content {
+        width: min(85%, 380px);
     }
 }

@@ -78,7 +78,7 @@ def delete_experience(request, experience_id):
 
     if request.method == "POST":
         experience.delete()
-        messages.error(request, "Experience successfully deleted!")
+        messages.success(request, "Experience successfully deleted!")
         return redirect("main:show_experience")
 
     return redirect("main:show_experience")
@@ -86,7 +86,7 @@ def delete_experience(request, experience_id):
 def show_skills(request):
     context = {
         "name": "Rafata Zahi Cherie",
-        "technical_skills": Skill.objects.filter(skill_type='technical'),
+        "hard_skills": Skill.objects.filter(skill_type='hard'),
         "soft_skills": Skill.objects.filter(skill_type='soft'),
     }
     return render(request, "skills.html", context)
@@ -147,7 +147,7 @@ def delete_project(request, project_id):
 
     if request.method == "POST":
         project.delete()
-        messages.error(request, "Project successfully deleted!")
+        messages.success(request, "Project successfully deleted!")
         return redirect("main:show_projects")
 
     return redirect("main:show_projects")

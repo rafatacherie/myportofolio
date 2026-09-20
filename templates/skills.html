@@ -8,11 +8,11 @@
 
         <div class="skills-row">
             <div class="skills-column">
-                <h3 class="title">Technical Skills</h3>
+                <h3 class="title">Hard Skills</h3>
 
                 <div class="skills-box">
                     <div class="skills-content">
-                        {% for skill in technical_skills %}
+                        {% for skill in hard_skills %}
                             <div class="progress">
                                 <div class="skills-info">
                                     <p><i class='bx {{ skill.icon_class }}'></i> {{ skill.name }}</p>
@@ -24,7 +24,7 @@
                                 </div>
                             </div>
                         {% empty %}
-                            <p class="empty-state">Belum ada technical skills yang ditambahkan.</p>
+                            <p class="empty-state">No hard skills have been added yet.</p>
                         {% endfor %}
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                         {% empty %}
-                            <p class="empty-state">Belum ada soft skills yang ditambahkan.</p>
+                            <p class="empty-state">No soft skills have been added yet.</p>
                         {% endfor %}
                     </div>
                 </div>
