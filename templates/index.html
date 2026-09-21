@@ -16,9 +16,10 @@
             </div>
 
             <div class="btn-group">
-                <a href="{% url 'main:show_contact' %}" class="btn">Contact</a>
-                <a href="{% url 'main:show_projects' %}" class="btn">Projects</a>
+                <a href="{% url 'main:login' %}" class="btn">Login</a>
+                <a href="{% url 'main:register' %}" class="btn">Register</a>
             </div>
+            <p class="last-login">Last login session: {{ last_login }}</p>
         </div>
             <div class="home-img">
                 <img src="/static/img/rafata.png" alt="Photo of {{ name }}">

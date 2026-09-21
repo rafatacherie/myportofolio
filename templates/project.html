@@ -18,12 +18,13 @@
             </button>
         </form>
 
+        {% if user.is_superuser %}
         <div class="project-header">
             <a href="{% url 'main:create_project' %}" class="btn project-add-button">
-                <span aria-hidden="true"></span>
                 + Add Project
             </a>
         </div>
+        {% endif %}
 
         <div class="project-grid">
             {% for project in project_list %}
@@ -43,7 +44,10 @@
                             {% if project.project_url %}
                                 <a href="{{ project.project_url }}" class="btn">See Project</a>
                             {% endif %}
-                            {% include "components/project_delete_modal.html" with project=project %}
+                            {% include "components/project_star.html" with project=project %}
+                            {% if user.is_superuser %}
+                                {% include "components/project_delete_modal.html" with project=project %}
+                            {% endif %}
                         </div>
                     </div>
                 </article>
