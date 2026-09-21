@@ -96,6 +96,25 @@ def delete_experience(request, experience_id):
 
     return redirect("main:show_experience")
 
+@login_required(login_url="/login/")
+def edit_experience(request, experience_id):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+
+    experience = get_object_or_404(Experience, pk=experience_id)
+    form = ExperienceForm(request.POST or None, instance=experience)
+
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "Experience successfully updated!")
+        return redirect("main:show_experience")
+
+    context = {
+        "name": "Rafata Zahi Cherie",
+        "form": form,
+    }
+    return render(request, "experience_form.html", context)
+
 def show_skills(request):
     context = {
         "name": "Rafata Zahi Cherie",
@@ -169,6 +188,25 @@ def delete_project(request, project_id):
         return redirect("main:show_projects")
 
     return redirect("main:show_projects")
+
+@login_required(login_url="/login/")
+def edit_project(request, project_id):
+    if not request.user.is_superuser:
+        raise PermissionDenied
+
+    project = get_object_or_404(Project, pk=project_id)
+    form = ProjectForm(request.POST or None, instance=project)
+
+    if request.method == "POST" and form.is_valid():
+        form.save()
+        messages.success(request, "Project successfully updated!")
+        return redirect("main:show_projects")
+
+    context = {
+        "name": "Rafata Zahi Cherie",
+        "form": form,
+    }
+    return render(request, "projects_form.html", context)
 
 @login_required(login_url="/login/")
 def toggle_star(request, project_id):

@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 {% block meta %}
-    <title>Add Experience - {{ name }}</title>
+    <title>{% if form.instance.pk %}Edit Experience{% else %}Add Experience{% endif %} - {{ name }}</title>
 {% endblock meta %}
 {% block content %}
-    <section class="experience" id="add-experience">
-        <h2 class="heading">Add New Experience</h2>
+    <section class="experience" id="experience">
+        <h2 class="heading">{% if form.instance.pk %}Edit Experience{% else %}Add New Experience{% endif %}</h2>
 
-        <form method="post" action="{% url 'main:create_experience' %}" class="experience-form">
+        <form method="post" action="{% if form.instance.pk %}{% url 'main:edit_experience' form.instance.pk %}{% else %}{% url 'main:create_experience' %}{% endif %}" class="experience-form"></form>
             {% csrf_token %}
             {% for field in form %}
                 <div class="experience-form-group">
