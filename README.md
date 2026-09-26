@@ -327,3 +327,27 @@ tambahan tersebut agar tetap sesuai dengan desain website yang sudah dibuat.
     pada fitur tetap konsisten dengan desain keseluruhan website.
 
 ---
+
+### Penggunaan AI Tugas 4
+
+Dalam tugas ini, saya menggunakan Claude untuk membantu menganalisis dan memperbaiki kode yang mengalami 
+kesalahan, khususnya pada section Projects setelah penambahan fitur login, register, dan logout. AI juga 
+digunakan untuk membantu memastikan section Projects dapat disesuaikan dengan contoh pada Tutorial 4 dan 
+berjalan dengan baik tanpa error.
+
+**Lampiran Prompting:**
+- **Section Projects**: Analisislah kesalahan yang terdapat pada kode berikut [kode terbaru setelah Tutorial 4] 
+    dan perbaiki kesalahan tersebut agar dapat berjalan sebagaimana mestinya sesuai dengan tutorial.
+
+**AI Disclosure & Analisis**
+- **Tools yang Digunakan**: Claude
+- **Analisis Keterbatasan AI**: Setelah penambahan fitur login, register, dan logout, terdapat beberapa bug 
+    pada kode. Salah satunya adalah halaman **Add Experience** dan **Add Project** yang mengarah ke halaman 
+    edit, bukan halaman untuk menambahkan data. Selain itu, akun superuser yang telah didaftarkan belum dapat 
+    melakukan beberapa aksi seperti mengedit, menghapus, dan menambahkan data serta menggunakan fitur star.
+- **Perbaikan Manual (oleh Saya)**: Untuk mengatasi masalah tersebut, saya menganalisis kembali penyebab akun 
+    superuser tidak dapat melakukan beberapa aksi, seperti menambah, mengedit, dan menggunakan fitur star pada 
+    section Projects. Kemudian, saya mencari dan menerapkan solusi yang sesuai agar kode dapat berjalan sebagaimana 
+    mestinya sesuai dengan tutorial serta hak akses yang telah ditentukan untuk setiap role pengguna.
+
+---

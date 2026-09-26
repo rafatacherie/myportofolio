@@ -791,7 +791,7 @@ span {
 /* Periode pengalaman berlangsung */
 .experience-period {
     position: absolute;
-    top: 2rem;
+    top: 3rem;
     right: 3rem;
     margin-top: 0;
     font-size: 1.3rem;
@@ -1322,8 +1322,8 @@ ditumpuk jadi satu kolom vertikal agar tidak menumpuk */
         padding-right: 2rem;
     }
 
-    /* Badge status (selesai, sedang berlangsung) */
-    .experience-status {
+    /* Periode pengalaman berlangsung */
+    .experience-period {
         top: 2rem;
         right: 2rem;
         font-size: 1.2rem;

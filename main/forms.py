@@ -17,7 +17,7 @@ class ProjectForm(ModelForm):
         labels = {
             "title": "Project Name",
             "description": "Project Description",
-            "tech_stack": "The Technology Used",
+            "tech_stack": "Technology Used",
             "project_url": "Project URL",
             "project_image_url": "Project Image URL",
         }
