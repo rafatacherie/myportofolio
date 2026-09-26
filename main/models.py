@@ -18,14 +18,22 @@ class Experience(models.Model):
     description = models.TextField()
     category = models.CharField(max_length=20, choices=EXPERIENCE_CHOICES, default='full-time')
     thumbnail = models.URLField(blank=True, null=True)
-    started_at = models.DateTimeField(auto_now_add=True)
-    ended_at = models.DateTimeField(blank=True, null=True)
+    started_at = models.DateField()
+    ended_at = models.DateField(blank=True, null=True)
+    
     def __str__(self):
         return self.title
     
     @property
     def is_ongoing(self):
         return self.ended_at is None
+
+    @property
+    def period_label(self):
+        start = self.started_at.strftime("%b %Y") if self.started_at else ""
+        if self.is_ongoing:
+            return f"{start} - Present"
+        return f"{start} - {self.ended_at.strftime('%b %Y')}"
 
 class Education(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

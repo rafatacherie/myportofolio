@@ -532,7 +532,7 @@ span {
 /* Baris button submit/cancel form experience */
 .experience-form-actions {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     margin-top: 3rem;
 }
 
@@ -603,10 +603,10 @@ span {
 /* Button Detele */
 .experience-delete-btn {
     display: inline-block;
-    padding: 0.8rem 2.4rem;
+    padding: 0.6rem 1.6rem;
     background: #ff4d4d;
     color: white;
-    border-radius: 4rem;
+    border-radius: 3rem;
     font-size: 1.3rem;
     font-weight: 500;
     letter-spacing: 0.1rem;
@@ -788,11 +788,11 @@ span {
     padding-right: 15rem;
 }
 
-/* Badge status pengalaman: Sedang berlangsung / Selesai */
-.experience-status {
+/* Periode pengalaman berlangsung */
+.experience-period {
     position: absolute;
-    top: 3rem;
-    right: 3.5rem;
+    top: 2rem;
+    right: 3rem;
     margin-top: 0;
     font-size: 1.3rem;
     font-weight: 800;
@@ -815,10 +815,10 @@ span {
 /* Tombol See Detail yang posisinya mengunci otomatis di dasar layar depan */
 .see-detail-btn {
     display: inline-block;
-    padding: 0.8rem 2.4rem;
+    padding: 0.6rem 1.6rem;
     background: var(--bg-color);
     color: var(--main-color);
-    border-radius: 4rem;
+    border-radius: 3rem;
     font-size: 1.3rem;
     font-weight: 600;
     letter-spacing: 0.1rem;
@@ -829,9 +829,9 @@ span {
 
 .experience-edit-btn {
     display: inline-block;
-    padding: 0.8rem 2.4rem;
+    padding: 0.6rem 1.6rem;
     color: var(--bg-color);
-    border-radius: 4rem;
+    border-radius: 3rem;
     font-size: 1.3rem;
     font-weight: 600;
     letter-spacing: 0.1rem;
@@ -1738,8 +1738,8 @@ ditumpuk jadi satu kolom vertikal agar tidak menumpuk */
 /* Baris button add project pada halaman add new project */
 .project-form-actions {
     display: flex;
-    gap: 1rem;
-    margin-top: 4rem;
+    gap: 1.5rem;
+    margin-top: 3rem;
 }
 
 /* Mengatur ukuran tombol See Detail/Delete */

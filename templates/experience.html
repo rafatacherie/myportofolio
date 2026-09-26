@@ -37,9 +37,7 @@
                         <span class="experience-category">{{ experience.get_category_display }}</span>
                         <h4>{{ experience.title }}</h4>
                         <h3>{{ experience.role }}</h3>
-                        <span class="experience-status">
-                            {% if experience.is_ongoing %}Ongoing{% else %}Finished{% endif %}
-                        </span>
+                        <span class="experience-period">{{ experience.period_label }}</span>
                         <div class="experience-front-actions">
                             <label for="toggle-exp{{ forloop.counter }}" class="see-detail-btn">See Detail</label>
                             {% if user.is_superuser or is_editor %}

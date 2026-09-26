@@ -1,3 +1,4 @@
+from django import forms
 from django.forms import ModelForm, Select, TextInput, Textarea, URLInput, DateInput
 
 from main.models import Experience, Project
@@ -52,6 +53,22 @@ class ProjectForm(ModelForm):
         }
 
 class ExperienceForm(ModelForm):
+    started_at = forms.DateField(
+        label="Start Date",
+        input_formats=["%Y-%m"],
+        widget=forms.DateInput(attrs={"type": "month"}, format="%Y-%m"),
+    )
+    ended_at = forms.DateField(
+        label="End Date",
+        required=False,
+        input_formats=["%Y-%m"],
+        widget=forms.DateInput(
+            attrs={"type": "month", "placeholder": "Leave empty if ongoing"},
+            format="%Y-%m",
+        ),
+        help_text="Leave this empty if the experience is still ongoing.",
+    )
+
     class Meta:
         model = Experience
         fields = [
@@ -59,6 +76,7 @@ class ExperienceForm(ModelForm):
             "role",
             "description",
             "category",
+            "started_at",
             "ended_at",
             "thumbnail",
         ]
@@ -68,7 +86,6 @@ class ExperienceForm(ModelForm):
             "role": "Position/Role",
             "description": "Experience Description",
             "category": "Experience Category",
-            "ended_at": "Experience Status",
             "thumbnail": "Image URL",
         }
  
@@ -92,12 +109,6 @@ class ExperienceForm(ModelForm):
                 }
             ),
             "category": Select(),
-            "ended_at": DateInput(
-                attrs={
-                    "placeholder" : "Ongoing/Finished",
-                    "type": "date",
-                }
-            ),
             "thumbnail": URLInput(
                 attrs={
                     "placeholder": "https://drive.google.com/thumbnail?id=...&sz=w1000",

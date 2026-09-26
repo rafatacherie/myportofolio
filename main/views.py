@@ -79,6 +79,7 @@ def create_experience(request):
     context = {
         "name": "Rafata Zahi Cherie",
         "form": form,
+        "is_edit": False,
     }
     return render(request, "experience_form.html", context)
 
@@ -112,6 +113,7 @@ def edit_experience(request, experience_id):
     context = {
         "name": "Rafata Zahi Cherie",
         "form": form,
+        "is_edit": True,
     }
     return render(request, "experience_form.html", context)
 
@@ -172,6 +174,7 @@ def create_project(request):
     context = {
         "name": "Rafata Zahi Cherie",
         "form": form,
+        "is_edit": False,
     }
     return render(request, "projects_form.html", context)
 
@@ -205,6 +208,7 @@ def edit_project(request, project_id):
     context = {
         "name": "Rafata Zahi Cherie",
         "form": form,
+        "is_edit": True,
     }
     return render(request, "projects_form.html", context)
 
