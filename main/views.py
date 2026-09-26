@@ -44,7 +44,7 @@ def get_experience_json(request):
     if title_query:
         experiences = experiences.filter(title__icontains=title_query)
 
-    experiences_json = serializers.serialize("json", experiences)
+    experiences_json = serializers.serialize("json", experiences, use_natural_foreign_keys=True)
     return HttpResponse(experiences_json, content_type="application/json")
 
 def show_experience(request):
@@ -98,7 +98,7 @@ def delete_experience(request, experience_id):
 
 @login_required(login_url="/login/")
 def edit_experience(request, experience_id):
-    if not request.user.is_superuser:
+    if not (request.user.is_superuser or request.user.groups.filter(name='Editor').exists()):
         raise PermissionDenied
 
     experience = get_object_or_404(Experience, pk=experience_id)
@@ -191,7 +191,7 @@ def delete_project(request, project_id):
 
 @login_required(login_url="/login/")
 def edit_project(request, project_id):
-    if not request.user.is_superuser:
+    if not (request.user.is_superuser or request.user.groups.filter(name='Editor').exists()):
         raise PermissionDenied
 
     project = get_object_or_404(Project, pk=project_id)
@@ -210,7 +210,6 @@ def edit_project(request, project_id):
 
 @login_required(login_url="/login/")
 def toggle_star(request, project_id):
-    form = ProjectForm(request.POST or None)
     project = get_object_or_404(Project, pk=project_id)
 
     if request.method == "POST":

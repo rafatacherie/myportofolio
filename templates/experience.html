@@ -42,7 +42,7 @@
                         </span>
                         <div class="experience-front-actions">
                             <label for="toggle-exp{{ forloop.counter }}" class="see-detail-btn">See Detail</label>
-                            {% if user.is_superuser %}
+                            {% if user.is_superuser or is_editor %}
                                 <a href="{% url 'main:edit_experience' experience.id %}" class="experience-edit-btn">Edit</a>
                             {% endif %}
                             {% if user.is_superuser %}

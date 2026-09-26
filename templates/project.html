@@ -41,7 +41,7 @@
                             {% if project.project_url %}
                                 <a href="{{ project.project_url }}" class="btn">See Project</a>
                             {% endif %}
-                            {% if user.is_superuser %}
+                            {% if user.is_superuser or is_editor %}
                                 <a href="{% url 'main:edit_project' project.id %}" class="btn btn-secondary">Edit</a>
                             {% endif %}
                             {% include "components/project_star.html" with project=project %}
