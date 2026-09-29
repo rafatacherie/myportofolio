@@ -6,8 +6,10 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.core import serializers
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.utils import timezone
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.http import require_POST
 
 from main.forms import ProjectForm, ExperienceForm
 from main.models import Project, Education, Experience, Skill, Contact
@@ -44,7 +46,10 @@ def get_experience_json(request):
     if title_query:
         experiences = experiences.filter(title__icontains=title_query)
 
-    experiences_json = serializers.serialize("json", experiences, use_natural_foreign_keys=True)
+    experiences_json = serializers.serialize(
+        "json", experiences, use_natural_foreign_keys=True,
+        fields=["title", "role", "description", "category", "thumbnail", "started_at", "ended_at"],
+    )
     return HttpResponse(experiences_json, content_type="application/json")
 
 def show_experience(request):
@@ -134,28 +139,40 @@ def show_contact(request):
 
 def get_projects_json(request):
     title_query = request.GET.get("title", "").strip()
-    projects = Project.objects.all()
+    projects = Project.objects.prefetch_related("starred_by").all()
 
     if title_query:
         projects = projects.filter(title__icontains=title_query)
 
-    projects_json = serializers.serialize("json", projects, use_natural_foreign_keys=True)
-    return HttpResponse(projects_json, content_type="application/json")
+    data = []
+    for project in projects:
+        starred_users = project.starred_by.all()
+        is_starred = request.user in starred_users if request.user.is_authenticated else False
+        starred_by_names = ", ".join([u.username for u in starred_users])
+
+        data.append({
+            "pk": str(project.id),
+            "fields": {
+                "title": project.title,
+                "description": project.description,
+                "tech_stack": project.tech_stack,
+                "project_url": project.project_url,
+                "project_image_url": project.project_image_url,
+                "star_count": starred_users.count(),
+                "is_starred": is_starred,
+                "starred_by_names": starred_by_names,
+            }
+        })
+
+    return JsonResponse(data, safe=False)
 
 def show_projects(request):
-    json_response = get_projects_json(request)
-
-    projects = serializers.deserialize(
-        "json",
-        json_response.content.decode("utf-8"),
-    )
-    projects = [project.object for project in projects]
     title_query = request.GET.get("title", "").strip()
 
     context = {
         "name": "Rafata Zahi Cherie",
-        "project_list": projects,
         "title_query": title_query,
+        "form": ProjectForm(),
     }
     return render(request, "project.html", context)
 
@@ -242,7 +259,7 @@ def login_user(request):
         user = form.get_user()
         login(request, user)
         response = redirect("main:show_main")
-        response.set_cookie('last_login', datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+        response.set_cookie('last_login', timezone.localtime(timezone.now()).strftime('%Y-%m-%d %H:%M:%S'))
         return response
 
     context = {"name": "Rafata Zahi Cherie", "form": form}
@@ -253,3 +270,21 @@ def logout_user(request):
     response = redirect("main:show_main")
     response.delete_cookie('last_login')
     return response
+
+@require_POST
+def create_project_ajax(request):
+    if not request.user.is_superuser:
+        return JsonResponse(
+            {"message": "Only the portfolio owner can add projects."},
+            status=403,
+        )
+
+    form = ProjectForm(request.POST)
+    if form.is_valid():
+        project = form.save()
+        return JsonResponse(
+            {"message": "The project was successfully added.", "pk": str(project.id)},
+            status=201,
+        )
+
+    return JsonResponse({"errors": form.errors.get_json_data()}, status=400)
