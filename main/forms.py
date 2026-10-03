@@ -94,7 +94,7 @@ class ExperienceForm(ModelForm):
             "ended_at",
             "thumbnail",
         ]
- 
+
         labels = {
             "title": "Name of Experience",
             "role": "Position/Role",
@@ -129,3 +129,15 @@ class ExperienceForm(ModelForm):
                 }
             ),
         }
+
+    def clean_title(self):
+        title = strip_tags(self.cleaned_data["title"]).strip()
+        if not title:
+            raise ValidationError("The experience name cannot consist solely of HTML tags.")
+        return title
+
+    def clean_role(self):
+        return strip_tags(self.cleaned_data["role"]).strip()
+
+    def clean_description(self):
+        return strip_tags(self.cleaned_data["description"]).strip()

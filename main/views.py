@@ -46,28 +46,51 @@ def get_experience_json(request):
     if title_query:
         experiences = experiences.filter(title__icontains=title_query)
 
-    experiences_json = serializers.serialize(
-        "json", experiences, use_natural_foreign_keys=True,
-        fields=["title", "role", "description", "category", "thumbnail", "started_at", "ended_at"],
-    )
-    return HttpResponse(experiences_json, content_type="application/json")
+    data = []
+    for exp in experiences:
+        data.append({
+            "pk": str(exp.id),
+            "fields": {
+                "title": exp.title,
+                "role": exp.role,
+                "description": exp.description,
+                "category": exp.category,
+                "category_display": exp.get_category_display(),
+                "period_label": exp.period_label, 
+                # "is_ongoing": exp.is_ongoing,
+                "thumbnail": exp.thumbnail or "",
+            }
+        })
+
+    return JsonResponse(data, safe=False)
 
 def show_experience(request):
-    json_response = get_experience_json(request)
-
-    experiences = serializers.deserialize(
-        "json",
-        json_response.content.decode("utf-8"),
-    )
-    experiences = [exp.object for exp in experiences]
     title_query = request.GET.get("title", "").strip()
 
     context = {
         "name": "Rafata Zahi Cherie",
-        "experience_list": experiences,
         "title_query": title_query,
+        "form": ExperienceForm(),
     }
     return render(request, "experience.html", context)
+
+@require_POST
+def create_experience_ajax(request):
+    if not request.user.is_superuser:
+        return JsonResponse(
+            {"message": "Only the portfolio owner can add experience."},
+            status=403,
+        )
+
+    form = ExperienceForm(request.POST)
+    if form.is_valid():
+        experience = form.save()
+        return JsonResponse(
+            {"message": "Experience successfully added.", "pk": str(experience.id)},
+            status=201,
+        )
+
+    return JsonResponse({"errors": form.errors.get_json_data()}, status=400)
 
 @login_required(login_url="/login/")
 def create_experience(request):
@@ -176,6 +199,24 @@ def show_projects(request):
     }
     return render(request, "project.html", context)
 
+@require_POST
+def create_project_ajax(request):
+    if not request.user.is_superuser:
+        return JsonResponse(
+            {"message": "Only the portfolio owner can add projects."},
+            status=403,
+        )
+
+    form = ProjectForm(request.POST)
+    if form.is_valid():
+        project = form.save()
+        return JsonResponse(
+            {"message": "The project was successfully added.", "pk": str(project.id)},
+            status=201,
+        )
+
+    return JsonResponse({"errors": form.errors.get_json_data()}, status=400)
+
 @login_required(login_url="/login/")
 def create_project(request):
     if not request.user.is_superuser:
@@ -270,21 +311,3 @@ def logout_user(request):
     response = redirect("main:show_main")
     response.delete_cookie('last_login')
     return response
-
-@require_POST
-def create_project_ajax(request):
-    if not request.user.is_superuser:
-        return JsonResponse(
-            {"message": "Only the portfolio owner can add projects."},
-            status=403,
-        )
-
-    form = ProjectForm(request.POST)
-    if form.is_valid():
-        project = form.save()
-        return JsonResponse(
-            {"message": "The project was successfully added.", "pk": str(project.id)},
-            status=201,
-        )
-
-    return JsonResponse({"errors": form.errors.get_json_data()}, status=400)
