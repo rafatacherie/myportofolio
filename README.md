@@ -22,6 +22,7 @@ Kelas : PBP C
     section induknya.
     `<aside>` juga tidak relevan karena tidak ada konten sekunder/sampingan di desain ini. 
     Semua informasi ditampilkan sebagai konten utama yang sejajar.
+
 2. Saat mengatur CSS agar tetap responsive, tantangan tata letak terbesar yang saya temukan 
     adalah mengubah elemen multi-kolom horizontal menjadi tata letak vertikal tanpa merusak 
     proporsi visual.
@@ -32,18 +33,19 @@ Kelas : PBP C
     bentuk aslinya. 
 
     Cara mengevaluasi dan menetukan prioritas ukuran/posisi elemen: 
-    - **Content flow**: mengevaluasi halaman pada berbagai breakpoint (seperti 1285px, 991px, 
+    * **Content flow**: mengevaluasi halaman pada berbagai breakpoint (seperti 1285px, 991px, 
     dan 895px). Jika elemen horizontal mulai terhimpit, akan diprioritaskan tata letak 
     dengan satu kolom sehingga memanjang ke bawah (vertikal).
-    - **Visual**: saat berpindah ke tampilan mobile, elemen visual yang besar (seperti foto profil) 
+    * **Visual**: saat berpindah ke tampilan mobile, elemen visual yang besar (seperti foto profil) 
     diprioritaskan posisinya agar berada di atas teks perkenalan untuk menyesuaikan alur.
-    - **Skalabilitas font**: menurunkan ukuran font dasar `(html { font-size: 55%; })` pada breakpoint 
+    * **Skalabilitas font**: menurunkan ukuran font dasar `(html { font-size: 55%; })` pada breakpoint 
     tertentu agar semua teks yang menggunakan satuan rem otomatis menyusut secara proporsional.
+    
 3. Sebagai website statis murni, batasan terbesar yang saya rasakan dalam menyajikan informasi 
     secara optimal meliputi:
-    - Pengunjung tidak dapat mengirimkan pesan langsung dari kotak input portofolio ke email 
+    * Pengunjung tidak dapat mengirimkan pesan langsung dari kotak input portofolio ke email 
     saya tanpa bantuan pihak ketiga atau pembukaan aplikasi email eksternal.
-    - Setiap kali ada pembaruan data pendidikan, pengalaman baru, atau persentase keahlian, 
+    * Setiap kali ada pembaruan data pendidikan, pengalaman baru, atau persentase keahlian, 
     saya harus membongkar dan mengubah baris kode HTML/CSS secara manual.
 
     Fungsionalitas dinamis yang ingin ditambahkan pada iterasi selanjutnya:
@@ -70,25 +72,25 @@ dengan google gemini. Terakhir, untuk footer juga mengikuti tutorial youtube dan
 disesuaikan agar sesuai dengan keinginan menggunakan google gemini.
 
 **Lampiran Prompting:**
-- **Section Experience (flip box)**: Berdasarkan kode ini [kode dari tutorial], bisakah buat agar terdapat 
+* **Section Experience (flip box)**: Berdasarkan kode ini [kode dari tutorial], bisakah buat agar terdapat 
     button "see detail" lalu menampilkan deskripsi dari pengalaman yang dilakukan. Buat agar tulisannya 
     tidak keluar dari box, dan dapat di scroll jika teksnya panjang. Kembalikan lagi ke halaman depan 
     dari box dengan button "back".
-- **Section Skills (skills bar)**: Berdasarkan kode ini [kode dari tutorial], bisakah buat untuk 2 jenis skills 
+* **Section Skills (skills bar)**: Berdasarkan kode ini [kode dari tutorial], bisakah buat untuk 2 jenis skills 
     (technical and soft skills) dengan tampilan sejajar horizontal dan untuk tiap skills berikan 5 bar serta
     berikan garis pemisah antara 2 jenis skills tersebut.
-- **Section Contact (button "send me a message")**: Berdasarkan kode ini [kode dari tutorial] sesuaikan agar 
+* **Section Contact (button "send me a message")**: Berdasarkan kode ini [kode dari tutorial] sesuaikan agar 
     button dapat mendirect ke email untuk mengirimkan pesan.
-- **Section Footer (logo, navbar, dan copyright)**: Berdasarkan kode ini [kode dari tutorial] sesuaikan agar 
+* **Section Footer (logo, navbar, dan copyright)**: Berdasarkan kode ini [kode dari tutorial] sesuaikan agar 
     layout footer berbaris berurutan dari atas ke bawah (vertikal) dan rata tengah.
 
 **AI Disclosure & Analisis:**
-- **Tools yang Digunakan**: Claude
-- **Analisis Keterbatasan AI**: Ketika mencoba membangun komponen dari awal (*build from scratch*), AI memiliki 
+* **Tools yang Digunakan**: Claude
+* **Analisis Keterbatasan AI**: Ketika mencoba membangun komponen dari awal (*build from scratch*), AI memiliki 
     keterbatasan dalam memahami estetika visual dan presisi layout yang saya inginkan. Hasil kode pertama 
     dari AI sering kali tidak sesuai ekspektasi, sehingga memicu proses trial and error yang berulang-ulang 
     dan memakan banyak waktu jika hanya mengandalkan teks.
-- **Perbaikan Manual (oleh saya)**: Untuk mengatasi keterbatasan AI, saya beralih mencari referensi yang cocok 
+* **Perbaikan Manual (oleh saya)**: Untuk mengatasi keterbatasan AI, saya beralih mencari referensi yang cocok 
     secara visual dari tutorial YouTube. Untuk beberapa section yang ingin saya rombak, saya perlu setidaknya 
     setengah gambaran kode yang sesuai secara visual, baru saya memberikan potongan kode tersebut ke AI dan 
     menyesuaikannya secara desain. Saya tidak menyuruh AI mendesain dari nol, melainkan memberikan instruksi 
@@ -104,7 +106,7 @@ disesuaikan agar sesuai dengan keinginan menggunakan google gemini.
     Ketika pengguna membuka halaman portofolio, misalnya `/experience/`, alurnya adalah:
     **Browser → `urls.py` proyek → `urls.py` aplikasi → View → Model → Template → Browser**
 
-    - **`urls.py` proyek** menerima request dari browser dan menentukan aplikasi mana 
+    * **`urls.py` proyek** menerima request dari browser dan menentukan aplikasi mana 
         yang menangani URL tersebut. Misalnya, pada `portofolio/urls.py` terdapat:
 
         ```python
@@ -112,14 +114,14 @@ disesuaikan agar sesuai dengan keinginan menggunakan google gemini.
         ```
         sehingga request diteruskan ke `main/urls.py`.
 
-    - **`urls.py` aplikasi** menentukan view yang sesuai dengan URL. Contohnya:
+    * **`urls.py` aplikasi** menentukan view yang sesuai dengan URL. Contohnya:
 
         ```python
         path("experience/", show_experience, name="show_experience")
         ```
         sehingga URL `/experience/` akan menjalankan `show_experience`.
 
-    - **View** memproses request dan mengambil data yang diperlukan dari model. Contohnya:
+    * **View** memproses request dan mengambil data yang diperlukan dari model. Contohnya:
         
         ```python
         def show_experience(request):
@@ -130,10 +132,10 @@ disesuaikan agar sesuai dengan keinginan menggunakan google gemini.
             return render(request, "experience.html", context)
         ```
 
-    - **Model** berfungsi sebagai penghubung dengan database. `Experience.objects.all()` 
+    * **Model** berfungsi sebagai penghubung dengan database. `Experience.objects.all()` 
         mengambil data pengalaman yang tersimpan di database.
 
-    - **Template** (`experience.html`) menerima data dari view dan 
+    * **Template** (`experience.html`) menerima data dari view dan 
         menampilkannya menggunakan Django Template Language, misalnya:
 
         ```html
@@ -169,9 +171,9 @@ disesuaikan agar sesuai dengan keinginan menggunakan google gemini.
 
 3. Perbedaan `makemigrations` dan `migrate`
 
-- **`makemigrations`** digunakan untuk **membuat file migration** berdasarkan perubahan 
+* **`makemigrations`** digunakan untuk **membuat file migration** berdasarkan perubahan 
     pada model. Migration tersebut **berisi instruksi perubahan struktur database**.
-- **`migrate`** digunakan untuk **menerapkan migration tersebut ke database**, sehingga 
+* **`migrate`** digunakan untuk **menerapkan migration tersebut ke database**, sehingga 
     struktur database benar-benar berubah.
 
     Contohnya, awalnya model `Experience` hanya memiliki:
@@ -209,25 +211,25 @@ education, skills, dan contact. Selain itu, AI digunakan untuk membantu menganal
 terjadi serta memberikan solusi untuk memperbaikinya.
 
 **Lampiran Prompting:**
-- **Section Education**: Bisakah buat agar struktur kode ini [kode lama statis] sesuai 
+* **Section Education**: Bisakah buat agar struktur kode ini [kode lama statis] sesuai 
     seperti yang ada pada kode di tutorial ini [kode baru dinamis].
-- **Section Experience**: Bisakah buat agar struktur kode ini [kode lama statis] sesuai 
+* **Section Experience**: Bisakah buat agar struktur kode ini [kode lama statis] sesuai 
     seperti yang ada pada kode di tutorial ini [kode baru dinamis].
-- **Section Skills**: Bisakah buat agar struktur kode ini [kode lama statis] sesuai 
+* **Section Skills**: Bisakah buat agar struktur kode ini [kode lama statis] sesuai 
     seperti yang ada pada kode di tutorial ini [kode baru dinamis].
-- **Section Contact**: Bisakah buat agar struktur kode ini [kode lama statis] sesuai 
+* **Section Contact**: Bisakah buat agar struktur kode ini [kode lama statis] sesuai 
     seperti yang ada pada kode di tutorial ini [kode baru dinamis].
 
 **AI Disclosure & Analisis**
-- **Tools yang Digunakan**: Claude
-- **Analisis Keterbatasan AI**: Ketika mencoba membangun section baru dari awal 
+* **Tools yang Digunakan**: Claude
+* **Analisis Keterbatasan AI**: Ketika mencoba membangun section baru dari awal 
     (*build from scratch*), AI memiliki keterbatasan dalam memahami estetika visual 
     dan presisi layout yang saya inginkan. Hasil kode yang diberikan terkadang tidak 
     sesuai dengan tampilan yang diharapkan, sehingga perlu dilakukan *trial and error* 
     secara berulang. Selain itu, ketika kode diubah menjadi lebih dinamis dengan 
     menerapkan DTL dan MVT, terdapat beberapa perubahan pada gaya tulisan di bagian 
     tertentu yang sebelumnya sudah sesuai.
-- **Perbaikan Manual (oleh saya)**: Untuk mengatasi keterbatasan tersebut, saya menganalisis 
+* **Perbaikan Manual (oleh saya)**: Untuk mengatasi keterbatasan tersebut, saya menganalisis 
     kembali kode yang sudah ada, terutama bagian HTML dan CSS yang mengatur tampilan setiap 
     section. Saya kemudian mengidentifikasi kode yang menyebabkan perubahan pada gaya tulisan, 
     ukuran, atau layout, lalu memperbaikinya secara manual agar tetap sesuai dengan desain 
@@ -313,15 +315,15 @@ Projects dari tutorial. AI juga digunakan untuk membantu merapikan layout dan ga
 tambahan tersebut agar tetap sesuai dengan desain website yang sudah dibuat.
 
 **Lampiran Prompting:**
-- **Section Experience**: Berdasarkan kode pada section Projects, bisakah sesuaikan kode yang ada di 
+* **Section Experience**: Berdasarkan kode pada section Projects, bisakah sesuaikan kode yang ada di 
     section Experience agar memiliki struktur yang sama dan dapat menerima input melalui website.   
 
 **AI Disclosure & Analisis**
-- **Tools yang Digunakan**: Claude
-- **Analisis Keterbatasan AI**: Ketika kode diubah agar section Experience dapat menerima input langsung 
+* **Tools yang Digunakan**: Claude
+* **Analisis Keterbatasan AI**: Ketika kode diubah agar section Experience dapat menerima input langsung 
     melalui website, terdapat beberapa perubahan pada layout dan gaya tulisan di bagian tertentu yang 
     membuat tampilannya tidak lagi sepenuhnya sesuai dengan desain awal.
-- **Perbaikan Manual (oleh saya)**: Untuk mengatasi perubahan tersebut, saya menganalisis kembali kode yang 
+* **Perbaikan Manual (oleh saya)**: Untuk mengatasi perubahan tersebut, saya menganalisis kembali kode yang 
     telah dibuat, terutama bagian CSS yang mengatur tampilan setiap section. Saya mengidentifikasi bagian 
     kode yang memengaruhi ukuran, jarak, dan layout, kemudian melakukan penyesuaian secara manual agar tampilan 
     pada fitur tetap konsisten dengan desain keseluruhan website.
@@ -336,18 +338,219 @@ digunakan untuk membantu memastikan section Projects dapat disesuaikan dengan co
 berjalan dengan baik tanpa error.
 
 **Lampiran Prompting:**
-- **Section Projects**: Analisislah kesalahan yang terdapat pada kode berikut [kode terbaru setelah Tutorial 4] 
+* **Section Projects**: Analisislah kesalahan yang terdapat pada kode berikut [kode terbaru setelah Tutorial 4] 
     dan perbaiki kesalahan tersebut agar dapat berjalan sebagaimana mestinya sesuai dengan tutorial.
 
 **AI Disclosure & Analisis**
-- **Tools yang Digunakan**: Claude
-- **Analisis Keterbatasan AI**: Setelah penambahan fitur login, register, dan logout, terdapat beberapa bug 
+* **Tools yang Digunakan**: Claude
+* **Analisis Keterbatasan AI**: Setelah penambahan fitur login, register, dan logout, terdapat beberapa bug 
     pada kode. Salah satunya adalah halaman **Add Experience** dan **Add Project** yang mengarah ke halaman 
     edit, bukan halaman untuk menambahkan data. Selain itu, akun superuser yang telah didaftarkan belum dapat 
     melakukan beberapa aksi seperti mengedit, menghapus, dan menambahkan data serta menggunakan fitur star.
-- **Perbaikan Manual (oleh Saya)**: Untuk mengatasi masalah tersebut, saya menganalisis kembali penyebab akun 
+* **Perbaikan Manual (oleh Saya)**: Untuk mengatasi masalah tersebut, saya menganalisis kembali penyebab akun 
     superuser tidak dapat melakukan beberapa aksi, seperti menambah, mengedit, dan menggunakan fitur star pada 
     section Projects. Kemudian, saya mencari dan menerapkan solusi yang sesuai agar kode dapat berjalan sebagaimana 
     mestinya sesuai dengan tutorial serta hak akses yang telah ditentukan untuk setiap role pengguna.
+
+---
+
+### Tugas 5
+
+1. Jelaskan apa itu *debouncing* dan mengapa teknik ini penting diterapkan pada fitur pencarian yang menggunakan AJAX!
+
+    *Debouncing* adalah teknik yang digunakan untuk memberi jeda sebelum sebuah fungsi dijalankan. Pada fitur 
+    pencarian, fungsi tidak langsung dijalankan setiap kali pengguna mengetik, tetapi menunggu sampai pengguna 
+    berhenti mengetik selama waktu tertentu.
+
+    Misalnya, pengguna ingin mencari data dengan kata `experience`. Tanpa *debouncing*, setiap karakter yang 
+    diketik dapat menyebabkan request baru ke server:
+
+    ```text
+    e → request
+    ex → request
+    exp → request
+    expe → request
+    exper → request
+    ...
+    experience → request
+    ```
+
+    Artinya, satu proses pencarian bisa menghasilkan banyak request. Jika fitur ini digunakan oleh banyak 
+    pengguna, jumlah request yang masuk ke server juga akan semakin banyak.
+
+    Dengan *debouncing*, sistem akan menunggu pengguna berhenti mengetik selama 300 ms. Jika selama 300 ms 
+    tidak ada input baru, barulah request AJAX dikirim.
+
+    Contohnya menjadi seperti berikut:
+
+    ```text
+    e
+    ex
+    exp
+    expe
+    exper
+    experience → berhenti mengetik → request
+    ```
+
+    Penerapan *debouncing* pada pencarian AJAX penting karena dapat:
+    * Mengurangi jumlah request ke server.
+    * Mengurangi beban server dan database.
+    * Menghindari request yang sebenarnya tidak diperlukan.
+    * Membuat proses pencarian menjadi lebih efisien dan responsif.
+
+    Jadi, *debouncing* digunakan agar request pencarian tidak dikirim terus-menerus setiap kali terjadi 
+    perubahan input, tetapi hanya setelah pengguna selesai atau berhenti mengetik dalam waktu tertentu.
+
+2. Jelaskan fungsi dari penggunaan `await` ketika kita menggunakan `fetch()`! Apa yang akan terjadi jika 
+    kita tidak menggunakan `await`?
+
+    `fetch()` digunakan untuk melakukan request ke server, misalnya untuk mengambil data experience dari 
+    endpoint JSON. Karena request tersebut membutuhkan waktu untuk mendapatkan response dari server, 
+    prosesnya berjalan secara asynchronous.
+
+    Hasil dari `fetch()` adalah sebuah **Promise**, yaitu objek yang mewakili proses yang masih berlangsung 
+    atau akan selesai nantinya.
+
+    `await` digunakan untuk menunggu Promise tersebut selesai sebelum kode dilanjutkan ke proses berikutnya.
+
+    Contohnya:
+
+    ```javascript
+    const response = await fetch('/api/experience/');
+    const data = await response.json();
+    ```
+
+    Pada baris pertama, `await` membuat program menunggu sampai request `fetch()` mendapatkan response dari server.
+
+    Kemudian pada baris kedua, `await` digunakan lagi karena `response.json()` juga merupakan proses asynchronous. 
+    Program akan menunggu sampai response selesai diubah menjadi data JSON sebelum data tersebut digunakan.
+
+    Alurnya:
+
+    ```text
+    fetch()
+    ↓
+    menunggu response dari server
+    ↓
+    response.json()
+    ↓
+    menunggu proses JSON selesai
+    ↓
+    data siap digunakan
+    ```
+
+    Jika tidak menggunakan `await`, hasil dari `fetch()` masih berupa Promise. Misalnya:
+
+    ```javascript
+    const response = fetch('/api/experience/');
+    console.log(response);
+    ```
+
+    Variabel `response` pada kondisi tersebut bukan langsung berisi response dari server, tetapi masih 
+    berupa Promise. Jika Promise tidak ditunggu atau ditangani dengan benar, data belum dapat digunakan 
+    sebagai hasil JSON yang sebenarnya. Akibatnya, jika kode langsung mencoba menggunakan data tersebut, 
+    proses dapat menghasilkan error atau data belum tersedia karena request masih berlangsung.
+
+    `await` biasanya digunakan di dalam fungsi yang diberi `async`, contohnya:
+
+    ```javascript
+    async function loadExperience() {
+        const response = await fetch('/api/experience/');
+        const data = await response.json();
+
+        console.log(data);
+    }
+    ```
+
+    Jadi, penggunaan `await` pada `fetch()` bertujuan untuk memastikan response dari server sudah diterima 
+    dan datanya sudah siap sebelum digunakan oleh kode berikutnya. Tanpa `await`, Promise perlu ditangani 
+    dengan cara lain, misalnya menggunakan `.then()`.
+
+3. Jelaskan apa itu serangan XSS (*Cross-Site Scripting*) dan mengapa data yang ditampilkan melalui AJAX/JavaScript 
+    lebih rentan terhadap serangan ini daripada data yang ditampilkan langsung melalui *template* Django!
+
+    XSS (*Cross-Site Scripting*) adalah serangan yang terjadi ketika seseorang berhasil memasukkan kode 
+    atau script berbahaya ke dalam sebuah aplikasi web, kemudian kode tersebut ikut dijalankan di browser 
+    ketika data ditampilkan.
+
+    Contohnya:
+
+    ```html
+    <script>alert('XSS')</script>
+    ```
+
+    Jika aplikasi tidak menangani data tersebut dengan benar dan langsung memasukkannya ke halaman sebagai 
+    HTML, browser dapat menganggapnya sebagai script dan menjalankannya.
+
+    Pada penggunaan AJAX, data dari server biasanya diterima dalam bentuk JSON. Setelah itu, JavaScript 
+    bertugas mengambil data tersebut dan memasukkannya ke halaman. 
+    
+    Contohnya:
+
+    ```javascript
+    element.innerHTML = data.description;
+    ```
+
+    Masalahnya, `innerHTML` akan membaca isi yang diberikan sebagai HTML. Jadi, apabila `data.description` 
+    mengandung tag HTML atau script yang berbahaya dan tidak melalui proses escaping atau sanitasi, kode 
+    tersebut dapat diproses oleh browser.
+
+    Untuk data yang hanya berupa teks, salah satu cara yang lebih aman adalah menggunakan `textContent`:
+
+    ```javascript
+    element.textContent = data.description;
+    ```
+
+    Dengan `textContent`, isi data dianggap sebagai teks biasa sehingga tag HTML di dalamnya tidak langsung 
+    diproses sebagai elemen HTML. Sementara itu, ketika data ditampilkan menggunakan template Django, Django 
+    secara default sudah melakukan **automatic HTML escaping**.
+
+    Contohnya:
+
+    ```django
+    <p>{{ experience.description }}</p>
+    ```
+
+    Jika isi `experience.description` mengandung:
+
+    ```html
+    <script>alert('XSS')</script>
+    ```
+
+    Django akan melakukan escaping sehingga isi tersebut ditampilkan sebagai teks dan tidak langsung 
+    dijalankan sebagai script oleh browser. Perbedaannya dapat digambarkan seperti berikut:
+
+    ```text
+    Template Django:
+    Data → Template Django → Automatic escaping → Ditampilkan sebagai teks
+
+    AJAX:
+    Data → JSON → JavaScript → Masuk ke DOM → Harus dipastikan aman
+    ```
+
+    Jadi, **AJAX sendiri tidak otomatis lebih rentan terhadap XSS**. Risikonya bergantung pada cara data 
+    dimasukkan ke halaman. Karena itu, selain escaping di sisi tampilan, input juga dapat dibersihkan di 
+    server, misalnya menggunakan strip_tags() pada ModelForm.
+
+---
+
+### Penggunaan AI Tugas 5
+
+Dalam tugas ini, saya menggunakan Claude untuk membantu menyesuaikan kode pada section **Experience** 
+agar memiliki alur kode yang sama seperti section **Projects** setelah perubahan pada Tutorial 5.
+
+**Lampiran Prompting:**
+* **Section Experience**: Bisakah membuat section Experience agar mengimplementasikan kode yang sama 
+    seperti section Projects setelah perubahan pada Tutorial 5?
+
+**AI Disclosure & Analisis**
+* **Tools yang Digunakan**: Claude
+* **Analisis Keterbatasan AI**: Saat mengimplementasikan perubahan pada beberapa section, terdapat 
+    perubahan pada tampilan dan hak akses pengguna. Salah satunya adalah akun superuser tidak dapat 
+    melihat tombol untuk mengedit dan menghapus data pada section Experience.
+* **Perbaikan Manual (oleh Saya)**: Untuk mengatasi masalah tersebut, saya menganalisis penyebab tombol 
+    edit dan delete tidak muncul meskipun akun yang digunakan adalah superuser. Setelah menemukan penyebabnya, 
+    saya menyesuaikan kembali kode agar tombol edit dan delete dapat ditampilkan untuk akun superuser pada 
+    section Experience.
 
 ---
