@@ -360,7 +360,19 @@ berjalan dengan baik tanpa error.
 
     *Debouncing* adalah teknik yang digunakan untuk memberi jeda sebelum sebuah fungsi dijalankan. Pada fitur 
     pencarian, fungsi tidak langsung dijalankan setiap kali pengguna mengetik, tetapi menunggu sampai pengguna 
-    berhenti mengetik selama waktu tertentu.
+    berhenti mengetik selama waktu tertentu. Contoh penerapannya pada `experience.html`:
+
+    ````javascript
+    const EXP_SEARCH_DEBOUNCE_DELAY = 300;
+    let experienceSearchDebounceTimer;
+
+    experienceSearchInput.addEventListener("input", function() {
+        clearTimeout(experienceSearchDebounceTimer);
+        experienceSearchDebounceTimer = setTimeout(function() {
+            searchExperiences();
+        }, EXP_SEARCH_DEBOUNCE_DELAY);
+    });
+    ````
 
     Misalnya, pengguna ingin mencari data dengan kata `experience`. Tanpa *debouncing*, setiap karakter yang 
     diketik dapat menyebabkan request baru ke server:

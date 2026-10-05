@@ -926,7 +926,7 @@ span {
     right: 3rem;
     margin-top: 0;
     font-size: 1.3rem;
-    font-weight: 800;
+    font-weight: 700;
     letter-spacing: 0.05rem;
     text-transform: uppercase;
     color: #8B1E2D;
@@ -1443,7 +1443,7 @@ ditumpuk jadi satu kolom vertikal agar tidak menumpuk */
     
     /* Judul pengalaman */
     .experience-info h4 {
-        font-size: 2.2rem;
+        font-size: 2rem;
         margin-top: 1.2rem;
     }
 
