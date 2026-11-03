@@ -1,3 +1,6 @@
+import datetime
+
+from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse
 
@@ -28,18 +31,21 @@ class ExperienceTest(TestCase):
             role="Participant",
             category="volunteer",
             description="Completed a series of studies on product and project management.",
+            started_at=datetime.date(2025, 1, 1),
         )
         Experience.objects.create(
             title="Dream Campus 2026",
             role="Event Staff",
             category="volunteer",
             description="Responsible for planning, coordinating, and executing a series of events.",
+            started_at=datetime.date(2025, 6, 1),
         )
         Experience.objects.create(
             title="Compfest 18",
             role="Direct Marketing Staff",
             category="volunteer",
             description="Experienced as an MC for seminars.",
+            started_at=datetime.date(2025, 8, 1),
         )
 
     def test_experience_url_is_accessible(self):
@@ -49,34 +55,37 @@ class ExperienceTest(TestCase):
         self.assertTemplateUsed(response, "experience.html")
 
     def test_experience_content(self):
-        response = self.client.get(reverse("main:show_experience"))
+        response = self.client.get(reverse("api:experience-list"))
 
-        self.assertContains(response, "Product Management Class by RISTEK")
-        self.assertContains(response, "Dream Campus 2026")
-        self.assertContains(response, "Compfest 18")
+        self.assertEqual(response.status_code, 200)
+        titles = [experience["title"] for experience in response.json()]
+        self.assertIn("Product Management Class by RISTEK", titles)
+        self.assertIn("Dream Campus 2026", titles)
+        self.assertIn("Compfest 18", titles)
 
     def test_experience_role(self):
-        response = self.client.get(reverse("main:show_experience"))
+        response = self.client.get(reverse("api:experience-list"))
 
-        self.assertContains(response, "Participant")
-        self.assertContains(response, "Event Staff")
-        self.assertContains(response, "Direct Marketing Staff")
+        roles = [experience["role"] for experience in response.json()]
+        self.assertIn("Participant", roles)
+        self.assertIn("Event Staff", roles)
+        self.assertIn("Direct Marketing Staff", roles)
 
     def test_experience_detail(self):
-        response = self.client.get(reverse("main:show_experience"))
+        response = self.client.get(reverse("api:experience-list"))
 
-        self.assertContains(
-            response,
+        descriptions = [experience["description"] for experience in response.json()]
+        self.assertIn(
             "Completed a series of studies on product and project management.",
+            descriptions,
         )
-        self.assertContains(response, "Experienced as an MC for seminars.")
+        self.assertIn("Experienced as an MC for seminars.", descriptions)
 
     def test_experience_empty_state(self):
         Experience.objects.all().delete()
-        self.assertEqual(Education.objects.count(), 0)
-        response = self.client.get(reverse("main:show_experience"))
+        response = self.client.get(reverse("api:experience-list"))
 
-        self.assertContains(response, "No experience has been added yet.")
+        self.assertEqual(response.json(), [])
 
 
 class EducationTest(TestCase):
@@ -124,7 +133,7 @@ class SkillsTest(TestCase):
             name="Python",
             percentage=70,
             icon_class="bxl-python",
-            skill_type="technical"
+            skill_type="hard"
         )
         Skill.objects.create(
             name="Public Speaking",
@@ -185,6 +194,12 @@ class ProjectTest(TestCase):
     """Test untuk halaman Projects"""
  
     def setUp(self):
+        self.owner = User.objects.create_superuser(
+            username="owner",
+            password="owner-password",
+            email="owner@example.com",
+        )
+        self.client.force_login(self.owner)
         self.project = Project.objects.create(
             title="Portfolio Website",
             description="Website portofolio pribadi dibangun pakai Django.",
@@ -249,8 +264,8 @@ class ProjectTest(TestCase):
         self.assertContains(response, "Portfolio Website")
 
     def test_project_empty_state(self):
-            Project.objects.all().delete()
-            self.assertEqual(Education.objects.count(), 0)
-            response = self.client.get(reverse("main:show_projects"))
-    
-            self.assertContains(response, "No projects have been added yet.")
+        Project.objects.all().delete()
+        response = self.client.get(reverse("api:project-list"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json(), [])
