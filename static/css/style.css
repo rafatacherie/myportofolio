@@ -2197,3 +2197,41 @@ ditumpuk jadi satu kolom vertikal agar tidak menumpuk */
 .toast-normal { 
     border-color: var(--main-color); 
 }
+
+/* ================== EXPERIENCE: TOMBOL STAR & EDIT ================== */
+button.experience-edit-btn {
+    background: transparent;
+}
+
+button.experience-star-btn,
+a.experience-star-btn {
+    display: inline-flex;
+    align-items: center;
+    background: #22396F;
+    color: white;
+    border: 2px solid black;
+    font-weight: 500;
+}
+
+button.experience-star-btn:hover,
+a.experience-star-btn:hover,
+button.experience-star-btn.is-starred:hover {
+    background: #22396F;
+    color: white;
+    box-shadow: 0 0 15px rgba(34, 57, 111, 0.8);
+}
+
+button.experience-star-btn.is-starred {
+    background: #22396F;
+    color: white;
+}
+
+/* Badge angka: putih tembus pandang, jadi warnanya mengikuti warna tombol */
+.experience-star-btn .star-count {
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+}
+
+.experience-front-actions {
+    flex-wrap: wrap;
+}

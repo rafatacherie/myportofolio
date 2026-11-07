@@ -1,0 +1,73 @@
+{# Modal edit Experience: datanya dikirim lewat PATCH ke /api/v1/experience/<id>/ #}
+{# Hanya dirender untuk pemilik (superuser) dan Editor, lihat experience.html. #}
+{# Struktur dan kelas CSS disamakan dengan experience_form_modal.html (modal Add); #}
+{# id field dibedakan (edit-exp-*) agar tidak bentrok dengan modal Add. #}
+<div id="edit-experience-modal"
+        class="project-form-modal"
+        popover="auto"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="edit-experience-modal-title">
+    <button type="button"
+            class="project-form-modal__backdrop"
+            popovertarget="edit-experience-modal"
+            popovertargetaction="hide"
+            aria-label="Tutup form edit pengalaman"></button>
+
+    <div class="project-form-modal__content">
+        <button type="button"
+                class="project-form-modal__close"
+                popovertarget="edit-experience-modal"
+                popovertargetaction="hide"
+                aria-label="Tutup form edit pengalaman">&times;</button>
+
+        <h2 id="edit-experience-modal-title">Edit Experience</h2>
+        <form id="edit-experience-form" class="experience-form">
+            <div class="experience-form-group">
+                <label for="edit-exp-title">Name of Experience</label>
+                <input type="text" id="edit-exp-title" name="title" maxlength="255" required>
+            </div>
+            <div class="experience-form-group">
+                <label for="edit-exp-role">Position/Role</label>
+                <input type="text" id="edit-exp-role" name="role" maxlength="255">
+            </div>
+            <div class="experience-form-group">
+                <label for="edit-exp-description">Experience Description</label>
+                <textarea id="edit-exp-description" name="description" rows="3" required></textarea>
+            </div>
+            <div class="experience-form-group">
+                <label for="edit-exp-category">Experience Category</label>
+                {# Pilihan sama dengan Experience.EXPERIENCE_CHOICES di main/models.py #}
+                <select id="edit-exp-category" name="category">
+                    <option value="internship">Internship</option>
+                    <option value="research">Research</option>
+                    <option value="volunteer">Volunteer</option>
+                    <option value="part-time">Part-Time</option>
+                    <option value="full-time">Full-Time</option>
+                    <option value="freelance">Freelance</option>
+                </select>
+            </div>
+            <div class="experience-form-row">
+                <div class="experience-form-group">
+                    <label for="edit-exp-started-at">Start Date</label>
+                    <input type="month" id="edit-exp-started-at" name="started_at" required>
+                </div>
+                <div class="experience-form-group">
+                    <label for="edit-exp-ended-at">End Date</label>
+                    <input type="month" id="edit-exp-ended-at" name="ended_at" title="Leave this empty if the experience is still ongoing.">
+                </div>
+            </div>
+            <div class="experience-form-group">
+                <label for="edit-exp-thumbnail">Image URL</label>
+                <input type="url" id="edit-exp-thumbnail" name="thumbnail" placeholder="https://drive.google.com/thumbnail?id=...&sz=w1000">
+            </div>
+            <div class="project-form-modal__actions">
+                <button type="button"
+                        class="btn btn-secondary"
+                        popovertarget="edit-experience-modal"
+                        popovertargetaction="hide">Cancel</button>
+                <button type="submit" class="btn">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>

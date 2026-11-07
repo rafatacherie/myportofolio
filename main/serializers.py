@@ -16,6 +16,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             "project_url", "project_image_url",
             "star_count", "is_starred", "starred_by_names",
         ]
+        # id dibuat otomatis (UUID default), tidak boleh ditentukan lewat input API
         read_only_fields = ["id"]
 
     # Validasi tambahan, menggantikan peran clean_title/clean_tech_stack/
@@ -59,11 +60,16 @@ class ExperienceSerializer(serializers.ModelSerializer):
     period_label = serializers.CharField(read_only=True)
     is_ongoing = serializers.BooleanField(read_only=True)
 
+    star_count = serializers.SerializerMethodField()
+    is_starred = serializers.SerializerMethodField()
+    starred_by_names = serializers.SerializerMethodField()
+
     class Meta:
         model = Experience
         fields = [
             "id", "title", "role", "description", "category", "category_display",
             "thumbnail", "started_at", "ended_at", "period_label", "is_ongoing",
+            "star_count", "is_starred", "starred_by_names",
         ]
         read_only_fields = ["id"]
 
@@ -72,11 +78,23 @@ class ExperienceSerializer(serializers.ModelSerializer):
     def validate_title(self, value):
         value = strip_tags(value).strip()
         if not value:
-            raise serializers.ValidationError("The experience name cannot consist solely of HTML tags.")
+            raise serializers.ValidationError("Title cannot be empty.")
         return value
 
     def validate_role(self, value):
         return strip_tags(value).strip()
-
+ 
     def validate_description(self, value):
         return strip_tags(value).strip()
+ 
+    def get_star_count(self, obj):
+        return obj.starred_by.count()
+ 
+    def get_is_starred(self, obj):
+        request = self.context.get("request")
+        if request is None or not request.user.is_authenticated:
+            return False
+        return request.user in obj.starred_by.all()
+ 
+    def get_starred_by_names(self, obj):
+        return ", ".join(user.username for user in obj.starred_by.all())

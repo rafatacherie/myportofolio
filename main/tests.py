@@ -212,7 +212,13 @@ class ProjectTest(TestCase):
  
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "project.html")
-        self.assertContains(response, "Portfolio Website")
+
+    # Kartu project dirender JavaScript dari API, jadi judulnya diperiksa lewat API
+    def test_projects_api_lists_project(self):
+        response = self.client.get(reverse("api:project-list"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()[0]["title"], "Portfolio Website")
  
     def test_add_project_form_is_accessible(self):
         response = self.client.get(reverse("main:create_project"))
@@ -243,10 +249,12 @@ class ProjectTest(TestCase):
             tech_stack="Flutter",
         )
  
-        response = self.client.get(reverse("main:show_projects"), {"title": "Portfolio"})
+        # Pencarian kini berupa parameter query pada endpoint API
+        response = self.client.get(reverse("api:project-list"), {"title": "Portfolio"})
  
-        self.assertContains(response, "Portfolio Website")
-        self.assertNotContains(response, "Another App")
+        titles = [project["title"] for project in response.json()]
+        self.assertIn("Portfolio Website", titles)
+        self.assertNotIn("Another App", titles)
  
     def test_delete_project(self):
         response = self.client.post(
