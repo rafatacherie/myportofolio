@@ -10,6 +10,8 @@ from main.models import Experience, Project
 
 
 class ProjectAPITest(APITestCase):
+    """Test API Project."""
+
     def setUp(self):
         self.owner = User.objects.create_superuser(
             username="owner", password="test-password", email="owner@example.com",
@@ -27,6 +29,7 @@ class ProjectAPITest(APITestCase):
         }
 
     def test_public_list_and_detail(self):
+        """Pengunjung tanpa login boleh membaca daftar dan detail."""
         response = self.client.get(self.list_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data[0]["id"], str(self.project.id))
@@ -35,16 +38,19 @@ class ProjectAPITest(APITestCase):
         self.assertEqual(self.client.get(self.detail_url).status_code, status.HTTP_200_OK)
 
     def test_search_and_empty_results(self):
+        """Parameter ?title= mencari tanpa membedakan huruf besar/kecil; tanpa hasil -> daftar kosong."""
         response = self.client.get(self.list_url, {"title": "PORT"})
         self.assertEqual(len(response.data), 1)
         response = self.client.get(self.list_url, {"title": "not-found"})
         self.assertEqual(response.data, [])
 
     def test_missing_project(self):
+        """ID yang tidak ada membalas 404."""
         url = reverse("api:project-detail", args=[uuid.uuid4()])
         self.assertEqual(self.client.get(url).status_code, status.HTTP_404_NOT_FOUND)
 
     def test_guest_and_visitor_cannot_write(self):
+        """Pengunjung dan pengguna biasa ditolak (403) dan isi database tidak berubah."""
         for user in (None, self.visitor):
             self.client.force_authenticate(user=user)
             self.assertEqual(self.client.post(self.list_url, self.payload, format="json").status_code, 403)
@@ -55,12 +61,14 @@ class ProjectAPITest(APITestCase):
         self.assertEqual(self.project.title, "Portfolio")
 
     def test_owner_can_create(self):
+        """Pemilik portofolio boleh membuat data baru (201)."""
         self.client.force_authenticate(user=self.owner)
         response = self.client.post(self.list_url, self.payload, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertTrue(Project.objects.filter(pk=response.data["id"]).exists())
 
     def test_validation(self):
+        """Input tidak valid ditolak dengan 400 dan pesan error per field."""
         self.client.force_authenticate(user=self.owner)
         for changes, field in [
             ({"title": "   "}, "title"),
@@ -73,6 +81,7 @@ class ProjectAPITest(APITestCase):
         self.assertEqual(Project.objects.count(), 1)
 
     def test_patch_put_and_delete(self):
+        """Pemilik boleh PATCH, PUT, dan DELETE (204)."""
         self.client.force_authenticate(user=self.owner)
         response = self.client.patch(self.detail_url, {"title": "Changed"}, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -88,6 +97,7 @@ class ProjectAPITest(APITestCase):
         self.assertFalse(Project.objects.filter(pk=self.project.id).exists())
 
     def test_star_requires_login_and_toggles(self):
+        """Star butuh login; request kedua dari akun yang sama mencabut star."""
         self.assertEqual(self.client.post(self.star_url).status_code, status.HTTP_403_FORBIDDEN)
         self.client.force_authenticate(user=self.visitor)
         response = self.client.post(self.star_url)
@@ -98,6 +108,7 @@ class ProjectAPITest(APITestCase):
         self.assertEqual(response.data["star_count"], 0)
 
     def test_computed_fields_are_read_only(self):
+        """star_count dan field turunan tidak bisa dipalsukan lewat input."""
         self.client.force_authenticate(user=self.owner)
         response = self.client.post(self.list_url, {
             **self.payload, "star_count": 99, "is_starred": True,
@@ -108,6 +119,7 @@ class ProjectAPITest(APITestCase):
         self.assertFalse(response.data["is_starred"])
 
     def test_staff_and_editor_cannot_manage_tutorial_projects(self):
+        """Project API hanya untuk pemilik: staff dan Editor ditolak."""
         self.visitor.is_staff = True
         self.visitor.save()
         self.visitor.groups.add(Group.objects.create(name="Editor"))
@@ -116,10 +128,12 @@ class ProjectAPITest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_wrong_method(self):
+        """Metode yang tidak didukung membalas 405."""
         self.client.force_authenticate(user=self.owner)
         self.assertEqual(self.client.delete(self.list_url).status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_session_write_without_csrf_is_rejected(self):
+        """Sesi login nyata tanpa token CSRF ditolak (403) dan data tidak berubah."""
         client = APIClient(enforce_csrf_checks=True)
         self.assertTrue(client.login(username="owner", password="test-password"))
         response = client.post(self.list_url, self.payload, format="json")
@@ -127,6 +141,7 @@ class ProjectAPITest(APITestCase):
         self.assertEqual(Project.objects.count(), 1)
 
     def test_session_write_with_csrf_succeeds(self):
+        """Sesi login nyata dengan token CSRF diterima."""
         client = APIClient(enforce_csrf_checks=True)
         client.login(username="owner", password="test-password")
         # The Browsable API form renders a real CSRF token into the response.
@@ -141,6 +156,9 @@ class ProjectAPITest(APITestCase):
 
 class ExperienceAPITest(APITestCase):
     """
+    Test API Experience.
+    
+    Adaptasi ProjectAPITest untuk Experience, dengan tambahan: 
     Editor boleh PATCH tetapi tetap ditolak untuk create/delete,
     sesuai IsPortfolioOwnerOrEditorOrReadOnly.
     """
@@ -172,22 +190,26 @@ class ExperienceAPITest(APITestCase):
         }
 
     def test_public_list_and_detail(self):
+        """Pengunjung tanpa login boleh membaca daftar dan detail."""
         response = self.client.get(self.list_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data[0]["id"], str(self.experience.id))
         self.assertEqual(self.client.get(self.detail_url).status_code, status.HTTP_200_OK)
 
     def test_search_and_empty_results(self):
+        """Parameter ?title= mencari tanpa membedakan huruf besar/kecil; tanpa hasil -> daftar kosong."""
         response = self.client.get(self.list_url, {"title": "Teaching"})
         self.assertEqual(len(response.data), 1)
         response = self.client.get(self.list_url, {"title": "not-found"})
         self.assertEqual(response.data, [])
 
     def test_missing_experience(self):
+        """ID yang tidak ada membalas 404."""
         url = reverse("api:experience-detail", args=[uuid.uuid4()])
         self.assertEqual(self.client.get(url).status_code, status.HTTP_404_NOT_FOUND)
 
     def test_guest_and_visitor_cannot_write(self):
+        """Pengunjung dan pengguna biasa ditolak (403) dan isi database tidak berubah."""
         for user in (None, self.visitor):
             self.client.force_authenticate(user=user)
             self.assertEqual(self.client.post(self.list_url, self.payload, format="json").status_code, 403)
@@ -199,12 +221,14 @@ class ExperienceAPITest(APITestCase):
         self.assertEqual(self.experience.title, "PBP Teaching Assistant")
 
     def test_owner_can_create(self):
+        """Pemilik portofolio boleh membuat data baru (201)."""
         self.client.force_authenticate(user=self.owner)
         response = self.client.post(self.list_url, self.payload, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertTrue(Experience.objects.filter(pk=response.data["id"]).exists())
 
     def test_ongoing_experience_has_no_end_date(self):
+        """Experience tanpa ended_at berstatus ongoing."""
         self.client.force_authenticate(user=self.owner)
         response = self.client.post(self.list_url, self.payload, format="json")
         self.assertIsNone(response.data["ended_at"])
@@ -216,6 +240,7 @@ class ExperienceAPITest(APITestCase):
         self.assertTrue(response.data["is_ongoing"])
 
     def test_validation(self):
+        """Input tidak valid ditolak dengan 400 dan pesan error per field."""
         self.client.force_authenticate(user=self.owner)
         response = self.client.post(self.list_url, {**self.payload, "title": "   "}, format="json")
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
@@ -223,6 +248,7 @@ class ExperienceAPITest(APITestCase):
         self.assertEqual(Experience.objects.count(), 1)
 
     def test_owner_can_patch_put_and_delete(self):
+        """Pemilik boleh PATCH, PUT, dan DELETE (204)."""
         self.client.force_authenticate(user=self.owner)
         response = self.client.patch(self.detail_url, {"title": "Changed"}, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -233,6 +259,7 @@ class ExperienceAPITest(APITestCase):
         self.assertFalse(Experience.objects.filter(pk=self.experience.id).exists())
 
     def test_editor_can_patch_but_not_create_or_delete(self):
+        """Editor boleh PUT/PATCH, tetapi POST dan DELETE ditolak (403) dan database tetap."""
         self.client.force_authenticate(user=self.editor)
         response = self.client.patch(self.detail_url, {"title": "Edited by editor"}, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -248,10 +275,12 @@ class ExperienceAPITest(APITestCase):
         self.assertTrue(Experience.objects.filter(pk=self.experience.pk).exists())
 
     def test_wrong_method(self):
+        """Metode yang tidak didukung membalas 405."""
         self.client.force_authenticate(user=self.owner)
         self.assertEqual(self.client.delete(self.list_url).status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_session_write_without_csrf_is_rejected(self):
+        """Sesi login nyata tanpa token CSRF ditolak (403) dan data tidak berubah."""
         client = APIClient(enforce_csrf_checks=True)
         self.assertTrue(client.login(username="owner", password="test-password"))
         response = client.post(self.list_url, self.payload, format="json")
@@ -259,6 +288,7 @@ class ExperienceAPITest(APITestCase):
         self.assertEqual(Experience.objects.count(), 1)
 
     def test_session_write_with_csrf_succeeds(self):
+        """Sesi login nyata dengan token CSRF diterima."""
         client = APIClient(enforce_csrf_checks=True)
         client.login(username="owner", password="test-password")
         client.get(self.list_url, HTTP_ACCEPT="text/html")
@@ -269,6 +299,7 @@ class ExperienceAPITest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_experience_validation_strips_tags_and_checks_dates(self):
+        """Tag HTML dibersihkan (strip_tags), judul kosong dan tanggal salah ditolak."""
         self.client.force_authenticate(user=self.owner)
         response = self.client.post(
             self.list_url,
@@ -292,6 +323,7 @@ class ExperienceAPITest(APITestCase):
         self.assertEqual(Experience.objects.count(), 2)
 
     def test_star_requires_login_and_toggles(self):
+        """Star butuh login; request kedua dari akun yang sama mencabut star."""
         star_url = reverse("api:experience-star", args=[self.experience.id])
         self.assertEqual(self.client.post(star_url).status_code, status.HTTP_403_FORBIDDEN)
         self.assertEqual(self.experience.starred_by.count(), 0)
@@ -308,6 +340,7 @@ class ExperienceAPITest(APITestCase):
         self.assertEqual(self.experience.starred_by.count(), 0)
 
     def test_star_is_per_account_and_get_not_allowed(self):
+        """Star dihitung per akun; GET ke endpoint star membalas 405."""
         star_url = reverse("api:experience-star", args=[self.experience.id])
         self.client.force_authenticate(user=self.visitor)
         self.client.post(star_url)
@@ -319,6 +352,7 @@ class ExperienceAPITest(APITestCase):
         self.assertEqual(self.client.get(star_url).status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_computed_fields_are_read_only(self):
+        """star_count dan field turunan tidak bisa dipalsukan lewat input."""
         self.client.force_authenticate(user=self.owner)
         response = self.client.post(self.list_url, {
             **self.payload, "star_count": 99, "is_starred": True,
@@ -330,6 +364,7 @@ class ExperienceAPITest(APITestCase):
         self.assertEqual(response.data["starred_by_names"], "")
 
     def test_api_does_not_expose_sensitive_account_data(self):
+        """Respons tidak memuat email atau password hash akun."""
         self.visitor.email = "secret@example.com"
         self.visitor.save()
         self.experience.starred_by.add(self.visitor)
