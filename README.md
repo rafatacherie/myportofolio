@@ -33,19 +33,19 @@ Kelas : PBP C
     bentuk aslinya. 
 
     Cara mengevaluasi dan menetukan prioritas ukuran/posisi elemen: 
-    * **Content flow**: mengevaluasi halaman pada berbagai breakpoint (seperti 1285px, 991px, 
+    - **Content flow**: mengevaluasi halaman pada berbagai breakpoint (seperti 1285px, 991px, 
     dan 895px). Jika elemen horizontal mulai terhimpit, akan diprioritaskan tata letak 
     dengan satu kolom sehingga memanjang ke bawah (vertikal).
-    * **Visual**: saat berpindah ke tampilan mobile, elemen visual yang besar (seperti foto profil) 
+    - **Visual**: saat berpindah ke tampilan mobile, elemen visual yang besar (seperti foto profil) 
     diprioritaskan posisinya agar berada di atas teks perkenalan untuk menyesuaikan alur.
-    * **Skalabilitas font**: menurunkan ukuran font dasar `(html { font-size: 55%; })` pada breakpoint 
+    - **Skalabilitas font**: menurunkan ukuran font dasar `(html { font-size: 55%; })` pada breakpoint 
     tertentu agar semua teks yang menggunakan satuan rem otomatis menyusut secara proporsional.
     
 3. Sebagai website statis murni, batasan terbesar yang saya rasakan dalam menyajikan informasi 
     secara optimal meliputi:
-    * Pengunjung tidak dapat mengirimkan pesan langsung dari kotak input portofolio ke email 
+    - Pengunjung tidak dapat mengirimkan pesan langsung dari kotak input portofolio ke email 
     saya tanpa bantuan pihak ketiga atau pembukaan aplikasi email eksternal.
-    * Setiap kali ada pembaruan data pendidikan, pengalaman baru, atau persentase keahlian, 
+    - Setiap kali ada pembaruan data pendidikan, pengalaman baru, atau persentase keahlian, 
     saya harus membongkar dan mengubah baris kode HTML/CSS secara manual.
 
     Fungsionalitas dinamis yang ingin ditambahkan pada iterasi selanjutnya:
@@ -72,25 +72,25 @@ dengan google gemini. Terakhir, untuk footer juga mengikuti tutorial youtube dan
 disesuaikan agar sesuai dengan keinginan menggunakan google gemini.
 
 **Lampiran Prompting:**
-* **Section Experience (flip box)**: Berdasarkan kode ini [kode dari tutorial], bisakah buat agar terdapat 
+- **Section Experience (flip box)**: Berdasarkan kode ini [kode dari tutorial], bisakah buat agar terdapat 
     button "see detail" lalu menampilkan deskripsi dari pengalaman yang dilakukan. Buat agar tulisannya 
     tidak keluar dari box, dan dapat di scroll jika teksnya panjang. Kembalikan lagi ke halaman depan 
     dari box dengan button "back".
-* **Section Skills (skills bar)**: Berdasarkan kode ini [kode dari tutorial], bisakah buat untuk 2 jenis skills 
+- **Section Skills (skills bar)**: Berdasarkan kode ini [kode dari tutorial], bisakah buat untuk 2 jenis skills 
     (technical and soft skills) dengan tampilan sejajar horizontal dan untuk tiap skills berikan 5 bar serta
     berikan garis pemisah antara 2 jenis skills tersebut.
-* **Section Contact (button "send me a message")**: Berdasarkan kode ini [kode dari tutorial] sesuaikan agar 
+- **Section Contact (button "send me a message")**: Berdasarkan kode ini [kode dari tutorial] sesuaikan agar 
     button dapat mendirect ke email untuk mengirimkan pesan.
-* **Section Footer (logo, navbar, dan copyright)**: Berdasarkan kode ini [kode dari tutorial] sesuaikan agar 
+- **Section Footer (logo, navbar, dan copyright)**: Berdasarkan kode ini [kode dari tutorial] sesuaikan agar 
     layout footer berbaris berurutan dari atas ke bawah (vertikal) dan rata tengah.
 
 **AI Disclosure & Analisis:**
-* **Tools yang Digunakan**: Claude
-* **Analisis Keterbatasan AI**: Ketika mencoba membangun komponen dari awal (*build from scratch*), AI memiliki 
+- **Tools yang Digunakan**: Claude
+- **Analisis Keterbatasan AI**: Ketika mencoba membangun komponen dari awal (*build from scratch*), AI memiliki 
     keterbatasan dalam memahami estetika visual dan presisi layout yang saya inginkan. Hasil kode pertama 
     dari AI sering kali tidak sesuai ekspektasi, sehingga memicu proses trial and error yang berulang-ulang 
     dan memakan banyak waktu jika hanya mengandalkan teks.
-* **Perbaikan Manual (oleh saya)**: Untuk mengatasi keterbatasan AI, saya beralih mencari referensi yang cocok 
+- **Perbaikan Manual (oleh saya)**: Untuk mengatasi keterbatasan AI, saya beralih mencari referensi yang cocok 
     secara visual dari tutorial YouTube. Untuk beberapa section yang ingin saya rombak, saya perlu setidaknya 
     setengah gambaran kode yang sesuai secara visual, baru saya memberikan potongan kode tersebut ke AI dan 
     menyesuaikannya secara desain. Saya tidak menyuruh AI mendesain dari nol, melainkan memberikan instruksi 
@@ -106,7 +106,7 @@ disesuaikan agar sesuai dengan keinginan menggunakan google gemini.
     Ketika pengguna membuka halaman portofolio, misalnya `/experience/`, alurnya adalah:
     **Browser → `urls.py` proyek → `urls.py` aplikasi → View → Model → Template → Browser**
 
-    * **`urls.py` proyek** menerima request dari browser dan menentukan aplikasi mana 
+    - **`urls.py` proyek** menerima request dari browser dan menentukan aplikasi mana 
         yang menangani URL tersebut. Misalnya, pada `portofolio/urls.py` terdapat:
 
         ```python
@@ -114,14 +114,14 @@ disesuaikan agar sesuai dengan keinginan menggunakan google gemini.
         ```
         sehingga request diteruskan ke `main/urls.py`.
 
-    * **`urls.py` aplikasi** menentukan view yang sesuai dengan URL. Contohnya:
+    - **`urls.py` aplikasi** menentukan view yang sesuai dengan URL. Contohnya:
 
         ```python
         path("experience/", show_experience, name="show_experience")
         ```
         sehingga URL `/experience/` akan menjalankan `show_experience`.
 
-    * **View** memproses request dan mengambil data yang diperlukan dari model. Contohnya:
+    - **View** memproses request dan mengambil data yang diperlukan dari model. Contohnya:
         
         ```python
         def show_experience(request):
@@ -132,10 +132,10 @@ disesuaikan agar sesuai dengan keinginan menggunakan google gemini.
             return render(request, "experience.html", context)
         ```
 
-    * **Model** berfungsi sebagai penghubung dengan database. `Experience.objects.all()` 
+    - **Model** berfungsi sebagai penghubung dengan database. `Experience.objects.all()` 
         mengambil data pengalaman yang tersimpan di database.
 
-    * **Template** (`experience.html`) menerima data dari view dan 
+    - **Template** (`experience.html`) menerima data dari view dan 
         menampilkannya menggunakan Django Template Language, misalnya:
 
         ```html
@@ -171,9 +171,9 @@ disesuaikan agar sesuai dengan keinginan menggunakan google gemini.
 
 3. Perbedaan `makemigrations` dan `migrate`
 
-* **`makemigrations`** digunakan untuk **membuat file migration** berdasarkan perubahan 
+- **`makemigrations`** digunakan untuk **membuat file migration** berdasarkan perubahan 
     pada model. Migration tersebut **berisi instruksi perubahan struktur database**.
-* **`migrate`** digunakan untuk **menerapkan migration tersebut ke database**, sehingga 
+- **`migrate`** digunakan untuk **menerapkan migration tersebut ke database**, sehingga 
     struktur database benar-benar berubah.
 
     Contohnya, awalnya model `Experience` hanya memiliki:
@@ -211,25 +211,25 @@ education, skills, dan contact. Selain itu, AI digunakan untuk membantu menganal
 terjadi serta memberikan solusi untuk memperbaikinya.
 
 **Lampiran Prompting:**
-* **Section Education**: Bisakah buat agar struktur kode ini [kode lama statis] sesuai 
+- **Section Education**: Bisakah buat agar struktur kode ini [kode lama statis] sesuai 
     seperti yang ada pada kode di tutorial ini [kode baru dinamis].
-* **Section Experience**: Bisakah buat agar struktur kode ini [kode lama statis] sesuai 
+- **Section Experience**: Bisakah buat agar struktur kode ini [kode lama statis] sesuai 
     seperti yang ada pada kode di tutorial ini [kode baru dinamis].
-* **Section Skills**: Bisakah buat agar struktur kode ini [kode lama statis] sesuai 
+- **Section Skills**: Bisakah buat agar struktur kode ini [kode lama statis] sesuai 
     seperti yang ada pada kode di tutorial ini [kode baru dinamis].
-* **Section Contact**: Bisakah buat agar struktur kode ini [kode lama statis] sesuai 
+- **Section Contact**: Bisakah buat agar struktur kode ini [kode lama statis] sesuai 
     seperti yang ada pada kode di tutorial ini [kode baru dinamis].
 
 **AI Disclosure & Analisis**
-* **Tools yang Digunakan**: Claude
-* **Analisis Keterbatasan AI**: Ketika mencoba membangun section baru dari awal 
+- **Tools yang Digunakan**: Claude
+- **Analisis Keterbatasan AI**: Ketika mencoba membangun section baru dari awal 
     (*build from scratch*), AI memiliki keterbatasan dalam memahami estetika visual 
     dan presisi layout yang saya inginkan. Hasil kode yang diberikan terkadang tidak 
     sesuai dengan tampilan yang diharapkan, sehingga perlu dilakukan *trial and error* 
     secara berulang. Selain itu, ketika kode diubah menjadi lebih dinamis dengan 
     menerapkan DTL dan MVT, terdapat beberapa perubahan pada gaya tulisan di bagian 
     tertentu yang sebelumnya sudah sesuai.
-* **Perbaikan Manual (oleh saya)**: Untuk mengatasi keterbatasan tersebut, saya menganalisis 
+- **Perbaikan Manual (oleh saya)**: Untuk mengatasi keterbatasan tersebut, saya menganalisis 
     kembali kode yang sudah ada, terutama bagian HTML dan CSS yang mengatur tampilan setiap 
     section. Saya kemudian mengidentifikasi kode yang menyebabkan perubahan pada gaya tulisan, 
     ukuran, atau layout, lalu memperbaikinya secara manual agar tetap sesuai dengan desain 
@@ -315,15 +315,15 @@ Projects dari tutorial. AI juga digunakan untuk membantu merapikan layout dan ga
 tambahan tersebut agar tetap sesuai dengan desain website yang sudah dibuat.
 
 **Lampiran Prompting:**
-* **Section Experience**: Berdasarkan kode pada section Projects, bisakah sesuaikan kode yang ada di 
+- **Section Experience**: Berdasarkan kode pada section Projects, bisakah sesuaikan kode yang ada di 
     section Experience agar memiliki struktur yang sama dan dapat menerima input melalui website.   
 
 **AI Disclosure & Analisis**
-* **Tools yang Digunakan**: Claude
-* **Analisis Keterbatasan AI**: Ketika kode diubah agar section Experience dapat menerima input langsung 
+- **Tools yang Digunakan**: Claude
+- **Analisis Keterbatasan AI**: Ketika kode diubah agar section Experience dapat menerima input langsung 
     melalui website, terdapat beberapa perubahan pada layout dan gaya tulisan di bagian tertentu yang 
     membuat tampilannya tidak lagi sepenuhnya sesuai dengan desain awal.
-* **Perbaikan Manual (oleh saya)**: Untuk mengatasi perubahan tersebut, saya menganalisis kembali kode yang 
+- **Perbaikan Manual (oleh saya)**: Untuk mengatasi perubahan tersebut, saya menganalisis kembali kode yang 
     telah dibuat, terutama bagian CSS yang mengatur tampilan setiap section. Saya mengidentifikasi bagian 
     kode yang memengaruhi ukuran, jarak, dan layout, kemudian melakukan penyesuaian secara manual agar tampilan 
     pada fitur tetap konsisten dengan desain keseluruhan website.
@@ -338,16 +338,16 @@ digunakan untuk membantu memastikan section Projects dapat disesuaikan dengan co
 berjalan dengan baik tanpa error.
 
 **Lampiran Prompting:**
-* **Section Projects**: Analisislah kesalahan yang terdapat pada kode berikut [kode terbaru setelah Tutorial 4] 
+- **Section Projects**: Analisislah kesalahan yang terdapat pada kode berikut [kode terbaru setelah Tutorial 4] 
     dan perbaiki kesalahan tersebut agar dapat berjalan sebagaimana mestinya sesuai dengan tutorial.
 
 **AI Disclosure & Analisis**
-* **Tools yang Digunakan**: Claude
-* **Analisis Keterbatasan AI**: Setelah penambahan fitur login, register, dan logout, terdapat beberapa bug 
+- **Tools yang Digunakan**: Claude
+- **Analisis Keterbatasan AI**: Setelah penambahan fitur login, register, dan logout, terdapat beberapa bug 
     pada kode. Salah satunya adalah halaman **Add Experience** dan **Add Project** yang mengarah ke halaman 
     edit, bukan halaman untuk menambahkan data. Selain itu, akun superuser yang telah didaftarkan belum dapat 
     melakukan beberapa aksi seperti mengedit, menghapus, dan menambahkan data serta menggunakan fitur star.
-* **Perbaikan Manual (oleh Saya)**: Untuk mengatasi masalah tersebut, saya menganalisis kembali penyebab akun 
+- **Perbaikan Manual (oleh Saya)**: Untuk mengatasi masalah tersebut, saya menganalisis kembali penyebab akun 
     superuser tidak dapat melakukan beberapa aksi, seperti menambah, mengedit, dan menggunakan fitur star pada 
     section Projects. Kemudian, saya mencari dan menerapkan solusi yang sesuai agar kode dapat berjalan sebagaimana 
     mestinya sesuai dengan tutorial serta hak akses yang telah ditentukan untuk setiap role pengguna.
@@ -552,17 +552,216 @@ Dalam tugas ini, saya menggunakan Claude untuk membantu menyesuaikan kode pada s
 agar memiliki alur kode yang sama seperti section **Projects** setelah perubahan pada Tutorial 5.
 
 **Lampiran Prompting:**
-* **Section Experience**: Bisakah membuat section Experience agar mengimplementasikan kode yang sama 
+- **Section Experience**: Bisakah membuat section Experience agar mengimplementasikan kode yang sama 
     seperti section Projects setelah perubahan pada Tutorial 5?
 
 **AI Disclosure & Analisis**
-* **Tools yang Digunakan**: Claude
-* **Analisis Keterbatasan AI**: Saat mengimplementasikan perubahan pada beberapa section, terdapat 
-    perubahan pada tampilan dan hak akses pengguna. Salah satunya adalah akun superuser tidak dapat 
-    melihat tombol untuk mengedit dan menghapus data pada section Experience.
-* **Perbaikan Manual (oleh Saya)**: Untuk mengatasi masalah tersebut, saya menganalisis penyebab tombol 
+- **Tools yang Digunakan**: Claude
+ **Analisis Keterbatasan AI**: Saat mengimplementasikan perubahan pada beberapa section, terdapat perubahan 
+    pada tampilan dan hak akses pengguna. Salah satunya adalah akun superuser tidak dapat melihat tombol 
+    untuk mengedit dan menghapus data pada section Experience.
+- **Perbaikan Manual (oleh Saya)**: Untuk mengatasi masalah tersebut, saya menganalisis penyebab tombol 
     edit dan delete tidak muncul meskipun akun yang digunakan adalah superuser. Setelah menemukan penyebabnya, 
     saya menyesuaikan kembali kode agar tombol edit dan delete dapat ditampilkan untuk akun superuser pada 
     section Experience.
+
+---
+
+### Tugas 6
+
+1. REST, JSON, PUT, dan PATCH
+
+    **REST (Representational State Transfer)** adalah gaya arsitektur perangkat lunak yang mengatur bagaimana 
+    client dan server berkomunikasi serta bertukar data melalui jaringan menggunakan antarmuka yang seragam 
+    (*uniform interface*).
+
+    REST memiliki beberapa prinsip, yaitu:
+    - **Client-Server:** Memisahkan client dan server.
+    - **Stateless:** Setiap request harus membawa informasi yang dibutuhkan untuk diproses.
+    - **Cacheable:** Respons dapat disimpan dalam cache jika diizinkan.
+    - **Uniform Interface:** Komunikasi menggunakan aturan yang konsisten.
+    - **Layered System:** Komunikasi dapat melewati perantara seperti proxy.
+
+    Mengembalikan JSON saja belum cukup untuk menyebut suatu API sebagai RESTful karena JSON hanyalah 
+    format pertukaran data, bukan aturan arsitektur REST. Sebuah API juga harus menerapkan prinsip-prinsip 
+    REST, seperti penggunaan HTTP method yang sesuai, pemisahan client-server, dan komunikasi yang stateless.
+
+    Contohnya, endpoint `/get_projects_json/` mengembalikan JSON, tetapi URL-nya berupa aksi, bukan resource, 
+    dan tidak memakai status HTTP yang bermakna. Versi RESTful-nya adalah `GET /api/v1/experience/` untuk daftar, 
+    `POST` dengan status `201` untuk membuat, `DELETE /api/v1/experience/<id>/` dengan status `204` untuk menghapus, 
+    serta `400`, `403`, dan `404` untuk kondisi gagal.
+
+    **Perbedaan PUT dan PATCH**
+
+    | PUT | PATCH |
+    | ------------------------------- | ------------------------------- |
+    | Mengganti seluruh representasi data resource. | Mengubah sebagian data resource. |
+    | Client mengirimkan data lengkap. | Client cukup mengirimkan field yang ingin diubah. |
+    | Digunakan jika ingin mengganti seluruh data. | Digunakan jika hanya ingin memperbarui atribut tertentu. |
+
+    **Contoh pada proyek ini:**
+
+    Misalnya terdapat data Experience:
+
+    ```json
+    {
+    "title": "Web Developer",
+    "role": "Frontend Developer",
+    "description": "Mengembangkan tampilan website",
+    "category": "internship",
+    "ended_at": null
+    }
+    ```
+
+    **PUT:** Jika Editor ingin mengganti keseluruhan data Experience, client mengirimkan seluruh data:
+
+    ```json
+    {
+    "title": "Fullstack Developer",
+    "role": "Web Developer",
+    "description": "Mengembangkan aplikasi web",
+    "category": "internship",
+    "ended_at": "2026-05"
+    }
+    ```
+
+    **PATCH:** Jika Editor hanya ingin mengubah tanggal berakhir Experience, client cukup mengirimkan:
+
+    ```json
+    {
+    "ended_at": "2026-05"
+    }
+    ```
+
+2. Peran Serializer pada Django REST Framework
+
+    **Serializer** adalah komponen pada Django REST Framework yang berfungsi untuk mengubah objek Django, 
+    seperti Model Instance dan QuerySet, menjadi tipe data Python standar yang kemudian dapat diubah menjadi 
+    JSON (*serialization*).
+
+    Serializer juga melakukan proses sebaliknya, yaitu menerima data JSON, memvalidasi data, dan mengubahnya 
+    menjadi data Python atau Django Model Instance (*deserialization*).
+
+    Pada proyek ini, `ExperienceSerializer` menentukan field mana yang ditampilkan, memvalidasi input melalui 
+    `validate_title` dengan `strip_tags`, dan menghitung field tambahan seperti `star_count`, `is_starred`, dan 
+    `starred_by_names`.
+
+    **Keuntungan Serializer dibandingkan JsonResponse manual**
+
+    1. **Konversi data otomatis:** Tidak perlu mengambil dan menyusun setiap field model secara manual menjadi dictionary.
+    2. **Validasi data:** Serializer menyediakan `.is_valid()` untuk memeriksa apakah data yang dikirim client sesuai 
+        dengan aturan yang ditentukan. Jika tidak valid, Serializer dapat menghasilkan pesan error untuk setiap field.
+    3. **Integrasi dengan model:** `ModelSerializer` dapat mengambil field dan aturan validasi langsung dari Django Model.
+    4. **Mendukung operasi CRUD:** `ModelSerializer` menyediakan implementasi `create()` dan `update()` sehingga mengurangi 
+        kode yang harus ditulis.
+    5. **Mengurangi kesalahan:** Validasi dan proses konversi data dilakukan secara terstruktur dan konsisten.
+    6. **Field read-only:** `SerializerMethodField` digunakan untuk menghitung field tambahan seperti `star_count` dan 
+        `is_starred`, sehingga nilainya tidak dapat diisi secara langsung oleh client.
+
+    **Contoh penggunaan pada proyek ini:**
+
+    ```python
+    serializer = ExperienceSerializer(data=request.data, context={"request": request})
+    serializer.is_valid(raise_exception=True)  # tidak valid -> otomatis 400
+    serializer.save()
+    ```
+
+    Dengan demikian, Serializer lebih efisien dan terstruktur dibandingkan harus membuat dictionary secara 
+    manual dan mengelola validasi sendiri menggunakan `JsonResponse`.
+
+3. Perbedaan Authentication dan Authorization pada Django REST Framework
+
+    **Authentication (autentikasi)** adalah proses memverifikasi identitas pengguna yang mengirimkan request. 
+    Tujuannya untuk mengetahui siapa pengguna tersebut. Pada proyek ini, autentikasi menggunakan `SessionAuthentication`, 
+    yang membaca cookie sesi dan mengidentifikasi pengguna melalui `request.user`.
+
+    **Authorization (otorisasi)** adalah proses menentukan apakah pengguna yang sudah teridentifikasi memiliki 
+    hak untuk mengakses atau melakukan tindakan tertentu terhadap suatu resource. Pada proyek ini, otorisasi 
+    dilakukan menggunakan permission class `IsPortfolioOwnerOrEditorOrReadOnly`, yang mengatur hak akses 
+    berdasarkan peran dan kepemilikan data.
+
+    Contohnya:
+    - Pengunjung hanya dapat membaca data.
+    - Pengguna biasa dapat memberikan star.
+    - Pemilik portofolio (superuser) boleh melakukan semua tindakan: `POST`, `PUT`, `PATCH`, dan `DELETE`.
+    - Editor hanya boleh `PUT` dan `PATCH`; `POST` dan `DELETE` ditolak dengan `403`.
+
+    **Perbedaan Authentication dan Authorization**
+
+    | Authentication | Authorization |
+    | ------------------------------- | ------------------------------- |
+    | Memeriksa identitas pengguna. | Memeriksa hak akses pengguna. |
+    | Menjawab: Siapa kamu? | Menjawab: Apa yang boleh kamu lakukan? |
+    | Contoh: SessionAuthentication. | Contoh: IsPortfolioOwnerOrEditorOrReadOnly. |
+
+    **Mengapa Permission Harus Diperiksa di Server?**
+
+    Hak akses harus diperiksa menggunakan *permission class* di server karena menyembunyikan tombol pada 
+    template hanya membatasi tampilan antarmuka, bukan akses sebenarnya terhadap API. Pengguna masih dapat 
+    mengirim request secara langsung menggunakan browser developer tools, `curl`, atau Postman tanpa melalui 
+    tombol yang disediakan. Oleh karena itu, server harus tetap memeriksa permission setiap kali menerima 
+    request agar pengguna yang tidak memiliki hak akses tidak dapat melakukan tindakan yang dilarang.
+
+4. CSRF pada SessionAuthentication dan force_authenticate
+
+    **CSRF (Cross-Site Request Forgery)** adalah serangan yang memanfaatkan browser pengguna yang sudah login 
+    untuk mengirimkan request ke suatu website tanpa sepengetahuan atau persetujuan pengguna.
+
+    Ketika API menggunakan `SessionAuthentication`, browser secara otomatis mengirimkan session cookie pada 
+    request. Hal ini menimbulkan risiko CSRF karena website lain dapat mencoba memanfaatkan session pengguna 
+    yang masih aktif. Oleh karena itu, request yang mengubah data seperti POST, PUT, PATCH, dan DELETE tetap 
+    harus menyertakan CSRF Token agar server dapat memverifikasi bahwa request berasal dari sumber yang sah.
+
+    Pada Django REST Framework, client biasanya mengambil cookie `csrftoken`, kemudian mengirimkan nilainya 
+    melalui HTTP header:
+
+    ```http
+    X-CSRFToken: <csrf_token>
+    ```
+
+    **Mengapa force_authenticate Tidak Cukup?**
+
+    `force_authenticate` merupakan fitur pada pengujian DRF yang secara langsung memaksa request dianggap 
+    sudah terautentikasi sebagai pengguna tertentu. Dengan demikian, pengujian tersebut melewati proses 
+    autentikasi normal melalui `SessionAuthentication`, termasuk mekanisme pemeriksaan CSRF yang berkaitan 
+    dengan proses tersebut. Akibatnya, test yang menggunakan `force_authenticate` hanya membuktikan bahwa 
+    pengguna dapat mengakses endpoint setelah dianggap terautentikasi, tetapi tidak membuktikan bahwa 
+    perlindungan CSRF berjalan dengan benar.
+
+    Untuk menguji perlindungan CSRF, gunakan pengujian dengan `APIClient` yang mengaktifkan pemeriksaan CSRF 
+    (`enforce_csrf_checks=True`), kemudian lakukan login menggunakan `.login()` agar pengujian menggunakan 
+    session yang sebenarnya.
+
+    **Pengujian pada proyek ini:**
+
+    Test client DRF secara default tidak melakukan pemeriksaan CSRF (`enforce_csrf_checks=False`). Selain itu, 
+    `force_authenticate` melewati proses autentikasi menggunakan `SessionAuthentication`. Oleh karena itu, 
+    pengujian berikut menggunakan `APIClient(enforce_csrf_checks=True)` untuk mengaktifkan pemeriksaan CSRF 
+    dan `.login()` untuk melakukan login menggunakan session seperti pada kondisi sebenarnya:
+
+    - `test_session_write_without_csrf_is_rejected`: request tanpa CSRF Token ditolak dengan respons `403`, 
+        dan database tidak berubah.
+    - `test_session_write_with_csrf_succeeds`: request dengan CSRF Token yang valid diterima, dengan catatan 
+        autentikasi dan permission juga terpenuhi.
+
+---
+
+### Penggunaan AI Tugas 6
+
+Dalam tugas ini, saya menggunakan Claude untuk membantu mengimplementasikan Django REST Framework pada 
+Tugas 6 (section **Experience**), di antaranya serializer, permission class, API view, integrasi halaman 
+dengan `fetch()`, fitur star, edit lewat `PATCH`, serta test `APITestCase`.
+
+**Lampiran Prompting:**
+- **Section Experience**: Bisakah section Experience disesuaikan agar menerapkan perubahan yang sama seperti 
+    section Projects setelah pembaruan pada Tutorial 7?
+
+**AI Disclosure & Analisis**
+- **Tools yang Digunakan**: Claude
+- **Analisis Keterbatasan AI**: Saat mengimplementasikan perubahan pada section Experience, terdapat perubahan
+    pada gaya halaman, contohnya tombol star. Kode yang diberikan terkadang tidak sesuai dengan gaya pada tombol
+    lain sehingga diperlukan penyesuaian agar gaya halaman tetap konsisten.
+- **Perbaikan Manual (oleh Saya)**: Untuk mengatasi masalah tersebut, saya mencari aturan CSS yang mengatur gaya
+    tombol tersebut dan menyesuaikannya agar konsisten dengan elemen lain yang terdapat pada halaman tersebut.
 
 ---
