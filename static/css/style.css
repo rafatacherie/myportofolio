@@ -16,6 +16,7 @@
     --second-bg-color: #131313;  /* warna latar section selang-seling */
     --text-color: white;         /* warna teks default */
     --main-color: #6499E9;       /* warna aksen biru */
+    --star-color: #006199;       /* warna button star */
 }
 
 /* Mengatur ukuran font dasar untuk perhitungan rem dan mencegah halaman web bisa digeser ke samping */
@@ -592,7 +593,7 @@ span {
     margin-top: 0.4rem;
 }
 
-/* Baris button See Detail + Delete */
+/* Baris button See Detail, Edit, Star + Delete */
 .experience-front-actions {
     display: flex;
     align-items: center;
@@ -617,6 +618,7 @@ span {
 
 /* Glow button hapus saat hover */
 .experience-delete-btn:hover {
+    transform: scale(1.05);
     box-shadow: 0 0 15px rgba(255, 77, 77, 0.5);
 }
 
@@ -957,11 +959,18 @@ span {
     font-size: 1.3rem;
     font-weight: 600;
     letter-spacing: 0.1rem;
-    border: 2px solid #395EA6;
+    border: 2px solid var(--bg-color);
     cursor: pointer;
     transition: 0.3s ease;
 }
 
+/* See Detail sedikit membesar saat hover */
+.see-detail-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(34, 57, 111, 0.8); 
+}
+
+/* Button Edit (juga dipakai Star lewat class yang sama) */
 .experience-edit-btn {
     display: inline-block;
     padding: 0.6rem 1.6rem;
@@ -970,15 +979,16 @@ span {
     font-size: 1.3rem;
     font-weight: 600;
     letter-spacing: 0.1rem;
-    border: 2px solid black;
+    border: 2px solid #010736;
     cursor: pointer;
     transition: 0.3s ease;
 }
 
+/* Hover Edit/Star: sedikit membesar + glow, latar tidak berubah */
 .experience-edit-btn:hover {
-    background: #67A2C5;
-    color: black;
-    box-shadow: 0 0 15px var(--main-color);
+    color: #010736;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(34, 57, 111, 0.8); 
 }
 
 /* Tampilan BELAKANG kartu (See Detail), ditumpuk di posisi yang sama
@@ -1706,6 +1716,20 @@ ditumpuk jadi satu kolom vertikal agar tidak menumpuk */
     gap: 1.2rem;
 }
 
+.project-actions .btn {
+    box-shadow: none;
+}
+
+/* Hover tombol di kartu project */
+.project-actions .btn:hover {
+    box-shadow: 0 0 15px var(--main-color);
+}
+
+/* Hover Star di kartu project */
+.project-actions .btn-star:hover {
+    box-shadow: 0 0 15px #67A2C5;
+}
+
 /* Mengatur tampilan tombol kedua dengan gaya outline transparan */
 .btn-secondary {
     background: transparent;
@@ -1718,6 +1742,11 @@ ditumpuk jadi satu kolom vertikal agar tidak menumpuk */
 .btn-danger {
     background: #ff4d4d;
     color: white;
+    box-shadow: none;   
+}
+
+/* Hover Delete */
+.project-actions .btn-danger:hover {
     box-shadow: 0 0 15px rgba(255, 77, 77, 0.5);
 }
 
@@ -2116,7 +2145,7 @@ ditumpuk jadi satu kolom vertikal agar tidak menumpuk */
 .btn-star {
     background: #67A2C5;
     color: black;
-    box-shadow: 0 0 15px #67A2C5;
+    box-shadow: none;
 }
 
 /* Mengatur tampilan tombol ketika project sudah diberi star */
@@ -2199,30 +2228,32 @@ ditumpuk jadi satu kolom vertikal agar tidak menumpuk */
 }
 
 /* ================== EXPERIENCE: TOMBOL STAR & EDIT ================== */
-button.experience-edit-btn {
+/* Tombol edit di kartu experience */
+.experience-edit-btn {
     background: transparent;
 }
 
-button.experience-star-btn,
-a.experience-star-btn {
+/* Tombol Star di kartu experience */
+.experience-star-btn {
     display: inline-flex;
     align-items: center;
-    background: #22396F;
+    background: var(--star-color);
     color: white;
-    border: 2px solid black;
+    border: 2px solid var(--star-color);
     font-weight: 500;
 }
 
-button.experience-star-btn:hover,
-a.experience-star-btn:hover,
-button.experience-star-btn.is-starred:hover {
-    background: #22396F;
+/* Hover Star (juga saat sudah di-star) */
+.experience-star-btn:hover,
+.experience-star-btn.is-starred:hover {
+    background: var(--star-color);
     color: white;
     box-shadow: 0 0 15px rgba(34, 57, 111, 0.8);
 }
 
-button.experience-star-btn.is-starred {
-    background: #22396F;
+/* Akun yang sudah memberi star */
+.experience-star-btn.is-starred {
+    background: var(--star-color);
     color: white;
 }
 
@@ -2232,6 +2263,7 @@ button.experience-star-btn.is-starred {
     color: white;
 }
 
+/* Baris tombol turun ke bawah jika tidak muat (See Detail, Edit, Star, Delete) */
 .experience-front-actions {
     flex-wrap: wrap;
 }
