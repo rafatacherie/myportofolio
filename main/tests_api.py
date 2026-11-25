@@ -50,12 +50,12 @@ class ProjectAPITest(APITestCase):
         self.assertEqual(self.client.get(url).status_code, status.HTTP_404_NOT_FOUND)
 
     def test_guest_and_visitor_cannot_write(self):
-        """Pengunjung dan pengguna biasa ditolak (403) dan isi database tidak berubah."""
-        for user in (None, self.visitor):
+        """Tanpa login ditolak 401, akun biasa ditolak 403, dan isi database tidak berubah."""
+        for user, expected in ((None, 401), (self.visitor, 403)):
             self.client.force_authenticate(user=user)
-            self.assertEqual(self.client.post(self.list_url, self.payload, format="json").status_code, 403)
-            self.assertEqual(self.client.patch(self.detail_url, {"title": "Changed"}, format="json").status_code, 403)
-            self.assertEqual(self.client.delete(self.detail_url).status_code, 403)
+            self.assertEqual(self.client.post(self.list_url, self.payload, format="json").status_code, expected)
+            self.assertEqual(self.client.patch(self.detail_url, {"title": "Changed"}, format="json").status_code, expected)
+            self.assertEqual(self.client.delete(self.detail_url).status_code, expected)
         self.assertEqual(Project.objects.count(), 1)
         self.project.refresh_from_db()
         self.assertEqual(self.project.title, "Portfolio")
@@ -98,7 +98,7 @@ class ProjectAPITest(APITestCase):
 
     def test_star_requires_login_and_toggles(self):
         """Star butuh login; request kedua dari akun yang sama mencabut star."""
-        self.assertEqual(self.client.post(self.star_url).status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(self.client.post(self.star_url).status_code, status.HTTP_401_UNAUTHORIZED)
         self.client.force_authenticate(user=self.visitor)
         response = self.client.post(self.star_url)
         self.assertTrue(response.data["is_starred"])
@@ -209,12 +209,12 @@ class ExperienceAPITest(APITestCase):
         self.assertEqual(self.client.get(url).status_code, status.HTTP_404_NOT_FOUND)
 
     def test_guest_and_visitor_cannot_write(self):
-        """Pengunjung dan pengguna biasa ditolak (403) dan isi database tidak berubah."""
-        for user in (None, self.visitor):
+        """Tanpa login ditolak 401, akun biasa ditolak 403, dan isi database tidak berubah."""
+        for user, expected in ((None, 401), (self.visitor, 403)):
             self.client.force_authenticate(user=user)
-            self.assertEqual(self.client.post(self.list_url, self.payload, format="json").status_code, 403)
-            self.assertEqual(self.client.patch(self.detail_url, {"title": "Changed"}, format="json").status_code, 403)
-            self.assertEqual(self.client.delete(self.detail_url).status_code, 403)
+            self.assertEqual(self.client.post(self.list_url, self.payload, format="json").status_code, expected)
+            self.assertEqual(self.client.patch(self.detail_url, {"title": "Changed"}, format="json").status_code, expected)
+            self.assertEqual(self.client.delete(self.detail_url).status_code, expected)
         # Periksa isi database, bukan hanya status HTTP
         self.assertEqual(Experience.objects.count(), 1)
         self.experience.refresh_from_db()
@@ -325,7 +325,7 @@ class ExperienceAPITest(APITestCase):
     def test_star_requires_login_and_toggles(self):
         """Star butuh login; request kedua dari akun yang sama mencabut star."""
         star_url = reverse("api:experience-star", args=[self.experience.id])
-        self.assertEqual(self.client.post(star_url).status_code, status.HTTP_403_FORBIDDEN)
+        self.assertEqual(self.client.post(star_url).status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertEqual(self.experience.starred_by.count(), 0)
         self.client.force_authenticate(user=self.visitor)
         response = self.client.post(star_url)
@@ -371,3 +371,30 @@ class ExperienceAPITest(APITestCase):
         response = self.client.get(self.list_url)
         self.assertNotIn("secret@example.com", str(response.data))
         self.assertNotIn("password", str(response.data))
+
+
+class TokenAuthAPITest(APITestCase):
+    """Test login/logout token."""
+
+    def setUp(self):
+        self.user = User.objects.create_user(username="mobile", password="test-password")
+
+    def test_token_login_and_logout(self):
+        """Login memberi token, token bisa dipakai, logout mencabut token."""
+        response = self.client.post(
+            reverse("api:api_token_auth"),
+            {"username": "mobile", "password": "test-password"}, format="json",
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        token = response.data["token"]
+
+        # Logout memakai header Authorization: Token <key>
+        self.client.credentials(HTTP_AUTHORIZATION=f"Token {token}")
+        self.assertEqual(self.client.post(reverse("api:api_logout")).status_code, status.HTTP_204_NO_CONTENT)
+
+        # Token sudah dicabut, jadi pemakaian berikutnya ditolak 401
+        self.assertEqual(self.client.post(reverse("api:api_logout")).status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_logout_requires_authentication(self):
+        """Logout tanpa token ditolak 401."""
+        self.assertEqual(self.client.post(reverse("api:api_logout")).status_code, status.HTTP_401_UNAUTHORIZED)
